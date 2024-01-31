@@ -11,6 +11,7 @@ type InputFields = {
 function ConfigurePage() {
     const { template } = useParams()
 
+    // TODO: https://stackoverflow.com/questions/70086856/create-object-based-on-types-typescript
     const [inputFields, setInputFields]: [InputFields, Function] = React.useState({ name: '', club: '' })
 
     // console.log(inputFields)

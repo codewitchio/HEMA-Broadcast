@@ -18,7 +18,8 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "noEmit": true,
-        "preserveSymlinks": true
+        "preserveSymlinks": true,
+        "allowImportingTsExtensions": true
     },
     "include": [
         "src"
