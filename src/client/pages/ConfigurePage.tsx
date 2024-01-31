@@ -14,11 +14,8 @@ function ConfigurePage() {
     // TODO: https://stackoverflow.com/questions/70086856/create-object-based-on-types-typescript
     const [inputFields, setInputFields]: [InputFields, Function] = React.useState({ name: '', club: '' })
 
-    // console.log(inputFields)
-
     return (
         <div className="page config-page">
-            {/* <h2>Config - {template}</h2> */}
             <form className="config-input">
                 {Object.entries(inputFields).map(([key, value], index) => {
                     let formattedKey: string = key[0].toUpperCase() + key.substring(1)
