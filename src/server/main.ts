@@ -3,7 +3,7 @@ import ViteExpress from "vite-express"
 
 const app = express()
 
-app.get("/hello", (_, res) => {
+app.get("/hello", (_: any, res: any) => {
     res.send("Hello Vite + React + TypeScript!")
 })
 

@@ -1,11 +1,16 @@
-:root {
+/* General */
+* {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* Page layout */
+:root {
     line-height: 1.5;
     font-weight: 400;
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    background-color: #202124;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -14,61 +19,108 @@
     -webkit-text-size-adjust: 100%;
 }
 
-a {
-    font-weight: 500;
-    color: #646cff;
-    text-decoration: inherit;
-}
+#root {
+    min-width: 320px;
+    min-height: 100vh;
+    max-width: 1600px;
+    margin: auto;
 
-a:hover {
-    color: #535bf2;
+    display: flex;
+    flex-direction: column;
 }
 
 body {
     margin: 0;
+}
+
+.content {
+    flex-grow: 1;
     display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
 }
 
-h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
+.page {
+    flex-grow: 1;
 }
 
-button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
+.config-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* gap: 5em */
+}
+
+.config-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Text input */
+.config-input input[type="text"],
+.config-input input[type="number"] {
+    border: 1px solid #c7a3ff;
+    border-radius: 5px;
+    background-color: #2d2e30;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16;
+    width: 360px;
+
+    transition: all 0.2s;
+}
+
+.config-input label {
+    color: #c7a3ff;
+    padding: 10px;
+    width: 80px;
+    display: inline-block;
+    text-align: end;
+
+    transform: translateX(50);
+    transition: all 0.2s;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}
+
+input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px 1px #c7a3ff;
+}
+
+/* Helpers */
+.shadow {
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.75);
+}
+
+
+/* General */
+
+a {
     font-weight: 500;
-    font-family: inherit;
-    background-color: #1a1a1a;
-    cursor: pointer;
-    transition: border-color 0.25s;
+    color: #b490ec;
+    text-decoration: inherit;
 }
 
-button:hover {
-    border-color: #646cff;
-}
-
-button:focus,
-button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
+a:hover {
+    color: #c7a3ff;
 }
 
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;
         background-color: #ffffff;
-    }
-
-    a:hover {
-        color: #747bff;
-    }
-
-    button {
-        background-color: #f9f9f9;
     }
 }

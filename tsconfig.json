@@ -17,7 +17,8 @@
         "moduleResolution": "NodeNext",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "noEmit": true
+        "noEmit": true,
+        "preserveSymlinks": true
     },
     "include": [
         "src"

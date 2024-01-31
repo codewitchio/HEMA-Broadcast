@@ -1,0 +1,9 @@
+.graphic-fightercard {
+    width: 400px;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    padding: 0 20px;
+    justify-content: space-evenly;
+}
