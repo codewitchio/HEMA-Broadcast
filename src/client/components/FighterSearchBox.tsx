@@ -1,8 +1,9 @@
 // import './FighterSearch.css'
 
 import React from "react"
-import { FighterResult, FighterSearch, FighterSearchMock, FighterSearchResult } from "../InternalAPI"
+import { FighterResult, FighterSearch, FighterSearchMock, FighterSearchResult } from "../helpers/InternalAPI"
 import { InputLoadingIcon } from './InputLoadingIcon'
+import { GetFlagEmoji } from "../helpers/GetFlagEmoji"
 
 const typingTimeoutDuration = 350
 
@@ -12,7 +13,13 @@ type SearchResultRowProps = {
 }
 
 function SearchResultRow(props: SearchResultRowProps) {
-    return <div className="fighter-search-results-row">{props.fighter.name}</div>
+    return (
+        <div className="fighter-search-results-row">
+            <span className="fighter-search-results-row-flag">{GetFlagEmoji(props.fighter.countryCode)}</span>
+            <span>{props.fighter.name}</span>
+            <span className="text-grey right">#{props.fighter.id}</span>
+        </div>
+    )
 }
 
 function FighterSearchBox() {
@@ -32,7 +39,7 @@ function FighterSearchBox() {
                     FighterSearchMock(inputValue).then((FighterSearchResults: FighterSearchResult): void => {
                         setIsLoading(false)
                         setSearchResult(FighterSearchResults)
-                        // console.log(FighterSearchResults)
+                        console.log(FighterSearchResults)
                     })
                 } else {
                     setIsLoading(false)
