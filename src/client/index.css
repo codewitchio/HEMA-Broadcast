@@ -72,7 +72,7 @@ body {
 input[type="text"],
 input[type="number"] {
     border: 1px solid #c7a3ff;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: #2d2e30;
     color: white;
     padding: 10px 20px;
@@ -143,13 +143,34 @@ input:focus {
 .fighter-search-results {
     display: flex;
     flex-direction: column;
+    max-height: 800px;
+    overflow-y: scroll;
+
+    border-radius: 0 0 10px 10px;
+    border-left: 1px solid #c7a3ff;
+    border-right: 1px solid #c7a3ff;
+    border-bottom: 1px solid #c7a3ff;
+
+    transition: all 0.2s;
+}
+
+.fighter-search-results.showHeader {
+    border-bottom: none;
+}
+
+.fighter-search-results-header {
+    background-color: #2d2e30;
+    color: white;
+    padding: 5px 20px;
+    font-size: 14px;
+    /* Regular input + label size */
+    width: 400px;
+    cursor: default;
 
     transition: all 0.2s;
 }
 
 .fighter-search-results-row {
-    border-left: 1px solid #c7a3ff;
-    border-right: 1px solid #c7a3ff;
     background-color: #2d2e30;
     color: white;
     padding: 10px 20px;
@@ -157,6 +178,7 @@ input:focus {
     /* Regular input + label size */
     width: 400px;
     cursor: pointer;
+    position: relative;
 
     transition: all 0.2s;
 
@@ -166,7 +188,7 @@ input:focus {
 }
 
 .fighter-search-results-row:last-child {
-    border-bottom: 1px solid #c7a3ff;
+    border-bottom: none;
     border-radius: 0 0 10px 10px;
 }
 
@@ -176,7 +198,7 @@ input[type="number"]:hover,
     background-color: #3b3b3d;
 }
 
-input[type="text"].hasMatches {
+input[type="text"].showHeader {
     border-bottom: 0;
     border-radius: 10px 10px 0 0;
 }
@@ -237,8 +259,15 @@ input[type="text"].hasMatches {
     right: 20px;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 
 /* General */
+.os-theme-custom {
+    /* --os-handle-bg: #FFFFFF */
+}
 
 a {
     font-weight: 500;

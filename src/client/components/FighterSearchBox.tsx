@@ -4,6 +4,7 @@ import React from "react"
 import { FighterResult, FighterSearch, FighterSearchMock, FighterSearchResult } from "../helpers/InternalAPI"
 import { InputLoadingIcon } from './InputLoadingIcon'
 import { GetFlagEmoji } from "../helpers/GetFlagEmoji"
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react"
 
 const typingTimeoutDuration = 350
 
@@ -48,12 +49,12 @@ function FighterSearchBox() {
     React.useEffect(() => {
         clearTimeout(typingTimeout.current)
 
-        if (inputValue != '') {
+        if (inputValue != '' && inputValue.length > 2) {
             setIsLoading(true)
             typingTimeout.current = setTimeout(() => {
                 if (inputValue != searchResult?.searchTerm) {
                     // TODO: Revert to regular FighterSearch
-                    FighterSearchMock(inputValue).then((FighterSearchResults: FighterSearchResult): void => {
+                    FighterSearch(inputValue).then((FighterSearchResults: FighterSearchResult): void => {
                         setIsLoading(false)
                         setSearchResult(FighterSearchResults)
                         console.log(FighterSearchResults)
@@ -68,23 +69,30 @@ function FighterSearchBox() {
     }, [inputValue])
 
     const hasMatches = searchResult && (searchResult.exactMatches.length > 0 || searchResult.fuzzyMatches.length > 0)
+    const matchesCount = searchResult && (searchResult.exactMatches.length + searchResult?.fuzzyMatches.length)
     const hasSelection = selectedFighters.length > 0
+    const showHeader = searchResult && (hasMatches || inputValue.length > 0)
 
     return (
         <form className="fighter-search-box">
             <div className="input-wrapper">
-                <input className={hasMatches ? 'hasMatches' : ''} type="text" name="name" placeholder="Search for a name" value={inputValue} onChange={(e) => {
+                <input className={showHeader ? 'showHeader' : ''} type="text" name="name" placeholder="Search for a name" value={inputValue} onChange={(e) => {
                     setInputValue(e.target.value as string)
                 }} />
                 <InputLoadingIcon visible={isLoading} />
-                <div className="fighter-search-results">
+                <OverlayScrollbarsComponent element="div" className={`fighter-search-results ${!showHeader ? 'showHeader' : ''}`} options={{ scrollbars: { autoHide: 'scroll', autoHideDelay: 500 } }} defer>
+                    {showHeader ? (
+                        <div className="fighter-search-results-header text-grey" >
+                            {`${matchesCount} matches found`}
+                        </div>
+                    ) : ''}
                     {hasMatches ? (searchResult.exactMatches.map((fighter: FighterResult) =>
                         <SearchResultRow key={fighter.id} exactMatch={true} fighter={fighter} selectFighter={selectFighter} />)
                     ) : ''}
                     {hasMatches ? (searchResult.fuzzyMatches.map((fighter: FighterResult) =>
                         <SearchResultRow key={fighter.id} exactMatch={false} fighter={fighter} selectFighter={selectFighter} />)
                     ) : ''}
-                </div>
+                </OverlayScrollbarsComponent>
             </div>
             <div className="fighter-search-selected-list">
                 {hasSelection ? (selectedFighters.map((fighter: FighterResult) =>
