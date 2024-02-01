@@ -56,27 +56,27 @@ body {
 }
 
 /* Text input */
-.config-input input[type="text"],
-.config-input input[type="number"] {
+input[type="text"],
+input[type="number"] {
     border: 1px solid #c7a3ff;
     border-radius: 5px;
     background-color: #2d2e30;
     color: white;
     padding: 10px 20px;
-    font-size: 16;
-    width: 360px;
+    font-size: 16px;
+    width: 300px;
 
     transition: all 0.2s;
 }
 
-.config-input label {
+label {
     color: #c7a3ff;
     padding: 10px;
     width: 80px;
     display: inline-block;
     text-align: end;
 
-    transform: translateX(50);
+    /* transform: translateX(50); */
     transition: all 0.2s;
 }
 
@@ -91,11 +91,74 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
-input[type="text"]:focus,
+.input-wrapper {
+    /* width: 442px; */
+    border-radius: 10px;
+    position: relative;
+}
+
+.fighter-search-box>.input-wrapper:has(> input[type="text"]:focus),
+input[type="text"]:focus:not(.fighter-search-box input[type="text"]:focus),
 input[type="number"]:focus,
 button:focus {
     outline: none;
     box-shadow: 0 0 5px 1px #c7a3ff;
+}
+
+input:focus {
+    outline: none;
+}
+
+.input-loading {
+    display: inline-flex !important;
+    position: absolute;
+    right: 0;
+    /* (17+10+10) = (25 + 7*2) */
+    padding: 7px;
+}
+
+/* FighterSearchBox */
+
+.fighter-search-box input[type="text"] {
+    /* Regular input + label size */
+    width: 400px;
+}
+
+.fighter-search-results {
+    display: flex;
+    flex-direction: column;
+
+    transition: all 0.2s;
+}
+
+.fighter-search-results-row {
+    border-left: 1px solid #c7a3ff;
+    border-right: 1px solid #c7a3ff;
+    background-color: #2d2e30;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    /* Regular input + label size */
+    width: 400px;
+    cursor: pointer;
+
+    transition: all 0.2s;
+}
+
+.fighter-search-results-row:last-child {
+    border-bottom: 1px solid #c7a3ff;
+    border-radius: 0 0 10px 10px;
+}
+
+input[type="text"]:hover,
+input[type="number"]:hover,
+.fighter-search-results-row:hover {
+    background-color: #3b3b3d;
+}
+
+input[type="text"].hasMatches {
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0;
 }
 
 /* Helpers */
