@@ -121,6 +121,10 @@ button:focus {
     box-shadow: 0 0 5px 1px #c7a3ff;
 }
 
+.fighter-search-box>.input-wrapper {
+    transition: all 0.2s;
+}
+
 input:focus {
     outline: none;
 }
