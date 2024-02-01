@@ -28,6 +28,7 @@ function SearchResultRow(props: SearchResultRowProps) {
 
 // TODO: Add prop for allowed number of fighters to pick
 function FighterSearchBox() {
+    const inputRef = React.useRef<HTMLInputElement>(null)
     const [inputValue, setInputValue]: [string, Function] = React.useState('')
     const [isLoading, setIsLoading]: [boolean, Function] = React.useState(false)
     const [searchResult, setSearchResult]: [FighterSearchResult | undefined, Function] = React.useState()
@@ -37,7 +38,9 @@ function FighterSearchBox() {
         setSelectedFighters(selectedFighters.concat([fighter]))
         setSearchResult()
         setInputValue('')
-        // TODO: Focus input
+        if (inputRef.current) {
+            inputRef.current.focus()
+        }
     }
 
     function unselectFighter(fighter: FighterResult): void {
@@ -53,7 +56,6 @@ function FighterSearchBox() {
             setIsLoading(true)
             typingTimeout.current = setTimeout(() => {
                 if (inputValue != searchResult?.searchTerm) {
-                    // TODO: Revert to regular FighterSearch
                     FighterSearch(inputValue).then((FighterSearchResults: FighterSearchResult): void => {
                         setIsLoading(false)
                         setSearchResult(FighterSearchResults)
@@ -76,7 +78,7 @@ function FighterSearchBox() {
     return (
         <form className="fighter-search-box">
             <div className="input-wrapper">
-                <input className={showHeader ? 'showHeader' : ''} type="text" name="name" placeholder="Search for a name" value={inputValue} onChange={(e) => {
+                <input className={showHeader ? 'showHeader' : ''} type="text" name="name" placeholder="Search for a name" ref={inputRef} value={inputValue} onChange={(e) => {
                     setInputValue(e.target.value as string)
                 }} />
                 <InputLoadingIcon visible={isLoading} />
