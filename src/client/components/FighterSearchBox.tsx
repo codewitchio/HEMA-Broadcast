@@ -48,7 +48,7 @@ function FighterSearchBox() {
     return (
         <form className="fighter-search-box">
             <div className="input-wrapper">
-                <input className={hasMatches ? 'hasMatches' : ''} type="text" name="name" placeholder="Search fencers" value={inputValue} onChange={(e) => {
+                <input className={hasMatches ? 'hasMatches' : ''} type="text" name="name" placeholder="Search for a name" value={inputValue} onChange={(e) => {
                     setInputValue(e.target.value as string)
                 }} />
                 <InputLoadingIcon visible={isLoading} />

@@ -49,7 +49,20 @@ body {
     /* gap: 5em */
 }
 
+.config-page h2 {
+    text-align: center;
+    /* Same as input boxes */
+    width: 442px;
+}
+
 .config-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: end;
+}
+
+.config-manual-input {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -64,7 +77,8 @@ input[type="number"] {
     color: white;
     padding: 10px 20px;
     font-size: 16px;
-    width: 300px;
+    width: 400px;
+    position: relative;
 
     transition: all 0.2s;
 }
@@ -72,9 +86,12 @@ input[type="number"] {
 label {
     color: #c7a3ff;
     padding: 10px;
-    width: 80px;
+    max-width: 200px;
+    min-width: 80px;
     display: inline-block;
     text-align: end;
+    position: relative;
+    left: -10px;
 
     /* transform: translateX(50); */
     transition: all 0.2s;
@@ -179,6 +196,14 @@ a {
 
 a:hover {
     color: #c7a3ff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin-block-end: 0;
 }
 
 @media (prefers-color-scheme: light) {

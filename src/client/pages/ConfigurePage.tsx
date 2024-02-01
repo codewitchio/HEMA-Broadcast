@@ -18,11 +18,11 @@ function ConfigurePage() {
     return (
         <div className="page config-page">
             <div className="config-input">
-                <h2>Search names</h2>
+                <h2>Search HEMA Ratings</h2>
                 <FighterSearchBox />
                 <h2>Manual input</h2>
                 {/* TODO: Hide by default? */}
-                <form>
+                <form className="config-manual-input">
                     {Object.entries(inputFields).map(([key, value], index) => {
                         let formattedKey: string = key[0].toUpperCase() + key.substring(1)
                         return (
