@@ -109,7 +109,6 @@ input[type="number"] {
 }
 
 .input-wrapper {
-    /* width: 442px; */
     border-radius: 10px;
     position: relative;
 }
@@ -180,6 +179,46 @@ input[type="number"]:hover,
 input[type="text"].hasMatches {
     border-bottom: 0;
     border-radius: 10px 10px 0 0;
+}
+
+.fighter-search-selected-list {
+    margin-block-start: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    /* Same as input boxes */
+    width: 442px;
+}
+
+.fighter-search-selected-list-item {
+    display: flex;
+    align-items: center;
+}
+
+.fighter-search-selected-list-item>span {
+    background-color: #2d2e30;
+    padding: 10px 0 10px 10px;
+    border-radius: 5px 0 0 5px;
+    cursor: default;
+    user-select: none;
+}
+
+.fighter-search-selected-list-item>i {
+    background-color: #2d2e30;
+    color: #717274;
+    padding: 10px;
+    line-height: 24px;
+    border-radius: 0 5px 5px 0;
+    user-select: none;
+    cursor: pointer;
+
+    transition: all 0.2s;
+}
+
+.fighter-search-selected-list-item>i:hover {
+    background-color: #3b3b3d;
+    color: white;
 }
 
 /* Helpers */
