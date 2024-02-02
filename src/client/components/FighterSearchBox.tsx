@@ -1,7 +1,7 @@
 // import './FighterSearch.css'
 
 import React from "react"
-import { FighterResult, FighterSearch, FighterSearchMock, FighterSearchResult } from "../helpers/InternalAPI"
+import { FighterResult, FighterSearch, FighterSearchResultCombined } from "../helpers/InternalAPI"
 import { InputLoadingIcon } from './InputLoadingIcon'
 import { GetFlagEmoji } from "../helpers/GetFlagEmoji"
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react"
@@ -11,15 +11,40 @@ const typingTimeoutDuration = 350
 const animationDuration = 250
 
 type SearchResultRowProps = {
-    exactMatch: boolean,
     fighter: FighterResult,
-    selectFighter: Function
+    selectFighter: Function,
+    highlight?: boolean
 }
 
 function SearchResultRow(props: SearchResultRowProps) {
     return (
-        <div className="fighter-search-results-row" onClick={(e) => {
+        <div className={`fighter-search-results-row ${props.highlight ? 'highlight' : ''}`} tabIndex={0} role="button" onClick={(e) => {
             props.selectFighter(props.fighter)
+        }} onKeyDown={(e) => {
+            if (e.key === "Enter") {
+                e.preventDefault()
+                props.selectFighter(props.fighter)
+                    (e.target as HTMLDivElement).blur()
+            }
+            if (e.key === 'ArrowDown') {
+                e.preventDefault()
+                let endOfList = !e.currentTarget.nextSibling
+                if (endOfList) {
+                    e.currentTarget.parentNode?.firstElementChild?.nextSibling && (e.currentTarget.parentNode?.firstElementChild?.nextSibling as HTMLDivElement).focus()
+                } else {
+                    e.currentTarget.nextSibling && (e.currentTarget.nextSibling as HTMLDivElement).focus()
+                }
+            }
+            if (e.key === 'ArrowUp') {
+                e.preventDefault()
+                let startOfList = e.currentTarget.previousSibling &&
+                    (e.currentTarget.previousSibling as HTMLDivElement).classList.contains("fighter-search-results-header")
+                if (startOfList) {
+                    e.currentTarget.parentNode?.lastElementChild && (e.currentTarget.parentNode?.lastElementChild as HTMLDivElement).focus()
+                } else (
+                    e.currentTarget.previousSibling && (e.currentTarget.previousSibling as HTMLDivElement).focus()
+                )
+            }
         }}>
             <span>{GetFlagEmoji(props.fighter.countryCode)}</span>
             <span>{props.fighter.name}</span>
@@ -32,20 +57,22 @@ function SearchResultRow(props: SearchResultRowProps) {
 function FighterSearchBox() {
     const inputRef = React.useRef<HTMLInputElement>(null)
     const [inputValue, setInputValue]: [string, Function] = React.useState('')
+    const [inputFocused, setInputFocused]: [boolean, Function] = React.useState(false)
     const [isLoading, setIsLoading]: [boolean, Function] = React.useState(false)
-    const [searchResult, setSearchResult]: [FighterSearchResult | undefined, Function] = React.useState()
-    const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
-
+    const [searchResult, setSearchResult]: [FighterSearchResultCombined | undefined, Function] = React.useState()
     const [searchResultsHeight, setSearchResultsHeight]: [number, Function] = React.useState<number>(0)
     const searchResultsElement = React.useRef<HTMLDivElement | null>(null)
+
+    const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
+
+
+    // const [focusedSearchResult, setFocusedSearchResult]: [number]
 
     function selectFighter(fighter: FighterResult): void {
         setSelectedFighters(selectedFighters.concat([fighter]))
         setSearchResult()
         setInputValue('')
-        if (inputRef.current) {
-            inputRef.current.focus()
-        }
+        inputRef.current && inputRef.current.focus()
     }
 
     function unselectFighter(fighter: FighterResult): void {
@@ -61,10 +88,10 @@ function FighterSearchBox() {
             setIsLoading(true)
             typingTimeout.current = setTimeout(() => {
                 if (inputValue != searchResult?.searchTerm) {
-                    FighterSearch(inputValue).then((FighterSearchResults: FighterSearchResult): void => {
+                    FighterSearch(inputValue).then((FighterSearchResults: FighterSearchResultCombined): void => {
                         setIsLoading(false)
                         setSearchResult(FighterSearchResults)
-                        console.log(FighterSearchResults)
+                        // console.log(FighterSearchResults)
                     })
                 } else {
                     setIsLoading(false)
@@ -80,7 +107,6 @@ function FighterSearchBox() {
         const element = searchResultsElement.current as HTMLDivElement
 
         const resizeObserver = new ResizeObserver(() => {
-            console.log(element, element.clientHeight)
             setSearchResultsHeight(element.clientHeight)
         })
 
@@ -89,31 +115,43 @@ function FighterSearchBox() {
         return () => resizeObserver.disconnect()
     }, [])
 
-    const hasMatches = searchResult && (searchResult.exactMatches.length > 0 || searchResult.fuzzyMatches.length > 0)
-    const matchesCount = searchResult && (searchResult.exactMatches.length + searchResult?.fuzzyMatches.length)
     const hasSelection = selectedFighters.length > 0
-    const showHeader = searchResult && (hasMatches || inputValue.length > 0)
+    const showHeader = searchResult && (searchResult.matches.length > 0 || inputValue.length > 0)
 
     return (
         <form className="fighter-search-box">
             <div className="input-wrapper">
-                <input className={showHeader ? 'showHeader' : ''} type="text" name="name" placeholder="Search for a name" ref={inputRef} value={inputValue} onChange={(e) => {
+                <input className={`fighter-search-input ${showHeader ? 'showHeader' : ''}`} type="text" name="name" placeholder="Search for a name" ref={inputRef} value={inputValue} onChange={(e) => {
                     setInputValue(e.target.value as string)
+                }} onFocus={(e) => {
+                    setInputFocused(true)
+                }} onBlur={(e) => {
+                    setInputFocused(false)
+                }} onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        searchResultsElement.current?.children.item(1) && (searchResultsElement.current?.children.item(1) as HTMLDivElement).click()
+                        e.preventDefault()
+                    }
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault()
+                        searchResultsElement.current?.children.item(2) && (searchResultsElement.current?.children.item(2) as HTMLDivElement).focus()
+                    }
+                    if (e.key === 'ArrowUp') {
+                        e.preventDefault()
+                        searchResultsElement.current?.lastChild && (searchResultsElement.current?.lastChild as HTMLDivElement).focus()
+                    }
                 }} />
                 <InputLoadingIcon visible={isLoading} />
-                <OverlayScrollbarsComponent element="div" className={`fighter-search-results ${!showHeader ? 'showHeader' : ''}`} options={{ scrollbars: { autoHide: 'scroll', autoHideDelay: 500 } }} defer>
+                <OverlayScrollbarsComponent tabIndex={-1} element="div" className={`fighter-search-results ${!showHeader ? 'showHeader' : ''}`} options={{ scrollbars: { autoHide: 'scroll', autoHideDelay: 500 } }} defer>
                     <AnimateHeight duration={animationDuration} contentRef={searchResultsElement} height={searchResultsHeight} disableDisplayNone contentClassName="auto-content">
                         {showHeader ? (
-                            <div className="fighter-search-results-header text-grey" >
-                                {`${matchesCount} matches found`}
+                            <div className="fighter-search-results-header text-grey" tabIndex={-1} >
+                                {`${searchResult && (searchResult.matches.length)} matches found`}
                             </div>
                         ) : ''}
-                        {hasMatches ? (searchResult.exactMatches.map((fighter: FighterResult) =>
-                            <SearchResultRow key={fighter.id} exactMatch={true} fighter={fighter} selectFighter={selectFighter} />)
-                        ) : ''}
-                        {hasMatches ? (searchResult.fuzzyMatches.map((fighter: FighterResult) =>
-                            <SearchResultRow key={fighter.id} exactMatch={false} fighter={fighter} selectFighter={selectFighter} />)
-                        ) : ''}
+                        {searchResult && searchResult.matches.map((fighter: FighterResult, index: number) =>
+                            <SearchResultRow key={fighter.id} highlight={index === 0 && inputFocused} fighter={fighter} selectFighter={selectFighter} />)
+                        }
                     </AnimateHeight>
                 </OverlayScrollbarsComponent>
             </div>

@@ -114,6 +114,7 @@ input[type="number"] {
 }
 
 .fighter-search-box>.input-wrapper:has(> input[type="text"]:focus),
+.fighter-search-box>.input-wrapper:has(.fighter-search-results-row:focus),
 input[type="text"]:focus:not(.fighter-search-box input[type="text"]:focus),
 input[type="number"]:focus,
 button:focus {
@@ -198,7 +199,10 @@ input:focus {
 
 input[type="text"]:hover,
 input[type="number"]:hover,
-.fighter-search-results-row:hover {
+.fighter-search-results-row:hover,
+.fighter-search-results-row:focus,
+.highlight {
+    outline: none;
     background-color: #3b3b3d;
 }
 
