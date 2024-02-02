@@ -14,6 +14,7 @@
     "overlayscrollbars": "^2.5.0",
     "overlayscrollbars-react": "^0.5.4",
     "react": "^18.2.0",
+    "react-animate-height": "^3.2.3",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^6.1.6",
     "react-router-dom": "^6.21.3",

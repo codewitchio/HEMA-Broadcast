@@ -5,8 +5,10 @@ import { FighterResult, FighterSearch, FighterSearchMock, FighterSearchResult } 
 import { InputLoadingIcon } from './InputLoadingIcon'
 import { GetFlagEmoji } from "../helpers/GetFlagEmoji"
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react"
+import AnimateHeight from 'react-animate-height'
 
 const typingTimeoutDuration = 350
+const animationDuration = 250
 
 type SearchResultRowProps = {
     exactMatch: boolean,
@@ -34,6 +36,9 @@ function FighterSearchBox() {
     const [searchResult, setSearchResult]: [FighterSearchResult | undefined, Function] = React.useState()
     const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
 
+    const [searchResultsHeight, setSearchResultsHeight]: [number, Function] = React.useState<number>(0)
+    const searchResultsElement = React.useRef<HTMLDivElement | null>(null)
+
     function selectFighter(fighter: FighterResult): void {
         setSelectedFighters(selectedFighters.concat([fighter]))
         setSearchResult()
@@ -47,8 +52,8 @@ function FighterSearchBox() {
         setSelectedFighters(selectedFighters.filter((f) => f.id !== fighter.id))
     }
 
+    // Typing timer and search
     let typingTimeout: React.MutableRefObject<NodeJS.Timeout | undefined> = React.useRef()
-
     React.useEffect(() => {
         clearTimeout(typingTimeout.current)
 
@@ -70,6 +75,20 @@ function FighterSearchBox() {
         }
     }, [inputValue])
 
+    // Animate search results on change
+    React.useEffect(() => {
+        const element = searchResultsElement.current as HTMLDivElement
+
+        const resizeObserver = new ResizeObserver(() => {
+            console.log(element, element.clientHeight)
+            setSearchResultsHeight(element.clientHeight)
+        })
+
+        resizeObserver.observe(element)
+
+        return () => resizeObserver.disconnect()
+    }, [])
+
     const hasMatches = searchResult && (searchResult.exactMatches.length > 0 || searchResult.fuzzyMatches.length > 0)
     const matchesCount = searchResult && (searchResult.exactMatches.length + searchResult?.fuzzyMatches.length)
     const hasSelection = selectedFighters.length > 0
@@ -83,17 +102,19 @@ function FighterSearchBox() {
                 }} />
                 <InputLoadingIcon visible={isLoading} />
                 <OverlayScrollbarsComponent element="div" className={`fighter-search-results ${!showHeader ? 'showHeader' : ''}`} options={{ scrollbars: { autoHide: 'scroll', autoHideDelay: 500 } }} defer>
-                    {showHeader ? (
-                        <div className="fighter-search-results-header text-grey" >
-                            {`${matchesCount} matches found`}
-                        </div>
-                    ) : ''}
-                    {hasMatches ? (searchResult.exactMatches.map((fighter: FighterResult) =>
-                        <SearchResultRow key={fighter.id} exactMatch={true} fighter={fighter} selectFighter={selectFighter} />)
-                    ) : ''}
-                    {hasMatches ? (searchResult.fuzzyMatches.map((fighter: FighterResult) =>
-                        <SearchResultRow key={fighter.id} exactMatch={false} fighter={fighter} selectFighter={selectFighter} />)
-                    ) : ''}
+                    <AnimateHeight duration={animationDuration} contentRef={searchResultsElement} height={searchResultsHeight} disableDisplayNone contentClassName="auto-content">
+                        {showHeader ? (
+                            <div className="fighter-search-results-header text-grey" >
+                                {`${matchesCount} matches found`}
+                            </div>
+                        ) : ''}
+                        {hasMatches ? (searchResult.exactMatches.map((fighter: FighterResult) =>
+                            <SearchResultRow key={fighter.id} exactMatch={true} fighter={fighter} selectFighter={selectFighter} />)
+                        ) : ''}
+                        {hasMatches ? (searchResult.fuzzyMatches.map((fighter: FighterResult) =>
+                            <SearchResultRow key={fighter.id} exactMatch={false} fighter={fighter} selectFighter={selectFighter} />)
+                        ) : ''}
+                    </AnimateHeight>
                 </OverlayScrollbarsComponent>
             </div>
             <div className="fighter-search-selected-list">
