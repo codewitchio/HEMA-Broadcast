@@ -23,8 +23,8 @@ function SearchResultRow(props: SearchResultRowProps) {
         }} onKeyDown={(e) => {
             if (e.key === "Enter") {
                 e.preventDefault()
-                props.selectFighter(props.fighter)
-                    (e.target as HTMLDivElement).blur()
+                props.selectFighter(props.fighter);
+                (e.target as HTMLDivElement).blur()
             }
             if (e.key === 'ArrowDown') {
                 e.preventDefault()
@@ -157,7 +157,7 @@ function FighterSearchBox() {
             </div>
             <div className="fighter-search-selected-list">
                 {hasSelection ? (selectedFighters.map((fighter: FighterResult) =>
-                    <div className="fighter-search-selected-list-item">
+                    <div className="fighter-search-selected-list-item" key={fighter.id}>
                         <span key={fighter.id}>{GetFlagEmoji(fighter.countryCode) + " " + fighter.name}</span>
                         <i className="fa-solid fa-xmark" onClick={e => unselectFighter(fighter)} />
                     </div>
