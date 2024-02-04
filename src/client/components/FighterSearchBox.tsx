@@ -53,8 +53,12 @@ function SearchResultRow(props: SearchResultRowProps) {
     )
 }
 
+type FighterSearchBox = {
+    numberOfSelections?: number
+}
+
 // TODO: Add prop for allowed number of fighters to pick
-function FighterSearchBox() {
+function FighterSearchBox(props: FighterSearchBox) {
     const inputRef = React.useRef<HTMLInputElement>(null)
     const [inputValue, setInputValue]: [string, Function] = React.useState('')
     const [inputFocused, setInputFocused]: [boolean, Function] = React.useState(false)
@@ -69,10 +73,12 @@ function FighterSearchBox() {
     // const [focusedSearchResult, setFocusedSearchResult]: [number]
 
     function selectFighter(fighter: FighterResult): void {
-        setSelectedFighters(selectedFighters.concat([fighter]))
-        setSearchResult()
-        setInputValue('')
-        inputRef.current && inputRef.current.focus()
+        if (!props.numberOfSelections || selectedFighters.length < props.numberOfSelections) {
+            setSelectedFighters(selectedFighters.concat([fighter]))
+            setSearchResult()
+            setInputValue('')
+            inputRef.current && inputRef.current.focus()
+        }
     }
 
     function unselectFighter(fighter: FighterResult): void {
@@ -132,7 +138,7 @@ function FighterSearchBox() {
                         searchResultsElement.current?.children.item(1) && (searchResultsElement.current?.children.item(1) as HTMLDivElement).click()
                         e.preventDefault()
                     }
-                    if (e.key === 'ArrowDown') {
+                    if (e.key === 'ArrowDown' || e.key === 'Tab') {
                         e.preventDefault()
                         searchResultsElement.current?.children.item(2) && (searchResultsElement.current?.children.item(2) as HTMLDivElement).focus()
                     }
@@ -140,7 +146,7 @@ function FighterSearchBox() {
                         e.preventDefault()
                         searchResultsElement.current?.lastChild && (searchResultsElement.current?.lastChild as HTMLDivElement).focus()
                     }
-                }} />
+                }} disabled={!!props.numberOfSelections && selectedFighters.length >= props.numberOfSelections} />
                 <InputLoadingIcon visible={isLoading} />
                 <OverlayScrollbarsComponent tabIndex={-1} element="div" className={`fighter-search-results ${!showHeader ? 'showHeader' : ''}`} options={{ scrollbars: { autoHide: 'scroll', autoHideDelay: 500 } }} defer>
                     <AnimateHeight duration={animationDuration} contentRef={searchResultsElement} height={searchResultsHeight} disableDisplayNone contentClassName="auto-content">
@@ -155,6 +161,9 @@ function FighterSearchBox() {
                     </AnimateHeight>
                 </OverlayScrollbarsComponent>
             </div>
+            {hasSelection && props.numberOfSelections ? (
+                <div className="fighter-search-selected-count text-grey">{`${selectedFighters.length}/${props.numberOfSelections} selected`}</div>
+            ) : ''}
             <div className="fighter-search-selected-list">
                 {hasSelection ? (selectedFighters.map((fighter: FighterResult) =>
                     <div className="fighter-search-selected-list-item" key={fighter.id}>

@@ -19,7 +19,7 @@ function ConfigurePage() {
         <div className="page config-page">
             <div className="config-input">
                 <h2>Search HEMA Ratings</h2>
-                <FighterSearchBox />
+                <FighterSearchBox numberOfSelections={1} />
                 <h2>Manual input</h2>
                 {/* TODO: Hide by default? */}
                 <form className="config-manual-input">

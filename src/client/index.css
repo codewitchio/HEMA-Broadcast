@@ -46,7 +46,6 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* gap: 5em */
 }
 
 .config-page h2 {
@@ -93,7 +92,6 @@ label {
     position: relative;
     left: -10px;
 
-    /* transform: translateX(50); */
     transition: all 0.2s;
 }
 
@@ -113,6 +111,15 @@ input[type="number"] {
     position: relative;
 }
 
+.fighter-search-box .input-wrapper {
+    background-color: #2d2e30;
+    border: 1px solid #c7a3ff;
+}
+
+.fighter-search-box input[type="text"] {
+    border: none;
+}
+
 .fighter-search-box>.input-wrapper:has(> input[type="text"]:focus),
 .fighter-search-box>.input-wrapper:has(.fighter-search-results-row:focus),
 input[type="text"]:focus:not(.fighter-search-box input[type="text"]:focus),
@@ -130,6 +137,13 @@ input:focus {
     outline: none;
 }
 
+.fighter-search-box>.input-wrapper:has(> input[type="text"]:disabled),
+input[type="text"]:disabled {
+    background-color: #18181a;
+    border-color: #717274;
+    cursor: not-allowed;
+}
+
 .input-loading {
     display: inline-flex !important;
     position: absolute;
@@ -139,6 +153,12 @@ input:focus {
 }
 
 /* FighterSearchBox */
+
+.fighter-search-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 .fighter-search-box input[type="text"] {
     /* Regular input + label size */
@@ -151,11 +171,6 @@ input:focus {
     max-height: 800px;
     overflow-y: scroll;
 
-    border-radius: 0 0 10px 10px;
-    border-left: 1px solid #c7a3ff;
-    border-right: 1px solid #c7a3ff;
-    border-bottom: 1px solid #c7a3ff;
-
     transition: all 0.2s;
 }
 
@@ -164,7 +179,6 @@ input:focus {
 }
 
 .fighter-search-results-header {
-    background-color: #2d2e30;
     color: white;
     padding: 5px 20px;
     font-size: 14px;
@@ -176,7 +190,6 @@ input:focus {
 }
 
 .fighter-search-results-row {
-    background-color: #2d2e30;
     color: white;
     padding: 10px 20px;
     font-size: 16px;
@@ -197,7 +210,7 @@ input:focus {
     border-radius: 0 0 10px 10px;
 }
 
-input[type="text"]:hover,
+input[type="text"]:hover:not(:disabled),
 input[type="number"]:hover,
 .fighter-search-results-row:hover,
 .fighter-search-results-row:focus,
@@ -211,8 +224,11 @@ input[type="text"].showHeader {
     border-radius: 10px 10px 0 0;
 }
 
+.fighter-search-selected-count {
+    padding-inline-start: 10px;
+}
+
 .fighter-search-selected-list {
-    margin-block-start: 10px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -269,12 +285,6 @@ input[type="text"].showHeader {
 
 .hidden {
     visibility: hidden;
-}
-
-
-/* General */
-.os-theme-custom {
-    /* --os-handle-bg: #FFFFFF */
 }
 
 a {
