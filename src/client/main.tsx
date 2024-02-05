@@ -14,7 +14,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     // TODO: Remove StrictMode when building for production
     <React.StrictMode>
         <BrowserRouter>
-            <div className="header"><h1><Link to="/">HEMA Broadcast</Link></h1></div>
+            <div className="header">
+                <Link className="nav-primary" to="/">HEMA Broadcast</Link>
+                <Link className="nav-secondary" to="/">Overlays</Link>
+                <Link className="nav-secondary" to="/">About</Link>
+            </div>
             <div className="content">
                 <Routes>
                     <Route exact path="/" element={<Frontpage />} />
