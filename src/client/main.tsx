@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 
 import Frontpage from "./pages/Frontpage"
-import GraphicFightercard from "./components/graphics/Fightercard"
+import GraphicFightercard from "./components/graphics/GraphicFightercard"
 import ConfigurePage from "./pages/ConfigurePage"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

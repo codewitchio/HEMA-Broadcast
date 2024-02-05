@@ -1,6 +1,6 @@
 import React from "react"
 import { useParams } from "react-router-dom"
-import GraphicFightercard from "../components/graphics/Fightercard"
+import GraphicFightercard from "../components/graphics/GraphicFightercard"
 import FighterSearchBox from "../components/FighterSearchBox"
 import { FighterResult } from "../helpers/InternalAPI"
 
@@ -48,7 +48,7 @@ function ConfigurePage() {
             </div>
             <div className="config-graphics">
                 {template == 'fightercard' ?
-                    <GraphicFightercard name={inputFields.name} /> : ''
+                    <GraphicFightercard {...selectedFighters[0]} /> : ''
                 }
             </div>
         </div>
