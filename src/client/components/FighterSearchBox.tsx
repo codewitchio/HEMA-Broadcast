@@ -56,7 +56,8 @@ function SearchResultRow(props: SearchResultRowProps) {
 type FighterSearchBox = {
     setSelectedFighters: Function,
     selectedFighters: Array<FighterResult>,
-    numberOfSelections?: number
+    numberOfSelections?: number,
+    includeRating?: boolean
 }
 
 // TODO: Add prop for allowed number of fighters to pick
@@ -71,7 +72,7 @@ function FighterSearchBox(props: FighterSearchBox) {
 
     // const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
 
-    const { setSelectedFighters, selectedFighters, numberOfSelections } = props
+    const { setSelectedFighters, selectedFighters, numberOfSelections, includeRating } = props
 
     function selectFighter(fighter: FighterResult): void {
         if (!numberOfSelections || selectedFighters.length < numberOfSelections) {
@@ -95,7 +96,7 @@ function FighterSearchBox(props: FighterSearchBox) {
             setIsLoading(true)
             typingTimeout.current = setTimeout(() => {
                 if (inputValue != searchResult?.searchTerm) {
-                    FighterSearch(inputValue).then((FighterSearchResults: FighterSearchResultCombined): void => {
+                    FighterSearch(inputValue, includeRating).then((FighterSearchResults: FighterSearchResultCombined): void => {
                         setIsLoading(false)
                         setSearchResult(FighterSearchResults)
                         // console.log(FighterSearchResults)
