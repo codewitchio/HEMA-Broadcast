@@ -8,15 +8,15 @@ function GraphicFightercard(props: FighterResult) {
         <div className="graphic graphic-fightercard">
             <div>
                 <span className='text-grey'>Name</span>
-                <span>{props.name}</span>
+                <span>{props.name || 'No data'}</span>
             </div>
             <div>
                 <span className='text-grey'>Club</span>
-                <span>{props.clubName}</span>
+                <span>{props.clubName || 'No data'}</span>
             </div>
             <div>
                 <span className='text-grey'>Country</span>
-                <span>{props.countryName && props.countryCode ? props.countryName + " " + GetFlagEmoji(props.countryCode) : ''}</span>
+                <span>{props.countryName && props.countryCode ? props.countryName + " " + GetFlagEmoji(props.countryCode) : 'No data'}</span>
             </div>
             <div>
                 <span className='text-grey'>Rank</span>
