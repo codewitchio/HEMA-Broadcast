@@ -1,7 +1,7 @@
 # HEMA-Broadcast
 Graphical overlay elements for HEMA Broadcasts powered by [HEMA Ratings](https://hemaratings.com/). 
 
-Tired of manually editing big photoshop files with your stream overlays for every single tournament participant? Tired of collecting information on every fencer manually? Boy do we have a new product for you! Introducing HEMA-Broadcast (name pending review)! 
+Tired of manually editing big photoshop files with your stream overlays for every single tournament participant? Tired of collecting information on every fencer manually? Then boy do we have a new product for you! Introducing HEMA-Broadcast (name subject to change)! 
 
 This project is intended to be a user-friendly web app that does the tedious and difficult tasks of creating stream overlays for HEMA tournaments for you. All you need to do is enter the name of the relevant fencers and out comes a ready to use graphical element. 
 
