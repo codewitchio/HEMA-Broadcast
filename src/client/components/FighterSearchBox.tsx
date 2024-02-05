@@ -127,7 +127,7 @@ function FighterSearchBox(props: FighterSearchBox) {
     const showHeader = searchResult && (searchResult.matches.length > 0 || inputValue.length > 0)
 
     return (
-        <form className="fighter-search-box">
+        <form className="fighter-search-box vertical-flex">
             <div className="input-wrapper">
                 <input className={`fighter-search-input ${showHeader ? 'showHeader' : ''}`} type="text" name="name" placeholder="Search for a name" ref={inputRef} value={inputValue} onChange={(e) => {
                     setInputValue(e.target.value as string)

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/overlayscrollbars": "^1.12.5",
+    "copy-to-clipboard": "^3.3.3",
     "express": "^4.18.2",
     "overlayscrollbars": "^2.5.0",
     "overlayscrollbars-react": "^0.5.4",

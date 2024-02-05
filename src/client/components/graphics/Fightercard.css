@@ -5,7 +5,7 @@
     flex-direction: column;
     border: 1px solid #c7a3ff;
     border-radius: 10px;
-    padding: 20px;
+    padding: 0 20px;
     justify-content: space-evenly;
 
     background-color: rgba(32, 33, 36, 0.5);

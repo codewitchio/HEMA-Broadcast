@@ -16,24 +16,38 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
+    height: 100%;
 }
 
 body {
     margin: 0;
+    height: 100%;
 }
 
-body:has(>.default-layout-root) {
+body:has(.default-layout-root) {
     background-color: #202124;
+}
+
+#root {
+    height: 100%;
 }
 
 .default-layout-root {
     min-width: 320px;
     min-height: 100vh;
-    max-width: 1600px;
+    max-width: 1400px;
     margin: auto;
 
     display: flex;
     flex-direction: column;
+}
+
+
+.graphic-layout-root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .header {
@@ -41,6 +55,7 @@ body:has(>.default-layout-root) {
     margin-block-end: 25px;
     display: flex;
     align-items: end;
+    justify-content: center;
     gap: 10px;
 }
 
@@ -86,16 +101,7 @@ body:has(>.default-layout-root) {
 }
 
 .config-input {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
     align-items: end;
-}
-
-.config-manual-input {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
 /* General */
@@ -119,7 +125,7 @@ h5 {
     margin-block-end: 0;
 }
 
-/* Text input */
+/* Input */
 input[type="text"],
 input[type="number"] {
     border: 1px solid #c7a3ff;
@@ -158,9 +164,81 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+button {
+    border: 1px solid #c7a3ff;
+    border-radius: 10px;
+    background-color: #2d2e30;
+    color: #c7a3ff;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    min-width: 90px;
+    position: relative;
+
+    transition: all 0.2s;
+}
+
+button:hover {
+    background-color: #3b3b3d;
+}
+
+button:disabled {
+    background-color: #18181a;
+    border-color: #717274;
+    cursor: not-allowed;
+    color: #717274;
+}
+
+button:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 10px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.5s;
+    box-shadow: 0 0 20px 10px #c7a3ff;
+}
+
+button:not([disabled]):active:after {
+    box-shadow: 0 0 0 0 #c7a3ff;
+    opacity: 1;
+    transition: 0s;
+}
+
 .input-wrapper {
     border-radius: 10px;
     position: relative;
+    display: flex;
+}
+
+.input-wrapper-shared {
+    border: 1px solid #c7a3ff;
+    border-radius: 10px;
+}
+
+.input-wrapper-shared button {
+    border: none;
+}
+
+.input-wrapper-shared input[type="text"] {
+    border: none;
+    width: unset;
+    flex-grow: 1;
+}
+
+.input-button-left button,
+.input-button-left button::after {
+    border-radius: 10px 0 0 10px;
+    border-radius: 10px 0 0 10px;
+}
+
+.input-button-left input[type="text"] {
+    border-inline-start: 1px solid #c7a3ff;
+    border-radius: 0 10px 10px 0;
 }
 
 .fighter-search-box .input-wrapper {
@@ -176,12 +254,17 @@ input[type="number"] {
 .fighter-search-box>.input-wrapper:has(.fighter-search-results-row:focus),
 input[type="text"]:focus:not(.fighter-search-box input[type="text"]:focus),
 input[type="number"]:focus,
-button:focus {
+button:focus-visible {
     outline: none;
     box-shadow: 0 0 5px 1px #c7a3ff;
 }
 
+input[type="text"]:read-only {
+    color: #717274;
+}
+
 .fighter-search-box>.input-wrapper {
+    flex-direction: column;
     transition: all 0.2s;
 }
 
@@ -189,7 +272,8 @@ input:focus {
     outline: none;
 }
 
-.fighter-search-box>.input-wrapper:has(> input[type="text"]:disabled),
+.input-wrapper:has(> input[type="text"]:disabled),
+.input-wrapper:has(> button:disabled),
 input[type="text"]:disabled {
     background-color: #18181a;
     border-color: #717274;
@@ -205,12 +289,6 @@ input[type="text"]:disabled {
 }
 
 /* FighterSearchBox */
-
-.fighter-search-box {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
 .fighter-search-box input[type="text"] {
     /* Regular input + label size */
@@ -320,6 +398,12 @@ input[type="text"].showHeader {
 }
 
 /* Helpers */
+.vertical-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .shadow {
     -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.75);
