@@ -54,6 +54,8 @@ function SearchResultRow(props: SearchResultRowProps) {
 }
 
 type FighterSearchBox = {
+    setSelectedFighters: Function,
+    selectedFighters: Array<FighterResult>,
     numberOfSelections?: number
 }
 
@@ -67,13 +69,12 @@ function FighterSearchBox(props: FighterSearchBox) {
     const [searchResultsHeight, setSearchResultsHeight]: [number, Function] = React.useState<number>(0)
     const searchResultsElement = React.useRef<HTMLDivElement | null>(null)
 
-    const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
+    // const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
 
-
-    // const [focusedSearchResult, setFocusedSearchResult]: [number]
+    const { setSelectedFighters, selectedFighters, numberOfSelections } = props
 
     function selectFighter(fighter: FighterResult): void {
-        if (!props.numberOfSelections || selectedFighters.length < props.numberOfSelections) {
+        if (!numberOfSelections || selectedFighters.length < numberOfSelections) {
             setSelectedFighters(selectedFighters.concat([fighter]))
             setSearchResult()
             setInputValue('')
@@ -146,7 +147,7 @@ function FighterSearchBox(props: FighterSearchBox) {
                         e.preventDefault()
                         searchResultsElement.current?.lastChild && (searchResultsElement.current?.lastChild as HTMLDivElement).focus()
                     }
-                }} disabled={!!props.numberOfSelections && selectedFighters.length >= props.numberOfSelections} />
+                }} disabled={!!numberOfSelections && selectedFighters.length >= numberOfSelections} />
                 <InputLoadingIcon visible={isLoading} />
                 <OverlayScrollbarsComponent tabIndex={-1} element="div" className={`fighter-search-results ${!showHeader ? 'showHeader' : ''}`} options={{ scrollbars: { autoHide: 'scroll', autoHideDelay: 500 } }} defer>
                     <AnimateHeight duration={animationDuration} contentRef={searchResultsElement} height={searchResultsHeight} disableDisplayNone contentClassName="auto-content">
@@ -161,8 +162,8 @@ function FighterSearchBox(props: FighterSearchBox) {
                     </AnimateHeight>
                 </OverlayScrollbarsComponent>
             </div>
-            {hasSelection && props.numberOfSelections ? (
-                <div className="fighter-search-selected-count text-grey">{`${selectedFighters.length}/${props.numberOfSelections} selected`}</div>
+            {hasSelection && numberOfSelections ? (
+                <div className="fighter-search-selected-count text-grey">{`${selectedFighters.length}/${numberOfSelections} selected`}</div>
             ) : ''}
             <div className="fighter-search-selected-list">
                 {hasSelection ? (selectedFighters.map((fighter: FighterResult) =>

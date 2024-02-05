@@ -2,6 +2,7 @@ import React from "react"
 import { useParams } from "react-router-dom"
 import GraphicFightercard from "../components/graphics/Fightercard"
 import FighterSearchBox from "../components/FighterSearchBox"
+import { FighterResult } from "../helpers/InternalAPI"
 
 // TODO: Create input types for each template
 type InputFields = {
@@ -14,14 +15,22 @@ function ConfigurePage() {
 
     // TODO: https://stackoverflow.com/questions/70086856/create-object-based-on-types-typescript
     const [inputFields, setInputFields]: [InputFields, Function] = React.useState({ name: '', club: '' })
+    const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
+
+    let numberOfSelections: number | undefined = undefined
+    switch (template) {
+        case 'fightercard':
+            numberOfSelections = 1
+            break
+    }
 
     return (
         <div className="page config-page">
             <div className="config-input">
                 <h2>Search HEMA Ratings</h2>
-                <FighterSearchBox numberOfSelections={1} />
-                <h2>Manual input</h2>
-                {/* TODO: Hide by default? */}
+                <FighterSearchBox setSelectedFighters={setSelectedFighters} selectedFighters={selectedFighters} numberOfSelections={numberOfSelections} />
+                {/* TODO: Hide by default? And fill with data */}
+                {/* <h2>Manual input</h2>
                 <form className="config-manual-input">
                     {Object.entries(inputFields).map(([key, value], index) => {
                         let formattedKey: string = key[0].toUpperCase() + key.substring(1)
@@ -35,7 +44,7 @@ function ConfigurePage() {
                         )
 
                     })}
-                </form>
+                </form> */}
             </div>
             <div className="config-graphics">
                 {template == 'fightercard' ?
