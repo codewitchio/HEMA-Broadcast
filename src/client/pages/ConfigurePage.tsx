@@ -33,7 +33,7 @@ function ConfigurePage() {
     let hasSelection: boolean = selectedFighters.length === numberOfSelections
 
     return (
-        <div className="page config-page">
+        <div className="page page-config">
             <div className="config-input vertical-flex">
                 <h2>Search HEMA Ratings</h2>
                 <FighterSearchBox setSelectedFighters={setSelectedFighters} selectedFighters={selectedFighters} numberOfSelections={numberOfSelections} />

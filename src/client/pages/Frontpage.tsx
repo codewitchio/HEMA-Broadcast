@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 function Frontpage() {
 
     return (
-        <div className="page Frontpage">
+        <div className="page page-frontpage">
             Frontpage :D
             <br />
             <Link to="/config/fightercard">Config - Fighter Card</Link>

@@ -37,6 +37,7 @@ body:has(.default-layout-root) {
     min-height: 100vh;
     max-width: 1400px;
     margin: auto;
+    padding: 0 20px;
 
     display: flex;
     flex-direction: column;
@@ -88,13 +89,16 @@ body:has(.default-layout-root) {
     flex-grow: 1;
 }
 
-.config-page {
+/* Pages */
+
+.page-config {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 20px
 }
 
-.config-page h2 {
+.page-config h2 {
     text-align: center;
     /* Same as input boxes */
     width: 442px;
@@ -144,7 +148,7 @@ label {
     color: #c7a3ff;
     padding: 10px;
     max-width: 200px;
-    min-width: 80px;
+    min-width: 50px;
     display: inline-block;
     text-align: end;
     position: relative;

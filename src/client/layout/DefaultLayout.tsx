@@ -9,7 +9,7 @@ function DefaultLayout() {
             <div className="header">
                 <Link className="nav-primary" to="/">HEMA Broadcast</Link>
                 <Link className="nav-secondary" to="/">Overlays</Link>
-                <Link className="nav-secondary" to="/">About</Link>
+                <Link className="nav-secondary" to="/about">About</Link>
             </div>
             <div className="content">
                 <Outlet />
