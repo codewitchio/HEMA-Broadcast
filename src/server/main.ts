@@ -12,8 +12,8 @@ app.get("/hello", (req: any, res: any) => {
 
 // http://localhost:3000/api/hemaratings/fighters/search/Einar
 // TODO: Should I restrict this to only allow local requests?
-app.get("/api/hemaratings/fighters/search/:name", (req: any, res: any) => {
-    HEMARatingsFighterSearch(req.params.name).then((FighterSearchResult): void => {
+app.get("/api/hemaratings/fighters/search/:name/:includeRating", (req: any, res: any) => {
+    HEMARatingsFighterSearch(req.params.name, req.params.includeRating).then((FighterSearchResult): void => {
         res.send(FighterSearchResult)
     })
 })

@@ -9,8 +9,8 @@ const DefaultOptions = {
     }
 }
 
-export async function HEMARatingsFighterSearch(name: string): Promise<any> {
-    return HEMARatingsAPIRequest(`${APIUrl}/fighters/search/${name}`)
+export async function HEMARatingsFighterSearch(name: string, includeRating: boolean = false): Promise<any> {
+    return HEMARatingsAPIRequest(`${APIUrl}/fighters/search/${name}?includeRating=${includeRating}`)
 }
 
 async function HEMARatingsAPIRequest(url: string): Promise<any> {

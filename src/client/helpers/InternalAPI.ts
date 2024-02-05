@@ -37,8 +37,8 @@ export function FighterSearchMock(name: string): Promise<FighterSearchResult> {
     })
 }
 
-export function FighterSearch(name: string): Promise<FighterSearchResultCombined> {
-    return InternalAPIRequest(`${HemaRatingsURL}/fighters/search/${name}`).then((JSONResponse: FighterSearchResult) => {
+export function FighterSearch(name: string, includeRating: boolean = false): Promise<FighterSearchResultCombined> {
+    return InternalAPIRequest(`${HemaRatingsURL}/fighters/search/${name}/${includeRating}`).then((JSONResponse: FighterSearchResult) => {
         return {
             searchTerm: JSONResponse.searchTerm,
             matches: JSONResponse.exactMatches.concat(JSONResponse.fuzzyMatches)
