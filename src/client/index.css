@@ -10,7 +10,6 @@
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #202124;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -19,7 +18,15 @@
     -webkit-text-size-adjust: 100%;
 }
 
-#root {
+body {
+    margin: 0;
+}
+
+body:has(>.default-layout-root) {
+    background-color: #202124;
+}
+
+.default-layout-root {
     min-width: 320px;
     min-height: 100vh;
     max-width: 1600px;
@@ -29,12 +36,9 @@
     flex-direction: column;
 }
 
-body {
-    margin: 0;
-}
-
 .header {
     margin-block-start: 25px;
+    margin-block-end: 25px;
     display: flex;
     align-items: end;
     gap: 10px;

@@ -14,13 +14,17 @@ function ConfigurePage() {
     const { template } = useParams()
 
     // TODO: https://stackoverflow.com/questions/70086856/create-object-based-on-types-typescript
-    const [inputFields, setInputFields]: [InputFields, Function] = React.useState({ name: '', club: '' })
+    // const [inputFields, setInputFields]: [InputFields, Function] = React.useState({ name: '', club: '' })
     const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
 
     let numberOfSelections: number | undefined = undefined
+    let graphicElement: React.ReactElement | undefined = undefined
+    let formattedData: Object = {}
     switch (template) {
         case 'fightercard':
             numberOfSelections = 1
+            graphicElement = <GraphicFightercard {...selectedFighters[0]} />
+            formattedData = encodeURI(JSON.stringify(selectedFighters[0]))
             break
     }
 
@@ -47,9 +51,10 @@ function ConfigurePage() {
                 </form> */}
             </div>
             <div className="config-graphics">
-                {template == 'fightercard' ?
-                    <GraphicFightercard {...selectedFighters[0]} /> : ''
-                }
+                {graphicElement}
+                <div>
+                    Link: { }
+                </div>
             </div>
         </div>
     )
