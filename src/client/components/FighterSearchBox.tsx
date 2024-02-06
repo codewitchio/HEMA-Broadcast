@@ -106,7 +106,7 @@ function FighterSearchBox(props: FighterSearchBox) {
                 }
             }, typingTimeoutDuration)
         } else {
-
+            setSearchResult(undefined)
         }
     }, [inputValue])
 
