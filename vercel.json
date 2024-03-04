@@ -1,9 +1,10 @@
 {
     "version": 2,
-    "routes": [
+    "rewrites": [
         {
-            "src": "/(.*)",
-            "dest": "src/server/main.ts"
+            "source": "/(.*)",
+            "destination": "/src/server"
         }
-    ]
+    ],
+    "devCommand": "pnpm run dev"
 }

@@ -21,3 +21,5 @@ app.get("/api/hemaratings/fighters/search/:name/:includeRating", (req: any, res:
 ViteExpress.listen(app, 3000, () =>
     console.log("Server is listening on port 3000..."),
 )
+
+module.exports = app
