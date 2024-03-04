@@ -3,7 +3,7 @@
     "rewrites": [
         {
             "source": "/(.*)",
-            "destination": "/src/server"
+            "destination": "/"
         }
     ],
     "devCommand": "pnpm run dev"
