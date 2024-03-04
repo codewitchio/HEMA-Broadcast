@@ -1,11 +1,9 @@
-import Credentials from "./credentials.json"
-
 const APIUrl = 'https://hemaratingspublicapi.azurewebsites.net/api'
 
 const DefaultOptions = {
     "method": 'GET',
     "headers": {
-        "x-functions-key": Credentials.HEMARatingsAPIKey
+        "x-functions-key": process.env.HEMARatingsAPIKey!
     }
 }
 

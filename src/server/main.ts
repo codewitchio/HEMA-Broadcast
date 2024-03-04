@@ -4,6 +4,13 @@ import ViteExpress from "vite-express"
 import "./HEMARatingsAPI.ts"
 import { HEMARatingsFighterSearch } from "./HEMARatingsAPI.ts"
 
+import 'dotenv/config'
+
+if (!process.env.HEMARatingsAPIKey) {
+    console.error("ERROR: HEMARatingsAPIKey not found, make sure to set up your .env")
+    process.exit(1)
+}
+
 const app = express()
 
 app.get("/hello", (req: any, res: any) => {
@@ -17,9 +24,10 @@ app.get("/api/hemaratings/fighters/search/:name/:includeRating", (req: any, res:
         res.send(FighterSearchResult)
     })
 })
+const port = 3001
 
-ViteExpress.listen(app, 3000, () =>
-    console.log("Server is listening on port 3000..."),
+ViteExpress.listen(app, port, () =>
+    console.log(`Server is listening on port ${port}...`),
 )
 
 module.exports = app
