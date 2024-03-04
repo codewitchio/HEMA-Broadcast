@@ -1,11 +1,5 @@
 {
     "version": 2,
-    "builds": [
-        {
-            "src": "src/server/main.ts",
-            "use": "@now/node"
-        }
-    ],
     "routes": [
         {
             "src": "/(.*)",
