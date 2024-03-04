@@ -1,5 +1,6 @@
-const APIUrl = 'https://hemaratingspublicapi.azurewebsites.net/api'
+import 'dotenv/config'
 
+const APIUrl = 'https://hemaratingspublicapi.azurewebsites.net/api'
 const DefaultOptions = {
     "method": 'GET',
     "headers": {

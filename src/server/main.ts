@@ -12,6 +12,7 @@ if (!process.env.HEMARatingsAPIKey) {
 }
 
 const app = express()
+ViteExpress.config({ mode: process.env.NODE_ENV as ("production" | "development" | undefined) })
 
 app.get("/hello", (req: any, res: any) => {
     res.send("Hello Vite + React + TypeScript!")
@@ -24,10 +25,9 @@ app.get("/api/hemaratings/fighters/search/:name/:includeRating", (req: any, res:
         res.send(FighterSearchResult)
     })
 })
-const port = 3001
 
-ViteExpress.listen(app, port, () =>
-    console.log(`Server is listening on port ${port}...`),
+ViteExpress.listen(app, Number(process.env.EXPRESS_PORT), () =>
+    console.log(`Server is listening on port ${process.env.EXPRESS_PORT}...`),
 )
 
 module.exports = app

@@ -17,5 +17,10 @@ Use [pnpm](https://pnpm.io/) as your package manager for best results. Developed
 1. Clone repository
 2. Run `pnpm install`
 3. Create a copy of `example.env`, call it `.env`, and add your API key
-4. To run, use `pnpm run dev`
+4. To run, use `pnpm run dev` (or `vercel dev`)
 5. Navigate to `localhost:3000`
+
+
+# Production
+1. Build using `pnpm build`
+2. Start using `pnpm start`
