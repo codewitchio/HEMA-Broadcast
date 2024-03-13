@@ -25,6 +25,8 @@ dist-ssr
 
 # Environment
 .env
+credentials.json 
+# TODO: Remove when merging with main
 
 # Vercel
 .vercel

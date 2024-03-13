@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Script from 'next/script'
 
+import 'overlayscrollbars/overlayscrollbars.css'
+import "./global.css"
+
 export const metadata: Metadata = {
     title: 'HEMA Broadcast',
     description: 'Broadcast tools for HEMA tournaments',
