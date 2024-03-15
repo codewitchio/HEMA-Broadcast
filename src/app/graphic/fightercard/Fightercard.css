@@ -1,0 +1,28 @@
+.graphic-fightercard {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #c7a3ff;
+    border-radius: 10px;
+    padding: 0 20px;
+    justify-content: space-evenly;
+
+    background-color: rgba(32, 33, 36, 0.5);
+}
+
+.graphic-fightercard div {
+    display: flex;
+}
+
+.graphic-fightercard span {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+    min-width: 100px;
+
+    /* TODO: Generalize */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+}

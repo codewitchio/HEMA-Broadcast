@@ -10,11 +10,7 @@ export const metadata: Metadata = {
     description: 'Broadcast tools for HEMA tournaments',
 }
 
-export default function RootLayout({
-    children,
-}: {
-    children: React.ReactNode
-}) {
+export default function RootLayout({ children, }: { children: React.ReactNode }) {
     return (
         <html lang="en">
             <Script src="https://kit.fontawesome.com/264ffc9fb7.js" crossOrigin="anonymous" />

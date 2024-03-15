@@ -1,9 +1,8 @@
 "use client"
 import React from "react"
-import { useParams } from "react-router-dom"
-import GraphicFightercard from "../../../client/components/graphics/GraphicFightercard"
-import FighterSearchBox from "../../../client/components/FighterSearchBox"
-import { FighterResult } from "../../../client/helpers/InternalAPI"
+import GraphicFightercard from "../../graphic/fightercard/page"
+import FighterSearchBox from "../../_components/FighterSearchBox"
+import { FighterResult } from "../../_helpers/InternalAPI"
 import copy from "copy-to-clipboard"
 
 // TODO: Create input types for each template
@@ -12,10 +11,7 @@ type InputFields = {
     club: string
 }
 
-
-function ConfigurePage(params: { template: string }) {
-    const { template } = useParams()
-
+function ConfigurePage({ params }: { params: { template: string } }) {
     // TODO: https://stackoverflow.com/questions/70086856/create-object-based-on-types-typescript
     const [inputFields, setInputFields]: [InputFields, Function] = React.useState({ name: '', club: '' })
     const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
@@ -23,7 +19,7 @@ function ConfigurePage(params: { template: string }) {
     let numberOfSelections: number | undefined = undefined
     let graphicElement: React.ReactElement | undefined = undefined
     let formattedData: Object = {}
-    switch (template) {
+    switch (params.template) {
         case 'fightercard':
             numberOfSelections = 1
             graphicElement = <GraphicFightercard {...selectedFighters[0]} />
@@ -31,7 +27,7 @@ function ConfigurePage(params: { template: string }) {
             break
     }
 
-    let link: string = `${window.location.hostname}:${window.location.port}/graphic/${template}/${formattedData}`
+    let link = (typeof window !== 'undefined') ? `${window.location.hostname}:${window.location.port}/graphic/${params.template}/${formattedData}` : ""
     let hasSelection: boolean = selectedFighters.length === numberOfSelections
 
     return (
