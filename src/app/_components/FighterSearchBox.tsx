@@ -16,7 +16,7 @@ type SearchResultRowProps = {
 
 function SearchResultRow(props: SearchResultRowProps) {
     return (
-        <div className={`fighter-search-results-row ${props.highlight ? 'highlight' : ''}`} tabIndex={0} role="button" onClick={(e) => {
+        <div className={`fighter-search-results-row ${props.highlight ? 'highlight' : ''}`} tabIndex={0} role="button" onClick={() => {
             props.selectFighter(props.fighter)
         }} onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -129,9 +129,9 @@ function FighterSearchBox(props: FighterSearchBox) {
             <div className="input-wrapper">
                 <input className={`fighter-search-input ${showHeader ? 'showHeader' : ''}`} type="text" name="name" placeholder="Search for a name" ref={inputRef} value={inputValue} onChange={(e) => {
                     setInputValue(e.target.value as string)
-                }} onFocus={(e) => {
+                }} onFocus={() => {
                     setInputFocused(true)
-                }} onBlur={(e) => {
+                }} onBlur={() => {
                     setInputFocused(false)
                 }} onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -168,7 +168,7 @@ function FighterSearchBox(props: FighterSearchBox) {
                 {hasSelection ? (selectedFighters.map((fighter: FighterResult) =>
                     <div className="fighter-search-selected-list-item" key={fighter.id}>
                         <span key={fighter.id}>{GetFlagEmoji(fighter.countryCode) + " " + fighter.name}</span>
-                        <i className="fa-solid fa-xmark" onClick={e => unselectFighter(fighter)} />
+                        <i className="fa-solid fa-xmark" onClick={() => unselectFighter(fighter)} />
                     </div>
                 )) : ''}
             </div>

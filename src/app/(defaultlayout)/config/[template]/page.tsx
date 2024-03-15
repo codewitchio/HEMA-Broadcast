@@ -62,7 +62,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                 {graphicElement}
                 <h2>Export</h2>
                 <div className="input-wrapper input-wrapper-shared input-button-left">
-                    <button onClick={(e) => {
+                    <button onClick={() => {
                         copy(link)
                     }} disabled={!hasSelection}>Copy link</button>
                     <input type="text" value={hasSelection ? link : ''} readOnly disabled={!hasSelection} />

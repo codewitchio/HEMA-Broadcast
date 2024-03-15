@@ -29,8 +29,8 @@ export type RatingResult = {
     rank: number
 }
 
-export function FighterSearchMock(name: string): Promise<FighterSearchResult> {
-    return new Promise<any>((resolve, reject) => {
+export function FighterSearchMock(_name: string): Promise<FighterSearchResult> {
+    return new Promise<any>((resolve, _reject) => {
         setTimeout(() => {
             resolve({ "searchTerm": "Einar", "exactMatches": [{ "id": 10369, "name": "Einar Lundgren", "countryCode": "SE", "countryName": "Sweden", "clubId": 64, "clubName": "Stockholmspolisens Idrottsförening Fäktning", "ratings": null }], "fuzzyMatches": [{ "id": 11594, "name": "Einar Schiöth", "countryCode": "IS", "countryName": "Iceland", "clubId": null, "clubName": null, "ratings": null }, { "id": 516, "name": "Einar Hellvik", "countryCode": "NO", "countryName": "Norway", "clubId": 20, "clubName": "Fekteklubben Frie Duellister", "ratings": null }, { "id": 10369, "name": "Einar Lundgren", "countryCode": "SE", "countryName": "Sweden", "clubId": 64, "clubName": "Stockholmspolisens Idrottsförening Fäktning", "ratings": null }, { "id": 3572, "name": "Andreas Reinartz", "countryCode": "DE", "countryName": "Germany", "clubId": 299, "clubName": "Brückenschlag", "ratings": null }, { "id": 3575, "name": "Olga Reinartz", "countryCode": "DE", "countryName": "Germany", "clubId": 299, "clubName": "Brückenschlag", "ratings": null }] })
         }, 100)
