@@ -27,9 +27,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
             break
     }
 
-
     const [isClient, setIsClient] = React.useState(false)
-
     React.useEffect(() => {
         setIsClient(true)
     }, [])

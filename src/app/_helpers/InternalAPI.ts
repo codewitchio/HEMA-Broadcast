@@ -1,4 +1,4 @@
-const HemaRatingsURL = "/api/hemaratings"
+const APIUrl = "/api"
 
 export type FighterSearchResultCombined = {
     searchTerm: string,
@@ -38,14 +38,13 @@ export function FighterSearchMock(name: string): Promise<FighterSearchResult> {
 }
 
 export function FighterSearch(name: string, includeRating: boolean = false): Promise<FighterSearchResultCombined> {
-    return InternalAPIRequest(`${HemaRatingsURL}/fighters/search/${name}/${includeRating}`).then((JSONResponse: FighterSearchResult) => {
+    return InternalAPIRequest(`${APIUrl}/fighters/search/${name}/${includeRating}`).then((JSONResponse: FighterSearchResult) => {
         return {
             searchTerm: JSONResponse.searchTerm,
             matches: JSONResponse.exactMatches.concat(JSONResponse.fuzzyMatches)
         }
     })
 }
-
 
 async function InternalAPIRequest(url: string): Promise<any> {
     return fetch(url).then((APIResponse): Promise<any> => {
