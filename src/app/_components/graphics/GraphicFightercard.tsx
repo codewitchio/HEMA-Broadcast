@@ -1,3 +1,4 @@
+import React from 'react'
 import { GetFlagEmoji } from '../../_helpers/GetFlagEmoji'
 import { FighterResult } from '../../_helpers/InternalAPI'
 import './Fightercard.css'

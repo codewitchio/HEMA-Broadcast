@@ -1,3 +1,4 @@
+import React from 'react'
 import GraphicFightercard from "../../../_components/graphics/GraphicFightercard"
 import { FighterResult } from "../../../_helpers/InternalAPI"
 
