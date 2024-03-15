@@ -1,10 +1,4 @@
 {
     "version": 2,
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/"
-        }
-    ],
     "devCommand": "pnpm run dev"
 }
