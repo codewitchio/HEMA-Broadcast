@@ -1,8 +1,8 @@
 "use client"
 import React from "react"
-import GraphicFightercard from "../../graphic/fightercard/page"
-import FighterSearchBox from "../../_components/FighterSearchBox"
-import { FighterResult } from "../../_helpers/InternalAPI"
+import GraphicFightercard from "../../../_components/graphics/GraphicFightercard"
+import FighterSearchBox from "../../../_components/FighterSearchBox"
+import { FighterResult } from "../../../_helpers/InternalAPI"
 import copy from "copy-to-clipboard"
 
 // TODO: Create input types for each template
@@ -27,7 +27,14 @@ function ConfigurePage({ params }: { params: { template: string } }) {
             break
     }
 
-    let link = (typeof window !== 'undefined') ? `${window.location.hostname}:${window.location.port}/graphic/${params.template}/${formattedData}` : ""
+
+    const [isClient, setIsClient] = React.useState(false)
+
+    React.useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    let link = isClient ? `${window.location.hostname}:${window.location.port}/graphic/${params.template}/${formattedData}` : ""
     let hasSelection: boolean = selectedFighters.length === numberOfSelections
 
     return (

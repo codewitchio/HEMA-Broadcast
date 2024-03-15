@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import "../global.css"
+import Script from 'next/script'
 
 export const metadata: Metadata = {
     title: 'HEMA Broadcast',
