@@ -31,6 +31,14 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                         </div>
                     </div>
                 </div>
+                <svg style={{ height: 0, width: 0, position: "absolute" }}>
+                    <filter id='noise'>
+                        <feTurbulence
+                            type='fractalNoise'
+                            baseFrequency='0.65'
+                            stitchTiles='stitch' />
+                    </filter>
+                </svg>
             </body>
         </html>
     )
