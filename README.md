@@ -12,11 +12,11 @@ Here's an early alpha demo to show the intended usage flow:
 https://github.com/Aryuko/HEMA-Broadcast/assets/7040167/d0d6f3f7-1b7b-4f23-b935-0f973d465c2b
 
 # Development
-Use [pnpm](https://pnpm.io/) as your package manager for best results. Developed on [Node.js](https://nodejs.org/) version `20.9.0`
+Use [pnpm](https://pnpm.io/) as your package manager for best results. Use [nvm](https://github.com/nvm-sh/nvm) or install [Node.js](https://nodejs.org/) version `21.7.1`.
 
 1. Clone repository
 2. Run `pnpm install`
-3. Create a copy of `example.env`, call it `.env`, and add your API key
+3. Create a copy of `example.env`, call it `.env`, and add your HEMA Ratings API key (get one by [contacting them](https://hemaratings.com/contact/))
 4. To run, use `pnpm run dev` (or `vercel dev`)
 5. Navigate to `localhost:3000`
 
