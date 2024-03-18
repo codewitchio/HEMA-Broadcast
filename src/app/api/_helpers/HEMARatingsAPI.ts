@@ -13,6 +13,9 @@ export async function HEMARatingsFighterSearch(name: string, includeRating: bool
 }
 
 async function HEMARatingsAPIRequest(url: string): Promise<any> {
+    if (!process.env.HEMARatingsAPIKey || process.env.HEMARatingsAPIKey === "KEYGOESHERE") {
+        throw new Error("No HEMARatingsAPIKey set in .env, see README for instructions")
+    }
     return fetch(url, DefaultOptions).then((APIResponse): Promise<any> => {
         if (!APIResponse.ok) {
             throw new Error(`HTTP error! Status: ${APIResponse.status}`)
