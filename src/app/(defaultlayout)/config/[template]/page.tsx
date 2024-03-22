@@ -2,7 +2,7 @@
 import React from "react"
 import GraphicFightercard from "../../../_components/graphics/GraphicFightercard"
 import FighterSearchBox from "../../../_components/FighterSearchBox"
-import { FighterResult } from "../../../_helpers/InternalAPI"
+import { FighterResult, RatingResult } from "../../../_helpers/InternalAPI"
 import copy from "copy-to-clipboard"
 
 // TODO: Create input types for each template
@@ -15,6 +15,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
     // TODO: https://stackoverflow.com/questions/70086856/create-object-based-on-types-typescript
     const [inputFields, setInputFields]: [InputFields, Function] = React.useState({ name: '', club: '' })
     const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
+    const [selectedRating, setSelectedRating]: [RatingResult | null, Function] = React.useState(null)
 
     let numberOfSelections: number | undefined = undefined
     let graphicElement: React.ReactElement | undefined = undefined
@@ -22,7 +23,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
     switch (params.template) {
         case 'fightercard':
             numberOfSelections = 1
-            graphicElement = <GraphicFightercard {...selectedFighters[0]} />
+            graphicElement = <GraphicFightercard {...selectedFighters[0]} selectedRating={selectedRating} />
             formattedData = encodeURI(JSON.stringify(selectedFighters[0]))
             break
     }
@@ -39,7 +40,15 @@ function ConfigurePage({ params }: { params: { template: string } }) {
         <div className="page page-config">
             <div className="config-input vertical-flex">
                 <h2>Search HEMA Ratings</h2>
-                <FighterSearchBox setSelectedFighters={setSelectedFighters} selectedFighters={selectedFighters} numberOfSelections={numberOfSelections} />
+                <FighterSearchBox setSelectedFighters={setSelectedFighters} selectedFighters={selectedFighters} numberOfSelections={numberOfSelections} includeRating={true} />
+                {selectedFighters[0] && selectedFighters[0].ratings ? (
+                    <select name="rating" onChange={(e) => setSelectedRating(selectedFighters[0].ratings?.[Number(e.target.value)])}>
+                        <option value={-1}>Select a rating</option>
+                        {Object.entries(selectedFighters[0].ratings).map(([index, rating]) =>
+                            <option key={index} value={index}>{rating.ratingCategoryName}</option>
+                        )}
+                    </select>
+                ) : ''}
                 {/* TODO: Hide by default? And fill with data */}
                 <h2>Manual input</h2>
                 <form className="config-manual-input vertical-flex">

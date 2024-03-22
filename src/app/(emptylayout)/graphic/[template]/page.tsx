@@ -1,6 +1,5 @@
 import React from 'react'
-import GraphicFightercard from "../../../_components/graphics/GraphicFightercard"
-import { FighterResult } from "../../../_helpers/InternalAPI"
+import GraphicFightercard, { GraphicFightercardProps } from "../../../_components/graphics/GraphicFightercard"
 
 // TODO: Add [data] folder for second param, figure out why JSON parse doesn't work on server
 function GraphicPage({ params }: { params: { template: string, data: string } }) {
@@ -10,7 +9,7 @@ function GraphicPage({ params }: { params: { template: string, data: string } })
     if (formattedData) {
         switch (params.template) {
             case 'fightercard':
-                graphicElement = <GraphicFightercard {...(formattedData as FighterResult)} />
+                graphicElement = <GraphicFightercard {...(formattedData as GraphicFightercardProps)} />
                 break
             default:
                 break
