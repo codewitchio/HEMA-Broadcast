@@ -1,7 +1,7 @@
 import React from "react"
-import { FighterResult, FighterSearch, FighterSearchResultCombined } from "../lib/InternalAPI"
+import { FighterResult, FighterSearch, FighterSearchResultCombined } from "@/lib/InternalAPI"
+import { GetFlagEmoji } from "@/lib/GetFlagEmoji"
 import { InputLoadingIcon } from './InputLoadingIcon'
-import { GetFlagEmoji } from "../lib/GetFlagEmoji"
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react"
 import AnimateHeight from 'react-animate-height'
 

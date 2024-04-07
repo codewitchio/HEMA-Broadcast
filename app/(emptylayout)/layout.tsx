@@ -1,7 +1,7 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import Script from 'next/script'
-import "../global.css"
+import "@/app/global.css" // idk if this works
 
 export const metadata: Metadata = {
     title: 'HEMA Broadcast',

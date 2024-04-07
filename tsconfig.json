@@ -29,6 +29,11 @@
                 "name": "next"
             }
         ],
+        "paths": {
+            "@/*": [
+                "./*"
+            ]
+        }
     },
     "include": [
         "./dist/types/**/*.ts",
