@@ -426,6 +426,12 @@ input[type="text"].showHeader {
     gap: 10px;
 }
 
+.horizontal-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .shadow {
     -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.75);

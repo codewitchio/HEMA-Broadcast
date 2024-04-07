@@ -1,11 +1,16 @@
+.graphic {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+}
+
 .graphic-fightercard {
     width: 400px;
-    height: 600px;
     display: flex;
     flex-direction: column;
     border-radius: var(--border-radius);
-    padding: 0 20px;
-    gap: 20px;
+    padding: 40px 20px;
+    gap: 5px;
     overflow: hidden;
     background: linear-gradient(135deg, var(--card-grd1), var(--card-grd2));
     filter: drop-shadow(0px 0px 0px rgb(173, 155, 255, 0));
@@ -16,18 +21,6 @@
 
 .card-list div {
     display: flex;
-}
-
-.card-list span {
-    font-size: 20px;
-    line-height: 30px;
-    font-weight: 500;
-    min-width: 100px;
-
-    /* TODO: Generalize */
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow-x: hidden;
 }
 
 .noise::after {
@@ -43,6 +36,11 @@
     transition: all ease 0.3s;
 }
 
+/* Counter the padding */
+.graphic-fightercard.noise::after {
+    top: -20px
+}
+
 .card-border {
     z-index: 1;
     border-radius: var(--border-radius);
@@ -52,4 +50,9 @@
 
 .card-secondary-text {
     color: var(--border-grd1);
+}
+
+.card-subtitle {
+    margin: 0 auto;
+    text-align: center;
 }

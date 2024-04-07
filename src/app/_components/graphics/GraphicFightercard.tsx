@@ -6,35 +6,35 @@ import './Fightercard.css'
 export type GraphicFightercardProps = FighterResult & { selectedRating: RatingResult | null }
 
 function GraphicFightercard(props: GraphicFightercardProps) {
-    let placeholder = "Under construction"
     return (
         <div className='card-wrapper vertical-flex'>
             <div className='card-border'>
                 <div className="graphic graphic-fightercard noise backdrop">
-                    <h1 style={{ textAlign: "center" }}>
-                        {props.name || 'Fencer name'}
+                    {/* Fencer name */}
+                    <h1 style={{ textAlign: "center", margin: '0' }}>
+                        {props.name || 'Fencer name'} {props.countryCode && GetFlagEmoji(props.countryCode)}
                     </h1>
-                    <div className='card-list vertical-flex'>
-                        <div>
-                            <span className='card-secondary-text'>Club</span>
-                            <span>{props.clubName || 'Select a fencer'}</span>
-                        </div>
-                        <div>
-                            <span className='card-secondary-text'>Country</span>
-                            <span>{props.countryName && props.countryCode ? props.countryName + " " + GetFlagEmoji(props.countryCode) : 'Select a fencer'}</span>
-                        </div>
-                        <div>
-                            <span className='card-secondary-text'>Rank</span>
-                            <span>{props.selectedRating?.ratingCategoryName || 'Select a rating'}</span>
-                        </div>
-                        <div>
-                            <span className='card-secondary-text'>Wins</span>
-                            <span>{placeholder}</span>
-                        </div>
+                    {/* Club name */}
+                    <div className='card-subtitle horizontal-flex card-secondary-text'>
+                        {/* TODO: Fetch short name when length over 35 */}
+                        <span>{props.clubName || 'Fencer club'}</span>
+                    </div>
+                    {/* Rating name */}
+                    <div className='card-subtitle horizontal-flex'>
+                        <h4>
+                            {props.selectedRating?.ratingCategoryName || 'Select a rating'}
+                        </h4>
+                    </div>
+                    {/* Rating and rank */}
+                    <div style={{ margin: '0 auto' }}>
+                        <span className='card-secondary-text'>Rank: </span>
+                        <span>{props.selectedRating?.rank || 'Select a rating'}</span>
+                        <span className='card-secondary-text'> Rating: </span>
+                        <span>{props.selectedRating?.weightedRating.toFixed(1) || 'Select a rating'}</span>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

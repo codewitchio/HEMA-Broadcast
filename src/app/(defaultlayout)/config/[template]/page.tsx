@@ -42,6 +42,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                 <h2>Search HEMA Ratings</h2>
                 <FighterSearchBox setSelectedFighters={setSelectedFighters} selectedFighters={selectedFighters} numberOfSelections={numberOfSelections} includeRating={true} />
                 {selectedFighters[0] && selectedFighters[0].ratings ? (
+                    // TODO: Reset selection on fighter unselect
                     <select name="rating" onChange={(e) => setSelectedRating(selectedFighters[0].ratings?.[Number(e.target.value)])}>
                         <option value={-1}>Select a rating</option>
                         {Object.entries(selectedFighters[0].ratings).map(([index, rating]) =>
