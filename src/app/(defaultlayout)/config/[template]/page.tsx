@@ -16,6 +16,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
     const [inputFields, setInputFields]: [InputFields, Function] = React.useState({ name: '', club: '' })
     const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
     const [selectedRating, setSelectedRating]: [RatingResult | null, Function] = React.useState(null)
+    const [isRed, setIsRed]: [boolean, Function] = React.useState(false)
 
     let numberOfSelections: number | undefined = undefined
     let graphicElement: React.ReactElement | undefined = undefined
@@ -23,7 +24,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
     switch (params.template) {
         case 'fightercard':
             numberOfSelections = 1
-            graphicElement = <GraphicFightercard {...selectedFighters[0]} selectedRating={selectedRating} />
+            graphicElement = <GraphicFightercard {...selectedFighters[0]} selectedRating={selectedRating} isRed={isRed} />
             formattedData = encodeURI(JSON.stringify(selectedFighters[0]))
             break
     }
@@ -49,6 +50,12 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                             <option key={index} value={index}>{rating.ratingCategoryName}</option>
                         )}
                     </select>
+                ) : ''}
+                {selectedFighters[0] ? (
+                    <label>
+                        <span>Red</span>
+                        <input type="checkbox" checked={isRed} onChange={() => setIsRed(!isRed)} />
+                    </label>
                 ) : ''}
                 {/* TODO: Hide by default? And fill with data */}
                 <h2>Manual input</h2>

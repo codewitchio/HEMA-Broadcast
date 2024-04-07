@@ -16,7 +16,31 @@
     filter: drop-shadow(0px 0px 0px rgb(173, 155, 255, 0));
 
     /* Probably add a toggle for this */
-    box-shadow: 0px 5px 80px 10px rgb(67, 74, 110, 0.4);
+    box-shadow: 0px 5px 80px 10px var(--card-glow);
+}
+
+.red .graphic-fightercard {
+    background: linear-gradient(135deg, var(--card-red-grd1), var(--card-red-grd2));
+    box-shadow: 0px 5px 80px 10px var(--card-red-glow);
+}
+
+.card-border {
+    z-index: 1;
+    border-radius: var(--border-radius);
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, var(--border-grd1), var(--border-grd2)) border-box;
+}
+
+.red .card-border {
+    background: linear-gradient(135deg, var(--border-red-grd1), var(--border-red-grd2)) border-box;
+}
+
+.card-secondary-text {
+    color: var(--border-grd1);
+}
+
+.red .card-secondary-text {
+    color: var(--border-red-grd1);
 }
 
 .card-list div {
@@ -39,17 +63,6 @@
 /* Counter the padding */
 .graphic-fightercard.noise::after {
     top: -20px
-}
-
-.card-border {
-    z-index: 1;
-    border-radius: var(--border-radius);
-    border: 1px solid transparent;
-    background: linear-gradient(135deg, var(--border-grd1), var(--border-grd2)) border-box;
-}
-
-.card-secondary-text {
-    color: var(--border-grd1);
 }
 
 .card-subtitle {

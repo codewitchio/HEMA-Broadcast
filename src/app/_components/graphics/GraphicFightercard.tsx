@@ -3,13 +3,13 @@ import { GetFlagEmoji } from '../../_helpers/GetFlagEmoji'
 import { FighterResult, RatingResult } from '../../_helpers/InternalAPI'
 import './Fightercard.css'
 
-export type GraphicFightercardProps = FighterResult & { selectedRating: RatingResult | null }
+export type GraphicFightercardProps = FighterResult & { selectedRating: RatingResult | null } & { isRed: boolean }
 
 function GraphicFightercard(props: GraphicFightercardProps) {
     return (
-        <div className='card-wrapper vertical-flex'>
+        <div className={`card-wrapper vertical-flex ${props.isRed ? ' red' : ''}`}>
             <div className='card-border'>
-                <div className="graphic graphic-fightercard noise backdrop">
+                <div className='graphic graphic-fightercard noise backdrop'>
                     {/* Fencer name */}
                     <h1 style={{ textAlign: "center", margin: '0' }}>
                         {props.name || 'Fencer name'} {props.countryCode && GetFlagEmoji(props.countryCode)}

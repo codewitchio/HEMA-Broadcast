@@ -22,14 +22,22 @@
     --border-grd2: #434a6e;
     --card-grd1: #08184f;
     --card-grd2: #05060D;
+    --card-glow: rgba(67, 74, 110, 0.4);
+
+    --border-red-grd1: #a36969;
+    --border-red-grd2: #6e4343;
+    --card-red-grd1: #4f0808;
+    --card-red-grd2: #0d0505;
+    --card-red-glow: rgba(110, 67, 67, 0.4);
+
     --holmgång-blue: #08184f;
     --holmgång-yellow: #e7c317;
     --holmgång-yellow-secondary: #c28f00;
     --border-radius: 10px;
 
     --color-background: #0d1117;
-    --color-primary: #c7a3ff;
-    --color-link: #b490ec;
+    --color-primary: #6976a3;
+    --color-link: #525f8f;
     --color-grey: #717274;
 
     --color-surface: #252629;
