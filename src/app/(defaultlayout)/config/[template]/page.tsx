@@ -18,6 +18,14 @@ function ConfigurePage({ params }: { params: { template: string } }) {
     const [selectedRating, setSelectedRating]: [RatingResult | null, Function] = React.useState(null)
     const [isRed, setIsRed]: [boolean, Function] = React.useState(false)
 
+    const setSelectedFightersWrapper = (fighters: FighterResult[]) => {
+        setSelectedFighters(fighters)
+        if (fighters.length === 0) {
+            setSelectedRating(null)
+            setIsRed(false)
+        }
+    }
+
     let numberOfSelections: number | undefined = undefined
     let graphicElement: React.ReactElement | undefined = undefined
     let formattedData: Object = {}
@@ -41,7 +49,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
         <div className="page page-config">
             <div className="config-input vertical-flex">
                 <h2>Search HEMA Ratings</h2>
-                <FighterSearchBox setSelectedFighters={setSelectedFighters} selectedFighters={selectedFighters} numberOfSelections={numberOfSelections} includeRating={true} />
+                <FighterSearchBox setSelectedFighters={setSelectedFightersWrapper} selectedFighters={selectedFighters} numberOfSelections={numberOfSelections} includeRating={true} />
                 {selectedFighters[0] && selectedFighters[0].ratings ? (
                     // TODO: Reset selection on fighter unselect
                     <select name="rating" onChange={(e) => setSelectedRating(selectedFighters[0].ratings?.[Number(e.target.value)])}>
