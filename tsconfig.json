@@ -1,52 +1,43 @@
 {
-    "compilerOptions": {
-        "target": "ES2020",
-        "useDefineForClassFields": true,
-        "lib": [
-            "ES2020",
-            "DOM",
-            "DOM.Iterable"
-        ],
-        "module": "ESNext",
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "preserve",
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true,
-        "allowJs": true,
-        "forceConsistentCasingInFileNames": true,
-        "incremental": true,
-        "preserveSymlinks": true,
-        "plugins": [
-            {
-                "name": "next"
-            }
-        ],
-        "paths": {
-            "@/*": [
-                "./*"
-            ]
-        }
-    },
-    "include": [
-        "./dist/types/**/*.ts",
-        "./next-env.d.ts",
-        "app",
-        "lib/GetFlagEmoji.ts",
-        "lib/InternalAPI.ts",
-        "components/graphics",
-        "components/FighterSearchBox.tsx",
-        "components/InputLoadingIcon.tsx",
-        "lib/HEMARatingsAPI.ts"
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
-    "exclude": [
-        "./node_modules"
-    ]
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "./dist/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

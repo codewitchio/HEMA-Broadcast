@@ -6,6 +6,13 @@ import FighterSearchBox from "@/components/FighterSearchBox"
 import { FighterResult, RatingResult } from "@/lib/InternalAPI"
 import GraphicLowerThird, { GraphicLowerThirdProps } from "@/components/graphics/GraphicLowerThird"
 import { GraphicFightercardProps } from '@/components/graphics/GraphicFightercard'
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { FormProvider, useForm } from "react-hook-form"
+import { Input } from "@/components/ui/input"
+
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import { Button } from "@/components/ui/button"
 
 // TODO: Create input types for each template
 type InputFields = {
@@ -20,12 +27,37 @@ function ConfigurePage({ params }: { params: { template: string } }) {
     const [selectedRating, setSelectedRating]: [RatingResult | null, Function] = React.useState(null)
     const [isRed, setIsRed]: [boolean, Function] = React.useState(false)
 
+    const [isClient, setIsClient] = React.useState(false)
+    React.useEffect(() => {
+        setIsClient(true)
+    }, [])
+
     const setSelectedFightersWrapper = (fighters: FighterResult[]) => {
         setSelectedFighters(fighters)
         if (fighters.length === 0) {
             setSelectedRating(null)
             setIsRed(false)
         }
+    }
+
+    const formSchema = z.object({
+        username: z.string().min(2, {
+            message: "Username must be at least 2 characters.",
+        }),
+    })
+
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            username: "",
+        },
+    })
+
+    // 2. Define a submit handler.
+    function onSubmit(values: z.infer<typeof formSchema>) {
+        // Do something with the form values.
+        // ✅ This will be type-safe and validated.
+        console.log(values)
     }
 
     let configInput: React.ReactElement | undefined = undefined
@@ -62,18 +94,35 @@ function ConfigurePage({ params }: { params: { template: string } }) {
         case 'lowerthird':
             configInput = (
                 <>
-                    TODO: Implement
+                    TODO: Implement properly
+
+                    <FormProvider {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                            <FormField
+                                control={form.control}
+                                name="username"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Username</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="shadcn" {...field} />
+                                        </FormControl>
+                                        <FormDescription>
+                                            This is your public display name.
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button type="submit">Submit</Button>
+                        </form>
+                    </FormProvider>
                 </>
             )
             graphicProps = { name: "Name Surname", subtitle: "Subtitle", isRed: isRed }
             graphicElement = <GraphicLowerThird {...(graphicProps as GraphicLowerThirdProps)} />
             formattedData = encodeURI(JSON.stringify(graphicProps))
     }
-
-    const [isClient, setIsClient] = React.useState(false)
-    React.useEffect(() => {
-        setIsClient(true)
-    }, [])
 
     let link = isClient ? `${window.location.hostname}:${window.location.port}/graphic/${params.template}/${formattedData}` : ""
     let hasSelection: boolean = selectedFighters.length > 0
