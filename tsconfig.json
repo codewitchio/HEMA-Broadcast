@@ -31,9 +31,15 @@
         ],
     },
     "include": [
-        "./src",
         "./dist/types/**/*.ts",
-        "./next-env.d.ts"
+        "./next-env.d.ts",
+        "app",
+        "lib/GetFlagEmoji.ts",
+        "lib/InternalAPI.ts",
+        "components/graphics",
+        "components/FighterSearchBox.tsx",
+        "components/InputLoadingIcon.tsx",
+        "lib/HEMARatingsAPI.ts"
     ],
     "exclude": [
         "./node_modules"

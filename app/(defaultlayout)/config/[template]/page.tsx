@@ -1,11 +1,11 @@
 "use client"
 import React from "react"
-import GraphicFightercard from "../../../_components/graphics/GraphicFightercard"
-import FighterSearchBox from "../../../_components/FighterSearchBox"
-import { FighterResult, RatingResult } from "../../../_helpers/InternalAPI"
+import GraphicFightercard from "../../../../components/graphics/GraphicFightercard"
+import FighterSearchBox from "../../../../components/FighterSearchBox"
+import { FighterResult, RatingResult } from "../../../../lib/InternalAPI"
 import copy from "copy-to-clipboard"
-import GraphicLowerThird, { GraphicLowerThirdProps } from "../../../_components/graphics/GraphicLowerThird"
-import { GraphicFightercardProps } from '../../../_components/graphics/GraphicFightercard'
+import GraphicLowerThird, { GraphicLowerThirdProps } from "../../../../components/graphics/GraphicLowerThird"
+import { GraphicFightercardProps } from '../../../../components/graphics/GraphicFightercard'
 
 // TODO: Create input types for each template
 type InputFields = {

@@ -1,7 +1,7 @@
 import React from 'react'
-import GraphicFightercard, { GraphicFightercardProps } from "../../../_components/graphics/GraphicFightercard"
-import GraphicLowerThird from '../../../_components/graphics/GraphicLowerThird'
-import { GraphicLowerThirdProps } from '../../../_components/graphics/GraphicLowerThird'
+import GraphicFightercard, { GraphicFightercardProps } from "../../../../components/graphics/GraphicFightercard"
+import GraphicLowerThird from '../../../../components/graphics/GraphicLowerThird'
+import { GraphicLowerThirdProps } from '../../../../components/graphics/GraphicLowerThird'
 
 // TODO: Add [data] folder for second param, figure out why JSON parse doesn't work on server
 function GraphicPage({ params }: { params: { template: string, data: string } }) {
