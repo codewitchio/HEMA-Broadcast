@@ -1,7 +1,7 @@
 import React from 'react'
 import { GetFlagEmoji } from '../../_helpers/GetFlagEmoji'
 import { FighterResult, RatingResult } from '../../_helpers/InternalAPI'
-import './Fightercard.css'
+import './graphics.css'
 
 export type GraphicFightercardProps = FighterResult & { selectedRating: RatingResult | null } & { isRed: boolean }
 
