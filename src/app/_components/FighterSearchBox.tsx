@@ -68,8 +68,6 @@ function FighterSearchBox(props: FighterSearchBox) {
     const [searchResultsHeight, setSearchResultsHeight]: [number, Function] = React.useState<number>(0)
     const searchResultsElement = React.useRef<HTMLDivElement | null>(null)
 
-    // const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
-
     const { setSelectedFighters, selectedFighters, numberOfSelections, includeRating } = props
 
     function selectFighter(fighter: FighterResult): void {

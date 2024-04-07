@@ -14,8 +14,8 @@ type InputFields = {
 }
 
 function ConfigurePage({ params }: { params: { template: string } }) {
-    // TODO: https://stackoverflow.com/questions/70086856/create-object-based-on-types-typescript
-    const [inputFields, setInputFields]: [InputFields, Function] = React.useState({ name: '', club: '' })
+    // TODO: Create input types for each template
+    const [inputFields, setInputFields]: [Object, Function] = React.useState({})
     const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
     const [selectedRating, setSelectedRating]: [RatingResult | null, Function] = React.useState(null)
     const [isRed, setIsRed]: [boolean, Function] = React.useState(false)
@@ -28,22 +28,46 @@ function ConfigurePage({ params }: { params: { template: string } }) {
         }
     }
 
-    let numberOfSelections: number | undefined = undefined
+    let configInput: React.ReactElement | undefined = undefined
     let graphicElement: React.ReactElement | undefined = undefined
-    let props: Object = {}
+    let graphicProps: Object = {}
     let formattedData: Object = {}
     switch (params.template) {
         case 'fightercard':
-            numberOfSelections = 1
-            props = { ...selectedFighters[0], selectedRating: selectedRating, isRed: isRed }
-            graphicElement = <GraphicFightercard  {...(props as GraphicFightercardProps)} />
-            formattedData = encodeURI(JSON.stringify(props))
+            configInput = (
+                <>
+                    <h2>Search HEMA Ratings</h2>
+                    <FighterSearchBox setSelectedFighters={setSelectedFightersWrapper} selectedFighters={selectedFighters} numberOfSelections={1} includeRating={true} />
+                    {selectedFighters[0] && selectedFighters[0].ratings ? (
+                        <select name="rating" onChange={(e) => setSelectedRating(selectedFighters[0].ratings?.[Number(e.target.value)])}>
+                            <option value={-1}>Select a rating</option>
+                            {Object.entries(selectedFighters[0].ratings).map(([index, rating]) =>
+                                <option key={index} value={index}>{rating.ratingCategoryName}</option>
+                            )}
+                        </select>
+                    ) : ''}
+                    {selectedFighters[0] ? (
+                        <label>
+                            <span>Red</span>
+                            <input type="checkbox" checked={isRed} onChange={() => setIsRed(!isRed)} />
+                        </label>
+                    ) : ''}
+                    {/* TODO: Add manual input */}
+                </>
+            )
+            graphicProps = { fighter: selectedFighters[0], selectedRating: selectedRating, isRed: isRed }
+            graphicElement = <GraphicFightercard  {...(graphicProps as GraphicFightercardProps)} />
+            formattedData = encodeURI(JSON.stringify(graphicProps))
             break
         case 'lowerthird':
-            numberOfSelections = 0
-            props = { name: "Name Surname", subtitle: "Subtitle", isRed: isRed }
-            graphicElement = <GraphicLowerThird {...(props as GraphicLowerThirdProps)} />
-            formattedData = encodeURI(JSON.stringify(props))
+            configInput = (
+                <>
+                    TODO: Implement
+                </>
+            )
+            graphicProps = { name: "Name Surname", subtitle: "Subtitle", isRed: isRed }
+            graphicElement = <GraphicLowerThird {...(graphicProps as GraphicLowerThirdProps)} />
+            formattedData = encodeURI(JSON.stringify(graphicProps))
     }
 
     const [isClient, setIsClient] = React.useState(false)
@@ -52,28 +76,13 @@ function ConfigurePage({ params }: { params: { template: string } }) {
     }, [])
 
     let link = isClient ? `${window.location.hostname}:${window.location.port}/graphic/${params.template}/${formattedData}` : ""
-    let hasSelection: boolean = selectedFighters.length === numberOfSelections
+    let hasSelection: boolean = selectedFighters.length > 0
+    // TODO: Add checks for all required inputs filled
 
     return (
         <div className="page page-config">
             <div className="config-input vertical-flex">
-                <h2>Search HEMA Ratings</h2>
-                <FighterSearchBox setSelectedFighters={setSelectedFightersWrapper} selectedFighters={selectedFighters} numberOfSelections={numberOfSelections} includeRating={true} />
-                {selectedFighters[0] && selectedFighters[0].ratings ? (
-                    // TODO: Reset selection on fighter unselect
-                    <select name="rating" onChange={(e) => setSelectedRating(selectedFighters[0].ratings?.[Number(e.target.value)])}>
-                        <option value={-1}>Select a rating</option>
-                        {Object.entries(selectedFighters[0].ratings).map(([index, rating]) =>
-                            <option key={index} value={index}>{rating.ratingCategoryName}</option>
-                        )}
-                    </select>
-                ) : ''}
-                {selectedFighters[0] ? (
-                    <label>
-                        <span>Red</span>
-                        <input type="checkbox" checked={isRed} onChange={() => setIsRed(!isRed)} />
-                    </label>
-                ) : ''}
+                {configInput}
                 {/* TODO: Hide by default? And fill with data */}
                 <h2>Manual input</h2>
                 <form className="config-manual-input vertical-flex">
@@ -87,7 +96,6 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                                 }} />
                             </div>
                         )
-
                     })}
                 </form>
             </div>
