@@ -4,6 +4,8 @@ import GraphicFightercard from "../../../_components/graphics/GraphicFightercard
 import FighterSearchBox from "../../../_components/FighterSearchBox"
 import { FighterResult, RatingResult } from "../../../_helpers/InternalAPI"
 import copy from "copy-to-clipboard"
+import GraphicLowerThird, { GraphicLowerThirdProps } from "../../../_components/graphics/GraphicLowerThird"
+import { GraphicFightercardProps } from '../../../_components/graphics/GraphicFightercard'
 
 // TODO: Create input types for each template
 type InputFields = {
@@ -28,13 +30,20 @@ function ConfigurePage({ params }: { params: { template: string } }) {
 
     let numberOfSelections: number | undefined = undefined
     let graphicElement: React.ReactElement | undefined = undefined
+    let props: Object = {}
     let formattedData: Object = {}
     switch (params.template) {
         case 'fightercard':
             numberOfSelections = 1
-            graphicElement = <GraphicFightercard {...selectedFighters[0]} selectedRating={selectedRating} isRed={isRed} />
-            formattedData = encodeURI(JSON.stringify(selectedFighters[0]))
+            props = { ...selectedFighters[0], selectedRating: selectedRating, isRed: isRed }
+            graphicElement = <GraphicFightercard  {...(props as GraphicFightercardProps)} />
+            formattedData = encodeURI(JSON.stringify(props))
             break
+        case 'lowerthird':
+            numberOfSelections = 0
+            props = { name: "Name Surname", subtitle: "Subtitle", isRed: isRed }
+            graphicElement = <GraphicLowerThird {...(props as GraphicLowerThirdProps)} />
+            formattedData = encodeURI(JSON.stringify(props))
     }
 
     const [isClient, setIsClient] = React.useState(false)
