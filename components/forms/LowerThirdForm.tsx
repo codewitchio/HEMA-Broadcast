@@ -22,7 +22,7 @@ export class LowerThirdForm implements FormInterface {
     public FormElement = (props: { form: UseFormReturn<any> }) => {
         const { form } = props
         return (
-            <form className="space-y-8">
+            <form className="space-y-4">
                 <h2>Manual input</h2>
                 <FormField
                     control={form.control}
@@ -54,10 +54,13 @@ export class LowerThirdForm implements FormInterface {
                     control={form.control}
                     name="isRed"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Red ?</FormLabel>
+                        <FormItem className='flex flex-col'>
+                            <FormLabel>
+                                Colour
+                            </FormLabel>
                             <FormControl>
                                 <Switch
+                                    className='data-[state=checked]:bg-red-700'
                                     checked={field.value}
                                     onCheckedChange={field.onChange}
                                 />

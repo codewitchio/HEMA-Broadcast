@@ -7,6 +7,7 @@ import FighterSearchBox from '../FighterSearchBox'
 import { FighterResult } from '@/lib/InternalAPI'
 import React from 'react'
 import { FighterContext } from '../FighterProvider'
+import { Switch } from '../ui/switch'
 
 
 export class FighterCardForm implements FormInterface {
@@ -41,16 +42,21 @@ export class FighterCardForm implements FormInterface {
                     </select>
                 ) : ''}
 
-                <form className="space-y-8">
+                <form className="space-y-8 w-full">
                     <FormField
                         control={form.control}
                         name="isRed"
                         render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Red ?</FormLabel>
+                            <FormItem className='flex flex-col'>
+                                <FormLabel>
+                                    Colour
+                                </FormLabel>
                                 <FormControl>
-                                    <input type="checkbox" {...field} />
-                                    {/* TODO: Replace with pnpm dlx shadcn-ui@latest add switch */}
+                                    <Switch
+                                        className='data-[state=checked]:bg-red-700'
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

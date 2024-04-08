@@ -245,7 +245,7 @@ input[type="number"] {
     transition: all 0.2s;
 }
 
-label {
+/* label {
     color: var(--color-primary);
     padding: 10px;
     max-width: 200px;
@@ -256,7 +256,7 @@ label {
     left: -10px;
 
     transition: all 0.2s;
-}
+} */
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -269,7 +269,7 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
-button {
+/* button {
     border: 1px solid var(--color-primary);
     border-radius: var(--border-radius);
     background-color: var(--color-surface);
@@ -312,7 +312,7 @@ button:not([disabled]):active:after {
     box-shadow: 0 0 0 0 var(--color-primary);
     opacity: 1;
     transition: 0s;
-}
+} */
 
 .input-wrapper {
     border-radius: var(--border-radius);
