@@ -12,7 +12,7 @@ function GraphicFightercard(props: GraphicFightercardProps) {
             <div className='card-border'>
                 <div className='graphic graphic-fightercard noise backdrop'>
                     {/* Fencer name */}
-                    <h1 style={{ textAlign: "center", margin: '0' }}>
+                    <h1 className='text-4xl text-center'>
                         {fighter?.name || 'Fencer name'} {fighter?.countryCode && GetFlagEmoji(fighter?.countryCode)}
                     </h1>
                     {/* Club name */}
@@ -22,7 +22,7 @@ function GraphicFightercard(props: GraphicFightercardProps) {
                     </div>
                     {/* Rating name */}
                     <div className='card-subtitle horizontal-flex'>
-                        <h4>
+                        <h4 className='mt-6'>
                             {selectedRating?.ratingCategoryName || 'Rating name'}
                         </h4>
                     </div>

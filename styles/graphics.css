@@ -9,6 +9,7 @@
 
     overflow: hidden;
     border-radius: var(--border-radius);
+    box-sizing: content-box;
 
     background: linear-gradient(135deg, var(--card-grd1), var(--card-grd2));
     filter: drop-shadow(0px 0px 0px rgb(173, 155, 255, 0));

@@ -240,6 +240,7 @@ input[type="number"] {
     font-size: 16px;
     width: 400px;
     position: relative;
+    box-sizing: content-box;
 
     transition: all 0.2s;
 }
@@ -419,6 +420,7 @@ input[type="text"]:disabled {
     /* Regular input + label size */
     width: 400px;
     cursor: default;
+    box-sizing: content-box;
 
     transition: all 0.2s;
 }
@@ -431,6 +433,7 @@ input[type="text"]:disabled {
     width: 400px;
     cursor: pointer;
     position: relative;
+    box-sizing: content-box;
 
     transition: all 0.2s;
 
