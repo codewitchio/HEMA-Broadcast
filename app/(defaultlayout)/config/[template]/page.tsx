@@ -1,18 +1,16 @@
 "use client"
 import React from "react"
 import copy from "copy-to-clipboard"
+import { FormProvider, useForm } from "react-hook-form"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
 import GraphicFightercard from "@/components/graphics/GraphicFightercard"
 import FighterSearchBox from "@/components/FighterSearchBox"
 import { FighterResult, RatingResult } from "@/lib/InternalAPI"
 import GraphicLowerThird, { GraphicLowerThirdProps } from "@/components/graphics/GraphicLowerThird"
 import { GraphicFightercardProps } from '@/components/graphics/GraphicFightercard'
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { FormProvider, useForm } from "react-hook-form"
-import { Input } from "@/components/ui/input"
-
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
+import { LowerThirdForm } from "@/components/forms/LowerThirdForm"
+import { FormInterface } from "@/components/forms/FormInterface"
 
 function ConfigurePage({ params }: { params: { template: string } }) {
     const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
@@ -32,17 +30,19 @@ function ConfigurePage({ params }: { params: { template: string } }) {
         }
     }
 
-    const formSchema = z.object({
-        name: z.string(),
-        subtitle: z.string()
-    })
+    let ConfigForm!: FormInterface
+    switch (params.template) {
+        case 'fightercard':
+            ConfigForm = React.useMemo(() => new LowerThirdForm(), [params.template])
+            break
+        case 'lowerthird':
+            ConfigForm = React.useMemo(() => new LowerThirdForm(), [params.template])
+            break
+    }
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: "",
-            subtitle: ""
-        },
+    const form = useForm<z.infer<typeof ConfigForm.FormSchema>>({
+        resolver: zodResolver(ConfigForm.FormSchema),
+        defaultValues: ConfigForm.DefaultValues,
     })
 
     let configInput: React.ReactElement | undefined = undefined
@@ -75,40 +75,9 @@ function ConfigurePage({ params }: { params: { template: string } }) {
             graphicElement = <GraphicFightercard  {...(graphicProps as GraphicFightercardProps)} />
             break
         case 'lowerthird':
-            configInput = (
-                <form className="space-y-8">
-                    <h2>Manual input</h2>
-                    <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Name</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Name" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="subtitle"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Subtitle</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Subtitle" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <Button type="submit">Submit</Button>
-                </form>
-            )
-            graphicProps = { name: form.watch('name'), subtitle: form.watch('subtitle'), isRed: isRed }
-            graphicElement = <GraphicLowerThird {...(graphicProps as GraphicLowerThirdProps)} />
+            configInput = <ConfigForm.FormElement form={form} /> // Always the same
+            graphicProps = { name: form.watch('name'), subtitle: form.watch('subtitle'), isRed: isRed } // Hmm still needs check
+            graphicElement = <GraphicLowerThird {...(graphicProps as GraphicLowerThirdProps)} /> // Still needs check
     }
 
     const URIEncodedData = encodeURI(JSON.stringify(graphicProps))
@@ -120,7 +89,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
         <div className="page page-config">
             <div className="config-input vertical-flex">
                 <FormProvider {...form}>
-                    {configInput}
+                    <ConfigForm.FormElement form={form} />
                 </FormProvider>
             </div>
             <div className="config-graphics vertical-flex">
