@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Script from 'next/script'
 
 import 'overlayscrollbars/overlayscrollbars.css'
-import "../global.css"
+import "@/styles/global.css"
 
 export const metadata: Metadata = {
     title: 'HEMA Broadcast',

@@ -1,7 +1,7 @@
 import React from 'react'
 import { GetFlagEmoji } from '@/lib/GetFlagEmoji'
 import { FighterResult, RatingResult } from '@/lib/InternalAPI'
-import './graphics.css'
+import '@/styles/graphics.css'
 
 export type GraphicFightercardProps = { fighter: FighterResult, selectedRating: RatingResult | null, isRed: boolean }
 

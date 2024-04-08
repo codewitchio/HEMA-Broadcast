@@ -1,5 +1,5 @@
 import React from 'react'
-import './graphics.css'
+import '@/styles/graphics.css'
 
 export type GraphicLowerThirdProps = { name: string, subtitle: string, isRed: boolean }
 

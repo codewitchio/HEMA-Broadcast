@@ -4,6 +4,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/
 import { Input } from '../ui/input'
 import { UseFormReturn } from 'react-hook-form'
 import { FormInterface } from './FormInterface'
+import { Switch } from '../ui/switch'
 
 export class LowerThirdForm implements FormInterface {
     public FormSchema = z.object({
@@ -56,8 +57,10 @@ export class LowerThirdForm implements FormInterface {
                         <FormItem>
                             <FormLabel>Red ?</FormLabel>
                             <FormControl>
-                                <input type="checkbox" {...field} />
-                                {/* TODO: Replace with pnpm dlx shadcn-ui@latest add switch */}
+                                <Switch
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
