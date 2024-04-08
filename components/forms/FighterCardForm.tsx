@@ -31,7 +31,7 @@ export class FighterCardForm implements FormInterface {
         }
         return (
             <>
-                <h2>Search HEMA Ratings</h2>
+                <h2 className='text-2xl text-center'>Search HEMA Ratings</h2>
                 <FighterSearchBox setSelectedFighters={setSelectedFightersWrapper} selectedFighters={selectedFighters} numberOfSelections={1} includeRating={true} />
                 {selectedFighters[0] && selectedFighters[0].ratings ? (
                     <select name="rating" onChange={(e) => setSelectedRating(selectedFighters[0].ratings?.[Number(e.target.value)])}>

@@ -23,7 +23,7 @@ export class LowerThirdForm implements FormInterface {
         const { form } = props
         return (
             <form className="space-y-4">
-                <h2>Manual input</h2>
+                <h2 className='text-2xl text-center'>Manual input</h2>
                 <FormField
                     control={form.control}
                     name="name"

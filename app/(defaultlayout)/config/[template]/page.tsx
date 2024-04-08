@@ -58,9 +58,9 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                 </FormProvider>
             </div>
             <div className="config-graphics vertical-flex">
-                <h2>Preview</h2>
+                <h2 className="text-2xl text-center">Preview</h2>
                 {graphicElement}
-                <h2>Export</h2>
+                <h2 className="text-2xl text-center">Export</h2>
                 <div className="input-wrapper input-wrapper-shared input-button-left">
                     <button onClick={() => {
                         copy(link)
