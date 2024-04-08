@@ -95,7 +95,6 @@ function FighterSearchBox(props: FighterSearchBox) {
                     FighterSearch(inputValue, includeRating).then((FighterSearchResults: FighterSearchResultCombined): void => {
                         setIsLoading(false)
                         setSearchResult(FighterSearchResults)
-                        // console.log(FighterSearchResults)
                     })
                 } else {
                     setIsLoading(false)
