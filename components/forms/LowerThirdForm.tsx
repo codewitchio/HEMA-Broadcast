@@ -1,6 +1,5 @@
 "use client"
 import { z } from 'zod'
-import { Button } from '../ui/button'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Input } from '../ui/input'
 import { UseFormReturn } from 'react-hook-form'
@@ -9,12 +8,14 @@ import { FormInterface } from './FormInterface'
 export class LowerThirdForm implements FormInterface {
     public FormSchema = z.object({
         name: z.string(),
-        subtitle: z.string()
+        subtitle: z.string(),
+        isRed: z.boolean()
     })
 
     public DefaultValues = {
         name: "",
-        subtitle: ""
+        subtitle: "",
+        isRed: false
     }
 
     public FormElement = (props: { form: UseFormReturn<any> }) => {
@@ -48,7 +49,20 @@ export class LowerThirdForm implements FormInterface {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Submit</Button>
+                <FormField
+                    control={form.control}
+                    name="isRed"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Red ?</FormLabel>
+                            <FormControl>
+                                <input type="checkbox" {...field} />
+                                {/* TODO: Replace with pnpm dlx shadcn-ui@latest add switch */}
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
             </form>
         )
     }
