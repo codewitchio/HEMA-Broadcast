@@ -14,15 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 
-// TODO: Create input types for each template
-type InputFields = {
-    name: string,
-    club: string
-}
-
 function ConfigurePage({ params }: { params: { template: string } }) {
-    // TODO: Create input types for each template
-    const [inputFields, setInputFields]: [Object, Function] = React.useState({})
     const [selectedFighters, setSelectedFighters]: [Array<FighterResult>, Function] = React.useState([])
     const [selectedRating, setSelectedRating]: [RatingResult | null, Function] = React.useState(null)
     const [isRed, setIsRed]: [boolean, Function] = React.useState(false)
@@ -41,29 +33,21 @@ function ConfigurePage({ params }: { params: { template: string } }) {
     }
 
     const formSchema = z.object({
-        username: z.string().min(2, {
-            message: "Username must be at least 2 characters.",
-        }),
+        name: z.string(),
+        subtitle: z.string()
     })
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            username: "",
+            name: "",
+            subtitle: ""
         },
     })
-
-    // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
-    }
 
     let configInput: React.ReactElement | undefined = undefined
     let graphicElement: React.ReactElement | undefined = undefined
     let graphicProps: Object = {}
-    let formattedData: Object = {}
     switch (params.template) {
         case 'fightercard':
             configInput = (
@@ -89,64 +73,55 @@ function ConfigurePage({ params }: { params: { template: string } }) {
             )
             graphicProps = { fighter: selectedFighters[0], selectedRating: selectedRating, isRed: isRed }
             graphicElement = <GraphicFightercard  {...(graphicProps as GraphicFightercardProps)} />
-            formattedData = encodeURI(JSON.stringify(graphicProps))
             break
         case 'lowerthird':
             configInput = (
-                <>
-                    TODO: Implement properly
-
-                    <FormProvider {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                            <FormField
-                                control={form.control}
-                                name="username"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Username</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="shadcn" {...field} />
-                                        </FormControl>
-                                        <FormDescription>
-                                            This is your public display name.
-                                        </FormDescription>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <Button type="submit">Submit</Button>
-                        </form>
-                    </FormProvider>
-                </>
+                <form className="space-y-8">
+                    <h2>Manual input</h2>
+                    <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Name</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Name" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="subtitle"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Subtitle</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Subtitle" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit">Submit</Button>
+                </form>
             )
-            graphicProps = { name: "Name Surname", subtitle: "Subtitle", isRed: isRed }
+            graphicProps = { name: form.watch('name'), subtitle: form.watch('subtitle'), isRed: isRed }
             graphicElement = <GraphicLowerThird {...(graphicProps as GraphicLowerThirdProps)} />
-            formattedData = encodeURI(JSON.stringify(graphicProps))
     }
 
-    let link = isClient ? `${window.location.hostname}:${window.location.port}/graphic/${params.template}/${formattedData}` : ""
-    let hasSelection: boolean = selectedFighters.length > 0
+    const URIEncodedData = encodeURI(JSON.stringify(graphicProps))
+    const link = isClient ? `${window.location.hostname}:${window.location.port}/graphic/${params.template}/${URIEncodedData}` : ""
+    const hasSelection: boolean = selectedFighters.length > 0
     // TODO: Add checks for all required inputs filled
 
     return (
         <div className="page page-config">
             <div className="config-input vertical-flex">
-                {configInput}
-                {/* TODO: Hide by default? And fill with data */}
-                <h2>Manual input</h2>
-                <form className="config-manual-input vertical-flex">
-                    {Object.entries(inputFields).map(([key, value], index) => {
-                        let formattedKey: string = key[0].toUpperCase() + key.substring(1)
-                        return (
-                            <div className="input-wrapper" key={index}>
-                                <label htmlFor={key}>{formattedKey}</label>
-                                <input type="text" name={key} placeholder={formattedKey} value={value} onChange={(e) => {
-                                    setInputFields({ ...inputFields, [e.target.name as keyof InputFields]: e.target.value as string })
-                                }} />
-                            </div>
-                        )
-                    })}
-                </form>
+                <FormProvider {...form}>
+                    {configInput}
+                </FormProvider>
             </div>
             <div className="config-graphics vertical-flex">
                 <h2>Preview</h2>
