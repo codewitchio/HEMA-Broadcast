@@ -2,10 +2,10 @@ import React from "react"
 import { FighterResult, FighterSearch, FighterSearchResultCombined } from "@/lib/InternalAPI"
 import { GetFlagEmoji } from "@/lib/GetFlagEmoji"
 import { InputLoadingIcon } from './InputLoadingIcon'
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react"
 import AnimateHeight from 'react-animate-height'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
 import { FighterContext } from "./FighterProvider"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 const typingTimeoutDuration = 350
 const animationDuration = 250
@@ -151,18 +151,18 @@ function FighterSearchBox(props: FighterSearchBoxProps) {
                     }
                 }} disabled={!!numberOfSelections && selectedFighters.length >= numberOfSelections} />
                 <InputLoadingIcon visible={isLoading} />
-                <OverlayScrollbarsComponent tabIndex={-1} element="div" className={`fighter-search-results ${!showHeader ? 'showHeader' : ''}`} options={{ scrollbars: { autoHide: 'scroll', autoHideDelay: 500 } }} defer>
+                <ScrollArea tabIndex={-1} className={`fighter-search-results ${!showHeader && 'showHeader'}`}>
                     <AnimateHeight duration={animationDuration} contentRef={searchResultsElement} height={searchResultsHeight} disableDisplayNone contentClassName="auto-content">
                         {showHeader ? (
                             <div className="fighter-search-results-header text-grey" tabIndex={-1} >
-                                {`${searchResult && (searchResult.matches.length)} matches found`}
+                                {`${searchResult && (searchResult.matches.length)} results`}
                             </div>
                         ) : ''}
                         {searchResult && searchResult.matches.map((fighter: FighterResult, index: number) =>
                             <SearchResultRow key={fighter.id} highlight={index === 0 && inputFocused} fighter={fighter} selectFighter={selectFighter} />)
                         }
                     </AnimateHeight>
-                </OverlayScrollbarsComponent>
+                </ScrollArea>
             </div>
             <div className="fighter-search-selected-list">
                 {hasSelection && (selectedFighters.map((fighter: FighterResult) =>

@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Script from 'next/script'
 
-import 'overlayscrollbars/overlayscrollbars.css'
 import "@/styles/global.css"
 import { Toaster } from '@/components/ui/sonner'
 

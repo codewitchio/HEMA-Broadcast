@@ -310,7 +310,7 @@ input[type="text"]:disabled {
 .fighter-search-results {
     display: flex;
     flex-direction: column;
-    max-height: 800px;
+    max-height: 275px;
     overflow-y: scroll;
 
     transition: all 0.2s;
