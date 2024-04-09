@@ -8,7 +8,7 @@ function GraphicLowerThird(props: GraphicLowerThirdProps) {
     const { name, subtitle, color, glow } = props
     console.log(glow)
     return (
-        <div className={`card-wrapper vertical-flex ${color === Colors.RED ? 'red' : ''} ${glow ? 'box-glow' : ''}`}>
+        <div className={`card-wrapper vertical-flex ${color} ${glow && 'box-glow'}`}>
             <div className='card-border'>
                 <div className='graphic graphic-lowerthird noise backdrop'>
                     <span>{name || 'Name'}</span>

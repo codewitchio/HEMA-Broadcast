@@ -96,16 +96,25 @@
     -webkit-text-size-adjust: 100%;
     height: 100%;
 
-    --border-grd1: #6976a3;
-    --border-grd2: #434a6e;
+    --border-grd1: #cdb164;
+    --border-grd2: #c28f00;
     --card-grd1: #08184f;
     --card-grd2: #05060D;
-    --card-glow: rgba(67, 74, 110, 0.4);
+    --card-secondary: #6976a3;
+    --card-glow: rgba(110, 97, 67, 0.4);
+
+    --border-blue-grd1: #6976a3;
+    --border-blue-grd2: #434a6e;
+    --card-blue-grd1: #08184f;
+    --card-blue-grd2: #05060D;
+    --card-blue-secondary: #6976a3;
+    --card-blue-glow: rgba(67, 74, 110, 0.4);
 
     --border-red-grd1: #a36969;
     --border-red-grd2: #6e4343;
     --card-red-grd1: #4f0808;
     --card-red-grd2: #0d0505;
+    --card-red-secondary: #a36969;
     --card-red-glow: rgba(110, 67, 67, 0.4);
 
     --holmgång-blue: #08184f;

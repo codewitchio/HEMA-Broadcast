@@ -15,15 +15,21 @@
     filter: drop-shadow(0px 0px 0px rgb(173, 155, 255, 0));
 }
 
-.red .graphic {
+.Red .graphic {
     background: linear-gradient(135deg, var(--card-red-grd1), var(--card-red-grd2));
+}
+.Blue .graphic {
+    background: linear-gradient(135deg, var(--card-blue-grd1), var(--card-blue-grd2));
 }
 
 .box-glow {
     box-shadow: 0px 5px 80px 10px var(--card-glow);
 }
-.red .box-glow {
+.Red.box-glow {
     box-shadow: 0px 5px 80px 10px var(--card-red-glow);
+}
+.Blue.box-glow {
+    box-shadow: 0px 5px 80px 10px var(--card-blue-glow);
 }
 
 .card-border {
@@ -33,16 +39,22 @@
     background: linear-gradient(135deg, var(--border-grd1), var(--border-grd2)) border-box;
 }
 
-.red .card-border {
+.Red .card-border {
     background: linear-gradient(135deg, var(--border-red-grd1), var(--border-red-grd2)) border-box;
+}
+.Blue .card-border {
+    background: linear-gradient(135deg, var(--border-blue-grd1), var(--border-blue-grd2)) border-box;
 }
 
 .card-secondary-text {
-    color: var(--border-grd1);
+    color: var(--card-secondary);
 }
 
-.red .card-secondary-text {
-    color: var(--border-red-grd1);
+.Red .card-secondary-text {
+    color: var(--card-red-secondary);
+}
+.Blue .card-secondary-text {
+    color: var(--card-blue-secondary);
 }
 
 .graphic-fightercard {

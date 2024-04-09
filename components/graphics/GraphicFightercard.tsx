@@ -9,7 +9,7 @@ export type GraphicFightercardProps = { fighter: FighterResult, selectedRating: 
 function GraphicFightercard(props: GraphicFightercardProps) {
     const { fighter, selectedRating, color, glow } = props
     return (
-        <div className={`card-wrapper vertical-flex ${color === Colors.RED ? ' red' : ''} ${glow ? 'box-glow' : ''}`}>
+        <div className={`card-wrapper vertical-flex ${color} ${glow && 'box-glow'}`}>
             <div className='card-border'>
                 <div className='graphic graphic-fightercard noise backdrop'>
                     {/* Fencer name */}
