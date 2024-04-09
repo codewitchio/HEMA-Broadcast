@@ -46,19 +46,9 @@
     flex-direction: column;
 }
 
-/* Counter the padding */
-.graphic-fightercard.noise::after {
-    top: -20px
-}
-
 .graphic-lowerthird {
     padding: 10px 20px;
     flex-direction: column;
-}
-
-/* Counter the padding */
-.graphic-lowerthird.noise::after {
-    top: -20px
 }
 
 .card-list div {
@@ -70,6 +60,8 @@
     position: absolute;
     width: 150%;
     height: 150%;
+    top: -25%;
+    left: -25%;
     z-index: 2;
     background: #000;
     filter: url(#noise);

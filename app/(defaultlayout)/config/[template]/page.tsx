@@ -64,8 +64,8 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                 <div className="input-wrapper input-wrapper-shared input-button-left">
                     <button onClick={() => {
                         copy(link)
-                    }} disabled={!hasSelection}>Copy link</button>
-                    <input type="text" value={hasSelection ? link : ''} readOnly disabled={!hasSelection} />
+                    }}>Copy link</button>
+                    <input type="text" value={link} readOnly />
                 </div>
                 <button disabled>Save as image (under construction)</button>
             </div>

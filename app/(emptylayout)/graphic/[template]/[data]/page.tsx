@@ -3,9 +3,8 @@ import GraphicFightercard, { GraphicFightercardProps } from "@/components/graphi
 import GraphicLowerThird from '@/components/graphics/GraphicLowerThird'
 import { GraphicLowerThirdProps } from '@/components/graphics/GraphicLowerThird'
 
-// TODO: Add [data] folder for second param, figure out why JSON parse doesn't work on server
 function GraphicPage({ params }: { params: { template: string, data: string } }) {
-    let formattedData: Object = params.data ? JSON.parse(decodeURI(params.data)) : undefined
+    let formattedData: Object = params.data ? JSON.parse(decodeURIComponent(params.data)) : undefined
     let graphicElement: React.ReactElement = <div>Invalid data</div>
 
     if (formattedData) {
