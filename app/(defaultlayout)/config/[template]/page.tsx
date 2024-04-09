@@ -11,6 +11,8 @@ import { LowerThirdForm } from "@/components/forms/LowerThirdForm"
 import { FormInterface } from "@/components/forms/FormInterface"
 import { FighterCardForm } from "@/components/forms/FighterCardForm"
 import { FighterContext } from "@/components/FighterProvider"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 function ConfigurePage({ params }: { params: { template: string } }) {
     const { selectedFighters, selectedRating } = React.useContext(FighterContext)
@@ -61,13 +63,11 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                 <h2 className="text-2xl text-center">Preview</h2>
                 {graphicElement}
                 <h2 className="text-2xl text-center">Export</h2>
-                <div className="input-wrapper input-wrapper-shared input-button-left">
-                    <button onClick={() => {
-                        copy(link)
-                    }}>Copy link</button>
-                    <input type="text" value={link} readOnly />
-                </div>
-                <button disabled>Save as image (under construction)</button>
+                <Input type="text" value={link} readOnly />
+                <Button variant={"outline"} onClick={() => {
+                    copy(link)
+                }}>Copy link</Button>
+                <Button variant={"outline"} disabled>Save as image (under construction)</Button>
             </div>
         </div>
     )

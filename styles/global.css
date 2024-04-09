@@ -15,6 +15,7 @@
         --popover-foreground: 210 40% 98%;
   
         --primary: 227, 24%, 53%;
+        --primary-highlight: 227, 24%, 60%;
         --primary-foreground: 222.2 47.4% 11.2%;
   
         --secondary: 217.2 32.6% 17.5%;
@@ -42,7 +43,7 @@
       @apply border-border;
     }
     body {
-      /* @apply bg-background text-foreground; */
+      @apply text-foreground;
     }
   }
 
@@ -209,8 +210,7 @@ h1, h2, h3, h4, h5 {
 }
 
 /* Input */
-input[type="text"],
-input[type="number"] {
+.fighter-search-input  {
     border: 1px solid var(--color-primary);
     border-radius: var(--border-radius);
     background-color: var(--color-surface);
@@ -223,75 +223,6 @@ input[type="number"] {
 
     transition: all 0.2s;
 }
-
-/* label {
-    color: var(--color-primary);
-    padding: 10px;
-    max-width: 200px;
-    min-width: 50px;
-    display: inline-block;
-    text-align: end;
-    position: relative;
-    left: -10px;
-
-    transition: all 0.2s;
-} */
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0
-}
-
-input[type="number"] {
-    appearance: textfield;
-    -moz-appearance: textfield;
-}
-
-/* button {
-    border: 1px solid var(--color-primary);
-    border-radius: var(--border-radius);
-    background-color: var(--color-surface);
-    color: var(--color-primary);
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    min-width: 90px;
-    position: relative;
-
-    transition: all 0.2s;
-}
-
-button:hover {
-    background-color: var(--color-surface-highlight);
-}
-
-button:disabled {
-    background-color: var(--color-surface-disabled);
-    border-color: var(--color-grey);
-    cursor: not-allowed;
-    color: var(--color-grey);
-}
-
-button:after {
-    content: "";
-    display: block;
-    position: absolute;
-    border-radius: var(--border-radius);
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: all 0.5s;
-    box-shadow: 0 0 20px 10px var(--color-primary);
-}
-
-button:not([disabled]):active:after {
-    box-shadow: 0 0 0 0 var(--color-primary);
-    opacity: 1;
-    transition: 0s;
-} */
 
 .input-wrapper {
     border-radius: var(--border-radius);
@@ -335,17 +266,10 @@ button:not([disabled]):active:after {
 }
 
 .fighter-search-box>.input-wrapper:has(> input[type="text"]:focus),
-.fighter-search-box>.input-wrapper:has(.fighter-search-results-row:focus),
-input[type="text"]:focus:not(.fighter-search-box input[type="text"]:focus),
-input[type="number"]:focus,
-button:focus-visible
+.fighter-search-box>.input-wrapper:has(.fighter-search-results-row:focus)
 {
     outline: none;
     box-shadow: 0 0 5px 1px var(--color-primary);
-}
-
-input[type="text"]:read-only {
-    color: var(--color-grey);
 }
 
 .fighter-search-box>.input-wrapper {
@@ -430,8 +354,8 @@ input[type="text"]:disabled {
     border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
-input[type="text"]:hover:not(:disabled),
-input[type="number"]:hover,
+/* input[type="text"]:hover:not(:disabled),
+input[type="number"]:hover, */
 .fighter-search-results-row:hover,
 .fighter-search-results-row:focus,
 .highlight {
