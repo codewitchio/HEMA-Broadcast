@@ -13,12 +13,16 @@
 
     background: linear-gradient(135deg, var(--card-grd1), var(--card-grd2));
     filter: drop-shadow(0px 0px 0px rgb(173, 155, 255, 0));
-    /* Probably add a toggle for this */
-    box-shadow: 0px 5px 80px 10px var(--card-glow);
 }
 
 .red .graphic {
     background: linear-gradient(135deg, var(--card-red-grd1), var(--card-red-grd2));
+}
+
+.box-glow {
+    box-shadow: 0px 5px 80px 10px var(--card-glow);
+}
+.red .box-glow {
     box-shadow: 0px 5px 80px 10px var(--card-red-glow);
 }
 

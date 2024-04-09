@@ -5,18 +5,21 @@ import { Input } from '../ui/input'
 import { UseFormReturn } from 'react-hook-form'
 import { FormInterface } from './FormInterface'
 import { Switch } from '../ui/switch'
+import { ColorPicker, Colors } from './ColorPicker'
 
 export class LowerThirdForm implements FormInterface {
     public FormSchema = z.object({
         name: z.string(),
         subtitle: z.string(),
-        isRed: z.boolean()
+        glow: z.boolean(),
+        color: z.nativeEnum(Colors)
     })
 
     public DefaultValues = {
         name: "",
         subtitle: "",
-        isRed: false
+        glow: true,
+        color: Colors.NEUTRAL
     }
 
     public FormElement = (props: { form: UseFormReturn<any> }) => {
@@ -52,15 +55,14 @@ export class LowerThirdForm implements FormInterface {
                 />
                 <FormField
                     control={form.control}
-                    name="isRed"
+                    name="glow"
                     render={({ field }) => (
                         <FormItem className='flex flex-col'>
                             <FormLabel>
-                                Colour
+                                Glow
                             </FormLabel>
                             <FormControl>
                                 <Switch
-                                    className='data-[state=checked]:bg-red-700'
                                     checked={field.value}
                                     onCheckedChange={field.onChange}
                                 />
@@ -69,6 +71,7 @@ export class LowerThirdForm implements FormInterface {
                         </FormItem>
                     )}
                 />
+                <ColorPicker name={'color'} form={form} />
             </form>
         )
     }

@@ -8,15 +8,18 @@ import { FighterResult } from '@/lib/InternalAPI'
 import React from 'react'
 import { FighterContext } from '../FighterProvider'
 import { Switch } from '../ui/switch'
+import { ColorPicker, Colors } from './ColorPicker'
 
 
 export class FighterCardForm implements FormInterface {
     public FormSchema = z.object({
-        isRed: z.boolean()
+        glow: z.boolean(),
+        color: z.nativeEnum(Colors)
     })
 
     public DefaultValues = {
-        isRed: false,
+        glow: true,
+        color: Colors.NEUTRAL
     }
 
     public FormElement = (props: { form: UseFormReturn<any> }) => {
@@ -45,15 +48,14 @@ export class FighterCardForm implements FormInterface {
                 <form className="space-y-8 w-full">
                     <FormField
                         control={form.control}
-                        name="isRed"
+                        name="glow"
                         render={({ field }) => (
                             <FormItem className='flex flex-col'>
                                 <FormLabel>
-                                    Colour
+                                    Glow
                                 </FormLabel>
                                 <FormControl>
                                     <Switch
-                                        className='data-[state=checked]:bg-red-700'
                                         checked={field.value}
                                         onCheckedChange={field.onChange}
                                     />
@@ -62,6 +64,7 @@ export class FighterCardForm implements FormInterface {
                             </FormItem>
                         )}
                     />
+                    <ColorPicker name={'color'} form={form} />
                     {/* TODO: Add manual input */}
                 </form>
             </>

@@ -31,7 +31,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                 resolver: zodResolver(ConfigForm.FormSchema),
                 defaultValues: ConfigForm.DefaultValues,
             })
-            graphicProps = { fighter: selectedFighters[0], selectedRating: selectedRating, isRed: form.watch('isRed') }
+            graphicProps = { fighter: selectedFighters[0], selectedRating: selectedRating, color: form.watch('color'), glow: form.watch('glow') }
             graphicElement = <GraphicFightercard  {...(graphicProps as GraphicFightercardProps)} />
             break
         case 'lowerthird':
@@ -41,8 +41,8 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                 resolver: zodResolver(ConfigForm.FormSchema),
                 defaultValues: ConfigForm.DefaultValues,
             })
-            graphicProps = { name: form.watch('name'), subtitle: form.watch('subtitle'), isRed: form.watch('isRed') } // Hmm still needs check
-            graphicElement = <GraphicLowerThird {...(graphicProps as GraphicLowerThirdProps)} /> // Still needs check
+            graphicProps = { name: form.watch('name'), subtitle: form.watch('subtitle'), color: form.watch('color'), glow: form.watch('glow') }
+            graphicElement = <GraphicLowerThird {...(graphicProps as GraphicLowerThirdProps)} />
     }
 
     const URIEncodedData = encodeURI(JSON.stringify(graphicProps))

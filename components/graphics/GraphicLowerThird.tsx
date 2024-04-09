@@ -1,12 +1,14 @@
 import React from 'react'
 import '@/styles/graphics.css'
+import { Colors } from '../forms/ColorPicker'
 
-export type GraphicLowerThirdProps = { name: string, subtitle: string, isRed: boolean }
+export type GraphicLowerThirdProps = { name: string, subtitle: string, color: Colors, glow: boolean }
 
 function GraphicLowerThird(props: GraphicLowerThirdProps) {
-    const { name, subtitle, isRed } = props
+    const { name, subtitle, color, glow } = props
+    console.log(glow)
     return (
-        <div className={`card-wrapper vertical-flex ${isRed ? ' red' : ''}`}>
+        <div className={`card-wrapper vertical-flex ${color === Colors.RED ? 'red' : ''} ${glow ? 'box-glow' : ''}`}>
             <div className='card-border'>
                 <div className='graphic graphic-lowerthird noise backdrop'>
                     <span>{name || 'Name'}</span>
