@@ -13,6 +13,7 @@ import { FighterCardForm } from "@/components/forms/FighterCardForm"
 import { FighterContext } from "@/components/FighterProvider"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
 
 function ConfigurePage({ params }: { params: { template: string } }) {
     const { selectedFighters, selectedRating } = React.useContext(FighterContext)
@@ -66,6 +67,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                 <Input type="text" value={link} readOnly />
                 <Button variant={"outline"} onClick={() => {
                     copy(link)
+                    toast("Link copied", { description: "Paste the link into a browser source in OBS", duration: 2500 })
                 }}>Copy link</Button>
                 <Button variant={"outline"} disabled>Save as image (under construction)</Button>
             </div>

@@ -5,6 +5,7 @@ import Script from 'next/script'
 
 import 'overlayscrollbars/overlayscrollbars.css'
 import "@/styles/global.css"
+import { Toaster } from '@/components/ui/sonner'
 
 export const metadata: Metadata = {
     title: 'HEMA Broadcast',
@@ -39,6 +40,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                             stitchTiles='stitch' />
                     </filter>
                 </svg>
+                <Toaster />
             </body>
         </html>
     )
