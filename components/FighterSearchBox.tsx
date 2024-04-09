@@ -4,6 +4,8 @@ import { GetFlagEmoji } from "@/lib/GetFlagEmoji"
 import { InputLoadingIcon } from './InputLoadingIcon'
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react"
 import AnimateHeight from 'react-animate-height'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
+import { FighterContext } from "./FighterProvider"
 
 const typingTimeoutDuration = 350
 const animationDuration = 250
@@ -51,15 +53,13 @@ function SearchResultRow(props: SearchResultRowProps) {
     )
 }
 
-type FighterSearchBox = {
-    setSelectedFighters: Function,
-    selectedFighters: Array<FighterResult>,
+type FighterSearchBoxProps = {
     numberOfSelections?: number,
     includeRating?: boolean
 }
 
 // TODO: Add prop for allowed number of fighters to pick
-function FighterSearchBox(props: FighterSearchBox) {
+function FighterSearchBox(props: FighterSearchBoxProps) {
     const inputRef = React.useRef<HTMLInputElement>(null)
     const [inputValue, setInputValue]: [string, Function] = React.useState('')
     const [inputFocused, setInputFocused]: [boolean, Function] = React.useState(false)
@@ -68,7 +68,9 @@ function FighterSearchBox(props: FighterSearchBox) {
     const [searchResultsHeight, setSearchResultsHeight]: [number, Function] = React.useState<number>(0)
     const searchResultsElement = React.useRef<HTMLDivElement | null>(null)
 
-    const { setSelectedFighters, selectedFighters, numberOfSelections, includeRating } = props
+    const { selectedFighters, setSelectedFighters, setSelectedRating } = React.useContext(FighterContext)
+    const { numberOfSelections, includeRating } = props
+
 
     function selectFighter(fighter: FighterResult): void {
         if (!numberOfSelections || selectedFighters.length < numberOfSelections) {
@@ -76,6 +78,10 @@ function FighterSearchBox(props: FighterSearchBox) {
             setSearchResult()
             setInputValue('')
             inputRef.current && inputRef.current.focus()
+        }
+
+        if (selectedFighters.length === 0) {
+            setSelectedRating(null)
         }
     }
 
@@ -124,7 +130,7 @@ function FighterSearchBox(props: FighterSearchBox) {
     return (
         <form className="fighter-search-box vertical-flex">
             <div className="input-wrapper">
-                <input className={`fighter-search-input ${showHeader ? 'showHeader' : ''}`} type="text" name="name" placeholder="Search for a name" ref={inputRef} value={inputValue} onChange={(e) => {
+                <input className={`fighter-search-input ${showHeader ? 'showHeader' : ''}`} type="text" name="name" placeholder="Search for a name" ref={inputRef} value={inputValue} autoComplete="off" onChange={(e) => {
                     setInputValue(e.target.value as string)
                 }} onFocus={() => {
                     setInputFocused(true)
@@ -158,17 +164,33 @@ function FighterSearchBox(props: FighterSearchBox) {
                     </AnimateHeight>
                 </OverlayScrollbarsComponent>
             </div>
-            {hasSelection && numberOfSelections ? (
-                <div className="fighter-search-selected-count text-grey">{`${selectedFighters.length}/${numberOfSelections} selected`}</div>
-            ) : ''}
             <div className="fighter-search-selected-list">
-                {hasSelection ? (selectedFighters.map((fighter: FighterResult) =>
+                {hasSelection && (selectedFighters.map((fighter: FighterResult) =>
                     <div className="fighter-search-selected-list-item" key={fighter.id}>
                         <span key={fighter.id}>{GetFlagEmoji(fighter.countryCode) + " " + fighter.name}</span>
                         <i className="fa-solid fa-xmark" onClick={() => unselectFighter(fighter)} />
                     </div>
-                )) : ''}
+                ))}
+                <div className="fighter-search-selected-count text-grey ms-auto">{`${selectedFighters.length}/${numberOfSelections} selected`}</div>
             </div>
+            {selectedFighters[0] && selectedFighters[0].ratings?.length ? (
+                <Select onValueChange={(e) => setSelectedRating(selectedFighters[0].ratings?.[Number(e)])}>
+                    <SelectTrigger>
+                        <SelectValue placeholder="Select a rating" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {Object.entries(selectedFighters[0].ratings).map(([index, rating]) =>
+                            <SelectItem key={index} value={index}>{rating.ratingCategoryName}</SelectItem>
+                        )}
+                    </SelectContent>
+                </Select>
+            ) : selectedFighters[0] && (
+                <Select disabled>
+                    <SelectTrigger>
+                        <SelectValue placeholder="Fencer has no ratings" />
+                    </SelectTrigger>
+                </Select>
+            )}
         </form>
     )
 }

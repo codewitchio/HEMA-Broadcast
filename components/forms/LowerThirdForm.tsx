@@ -53,6 +53,7 @@ export class LowerThirdForm implements FormInterface {
                         </FormItem>
                     )}
                 />
+                <h2 className='text-2xl text-center'>Graphic settings</h2>
                 <FormField
                     control={form.control}
                     name="glow"

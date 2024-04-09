@@ -4,7 +4,6 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/
 import { UseFormReturn } from 'react-hook-form'
 import { FormInterface } from './FormInterface'
 import FighterSearchBox from '../FighterSearchBox'
-import { FighterResult } from '@/lib/InternalAPI'
 import React from 'react'
 import { FighterContext } from '../FighterProvider'
 import { Switch } from '../ui/switch'
@@ -24,27 +23,12 @@ export class FighterCardForm implements FormInterface {
 
     public FormElement = (props: { form: UseFormReturn<any> }) => {
         const { form } = props
-        const { selectedFighters, setSelectedFighters, setSelectedRating } = React.useContext(FighterContext)
 
-        const setSelectedFightersWrapper = (fighters: FighterResult[]) => {
-            setSelectedFighters(fighters)
-            if (fighters.length === 0) {
-                setSelectedRating(null)
-            }
-        }
         return (
             <>
                 <h2 className='text-2xl text-center'>Search HEMA Ratings</h2>
-                <FighterSearchBox setSelectedFighters={setSelectedFightersWrapper} selectedFighters={selectedFighters} numberOfSelections={1} includeRating={true} />
-                {selectedFighters[0] && selectedFighters[0].ratings ? (
-                    <select name="rating" onChange={(e) => setSelectedRating(selectedFighters[0].ratings?.[Number(e.target.value)])}>
-                        <option value={-1}>Select a rating</option>
-                        {Object.entries(selectedFighters[0].ratings).map(([index, rating]) =>
-                            <option key={index} value={index}>{rating.ratingCategoryName}</option>
-                        )}
-                    </select>
-                ) : ''}
-
+                <FighterSearchBox numberOfSelections={1} includeRating={true} />
+                <h2 className='text-2xl text-center'>Graphic settings</h2>
                 <form className="space-y-8 w-full">
                     <FormField
                         control={form.control}
