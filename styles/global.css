@@ -6,6 +6,7 @@
   @layer base {
     :root {
         --background: 216, 28%, 7%;
+        --background-gradient: 216, 28%, 12%;
         --foreground: 216, 28%, 90%;
         
         --card: 222.2 84% 4.9%;
@@ -109,6 +110,10 @@ body {
 
 body:has(.default-layout-root) {
     background-color: var(--color-background);
+}
+
+body:has(.page-frontpage) {
+    background: radial-gradient(circle at top, hsl(var(--background-gradient)), hsl(var(--background)) 50vw);
 }
 
 #root {
