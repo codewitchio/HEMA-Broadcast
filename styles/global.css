@@ -6,8 +6,8 @@
   @layer base {
     :root {
         --background: 216, 28%, 7%;
-        --foreground: 210 40% 98%;
-  
+        --foreground: 216, 28%, 90%;
+        
         --card: 222.2 84% 4.9%;
         --card-foreground: 210 40% 98%;
   
@@ -58,7 +58,6 @@
     font-weight: 400;
 
     color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87) !important;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -119,7 +118,7 @@ body:has(.default-layout-root) {
 .default-layout-root {
     min-width: 320px;
     min-height: 100vh;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: auto;
     padding: 0 20px;
 
@@ -135,51 +134,22 @@ body:has(.default-layout-root) {
     height: 100%;
 }
 
-.header {
-    margin-block-start: 25px;
-    margin-block-end: 25px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 10px;
-}
-
-.header .nav-primary,
-.header .nav-secondary {
-    margin: 0;
-}
-
-.header .nav-primary {
-    line-height: 32px;
-    font-size: 32px;
-}
-
-.header .nav-secondary {
-    line-height: 24px;
-    font-size: 24px;
-    color: white;
-}
-
-.header .nav-secondary:hover {
-    color: var(--color-primary);
-}
-
 .content {
     flex-grow: 1;
     display: flex;
 }
 
+/* Pages */
+
 .page {
     flex-grow: 1;
 }
 
-/* Pages */
-
 .page-config {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    gap: 20px
+    justify-content: space-evenly;
+    gap: 24px
 }
 
 .page-config h2 {
@@ -192,17 +162,35 @@ body:has(.default-layout-root) {
     align-items: flex-end;
 }
 
+.graphics-list a {
+    display: block;
+    width: 160px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px hsl(var(--border)) solid;
+    border-radius: var(--border-radius);
+}
+
+.graphics-list a:hover {
+    border-color: var(--color-primary-highlight);
+}
+
 /* General */
-a {
+a, .link {
     font-weight: 500;
     color: var(--color-link);
     text-decoration: inherit;
 
     transition: 0.2s all;
 }
+.link.text-muted-foreground {
+    color: hsl(var(--muted-foreground));
+}
 
-a:hover {
-    color: var(--color-primary);
+a:hover, .link:hover {
+    color: var(--color-primary-highlight);
 }
 
 h1, h2, h3, h4, h5 {
