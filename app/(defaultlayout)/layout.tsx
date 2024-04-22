@@ -23,9 +23,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                     <Link className="text-muted-foreground" href="/about">About</Link>
                 </div>
                 <div className="default-layout-root">
-                    <div className="content">
-                        {children}
-                    </div>
+                    {children}
                     <div className="pt-12 pb-4">
                         <div className="frontpage-credits">
                             Author: <a href="https://github.com/Aryuko/">Aryuko</a>, Code: <a href="https://github.com/Aryuko/HEMA-Broadcast">GitHub</a>
