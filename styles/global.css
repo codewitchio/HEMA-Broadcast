@@ -103,34 +103,24 @@
     --color-surface-highlight: #2d2d31;
 }
 
-body {
-    margin: 0;
-    height: 100%;
-}
-
 body:has(.default-layout-root) {
     background-color: var(--color-background);
 }
-
-body:has(.page-frontpage) {
+body::after {
+    content: "";
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  
     background: radial-gradient(circle at top, hsl(var(--background-gradient)), hsl(var(--background)) 50vw);
 }
 
 #root {
     height: 100%;
 }
-
-.default-layout-root {
-    min-width: 320px;
-    min-height: 100vh;
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 20px;
-
-    display: flex;
-    flex-direction: column;
-}
-
 
 .graphic-layout-root {
     display: flex;
@@ -140,6 +130,12 @@ body:has(.page-frontpage) {
 }
 
 .content {
+    min-width: 320px;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+
     flex-grow: 1;
     display: flex;
 }
@@ -165,21 +161,6 @@ body:has(.page-frontpage) {
 
 .config-input {
     align-items: flex-end;
-}
-
-.graphics-list a {
-    display: block;
-    width: 160px;
-    height: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px hsl(var(--border)) solid;
-    border-radius: var(--border-radius);
-}
-
-.graphics-list a:hover {
-    border-color: var(--color-primary-highlight);
 }
 
 /* General */

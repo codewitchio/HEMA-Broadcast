@@ -2,19 +2,47 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 export default function Page() {
     return (
         <div className="page page-frontpage flex flex-col gap-8 [&>section]:flex [&>section]:flex-col [&>section]:gap-2">
-            <section className='vertical-flex justify-center' style={{ height: "480px" }}>
-                <div className='hero text-center text-6xl'>HEMA-Broadcast</div>
+            <section className='vertical-flex justify-center h-80'>
+                <div className='hero text-center text-6xl'>HEMA Broadcast Tools</div>
                 <div className='text-center text-xl text-muted-foreground'>An easier way of creating overlays for HEMA events</div>
             </section>
             <section>
                 <div className='text-center text-3xl'>Graphic templates</div>
-                <div className='horizontal-flex flex-wrap justify-center graphics-list'>
-                    <Link href="/config/fightercard">Fighter Card</Link>
-                    <Link href="/config/lowerthird">Lower Third</Link>
+                <div className='horizontal-flex flex-wrap justify-center [&>*]:w-72'>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Fighter Card</CardTitle>
+                            <CardDescription>A card full of juicy fencer information</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <p>TODO: Add screenshot</p>
+                        </CardContent>
+                        <CardFooter>
+                            <Button asChild className="w-full">
+                                <Link href="/config/fightercard">Create</Link>
+                            </Button>
+                        </CardFooter>
+                    </Card>
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Lower Third</CardTitle>
+                            <CardDescription>A smaller card to show at the bottom of the screen</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <p>TODO: Add screenshot</p>
+                        </CardContent>
+                        <CardFooter>
+                            <Button asChild className="w-full">
+                                <Link href="/config/lowerthird">Create</Link>
+                            </Button>
+                        </CardFooter>
+                    </Card>
                 </div>
             </section>
             <section>

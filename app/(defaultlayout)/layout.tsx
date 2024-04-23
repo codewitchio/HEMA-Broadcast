@@ -7,7 +7,7 @@ import "@/styles/global.css"
 import { Toaster } from '@/components/ui/sonner'
 
 export const metadata: Metadata = {
-    title: 'HEMA Broadcast',
+    title: 'HEMA Broadcast Tools',
     description: 'Broadcast tools for HEMA tournaments',
 }
 
@@ -16,19 +16,14 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
         <html lang="en">
             <Script src="https://kit.fontawesome.com/264ffc9fb7.js" crossOrigin="anonymous" />
             <body>
-                <div className="flex flex-row gap-3 text-xl border-b border-border [&>*]:p-4 mb-12">
-                    <Link className="nav-primary" href="/">HEMA Broadcast</Link>
-                    {/* TODO: Graphics dropdown */}
-                    <span className='link text-muted-foreground'>Graphics</span>
-                    <Link className="text-muted-foreground" href="/about">About</Link>
-                </div>
                 <div className="default-layout-root">
+                    <nav className="flex flex-row gap-3 text-xl border-b border-border [&>*]:p-4 mb-12 sticky top-0 left-0 w-screen backdrop-blur z-10">
+                        <Link className="nav-primary" href="/">HEMA Broadcast</Link>
+                        {/* TODO: Graphics dropdown */}
+                        <span className='link text-muted-foreground'>Graphics</span>
+                        <Link className="text-muted-foreground" href="/about">About</Link>
+                    </nav>
                     {children}
-                    <div className="pt-12 pb-4">
-                        <div className="frontpage-credits">
-                            Author: <a href="https://github.com/Aryuko/">Aryuko</a>, Code: <a href="https://github.com/Aryuko/HEMA-Broadcast">GitHub</a>
-                        </div>
-                    </div>
                 </div>
                 <svg style={{ height: 0, width: 0, position: "absolute" }}>
                     <filter id='noise'>
