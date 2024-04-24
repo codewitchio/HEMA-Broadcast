@@ -17,7 +17,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
             <Script src="https://kit.fontawesome.com/264ffc9fb7.js" crossOrigin="anonymous" />
             <body>
                 <div className="default-layout-root">
-                    <nav className="flex flex-row gap-3 text-xl border-b border-border [&>*]:p-4 mb-12 sticky top-0 left-0 w-screen backdrop-blur z-10">
+                    <nav className="flex flex-row gap-3 text-xl border-b border-border [&>*]:p-4 mb-12 sticky top-0 left-0 w-full backdrop-blur z-10">
                         <Link className="nav-primary" href="/">HEMA Broadcast</Link>
                         {/* TODO: Graphics dropdown */}
                         <span className='link text-muted-foreground'>Graphics</span>
