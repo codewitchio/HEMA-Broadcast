@@ -106,7 +106,7 @@
 body:has(.default-layout-root) {
     background-color: var(--color-background);
 }
-body::after {
+body:has(.default-layout-root)::after {
     content: "";
     height: 100%;
     width:100%;
@@ -126,7 +126,7 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    height: 100vh;
 }
 
 .content {
