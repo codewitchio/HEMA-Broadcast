@@ -137,14 +137,10 @@ body:has(.default-layout-root)::after {
 
     flex-grow: 1;
     display: flex;
+    justify-content: center;
 }
 
 /* Pages */
-
-.page {
-    flex-grow: 1;
-}
-
 .page-config {
     display: flex;
     flex-direction: row;
@@ -420,6 +416,10 @@ input[type="text"].showHeader {
 
 .hidden {
     visibility: hidden;
+}
+
+.h-30 {
+    height: 7.5rem;
 }
 
 @media (prefers-color-scheme: light) {
