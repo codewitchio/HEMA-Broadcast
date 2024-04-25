@@ -24,7 +24,7 @@ export type FighterResult = {
 export type RatingResult = {
     ratingCategoryId: number,
     ratingCategoryName: string,
-    month: string, // TODO: Date type?
+    month: string,
     weightedRating: number,
     rank: number
 }
