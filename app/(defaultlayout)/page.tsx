@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { GraphicInfoList } from '@/lib/Graphics'
 
 export default function Page() {
     return (
@@ -15,34 +16,22 @@ export default function Page() {
             <section>
                 <h2 className='text-center text-3xl'>Graphic templates</h2>
                 <div className='horizontal-flex flex-wrap justify-center [&>*]:w-72'>
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Fighter Card</CardTitle>
-                            <CardDescription>A card full of juicy fencer information</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <p>TODO: Add screenshot</p>
-                        </CardContent>
-                        <CardFooter>
-                            <Button asChild className="w-full">
-                                <Link href="/config/fightercard">Create</Link>
-                            </Button>
-                        </CardFooter>
-                    </Card>
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Lower Third</CardTitle>
-                            <CardDescription>A smaller card to show at the bottom of the screen</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <p>TODO: Add screenshot</p>
-                        </CardContent>
-                        <CardFooter>
-                            <Button asChild className="w-full">
-                                <Link href="/config/lowerthird">Create</Link>
-                            </Button>
-                        </CardFooter>
-                    </Card>
+                    {GraphicInfoList.map((graphic) =>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>{graphic.title}</CardTitle>
+                                <CardDescription>{graphic.description}</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <p>TODO: Add screenshot</p>
+                            </CardContent>
+                            <CardFooter>
+                                <Button asChild className="w-full">
+                                    <Link href={graphic.path}>Create</Link>
+                                </Button>
+                            </CardFooter>
+                        </Card>
+                    )}
                 </div>
             </section>
             <section>

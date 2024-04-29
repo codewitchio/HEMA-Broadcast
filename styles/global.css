@@ -95,7 +95,7 @@
 
     --color-background: #0d1117;
     --color-primary: #6976a3;
-    --color-link: #525f8f;
+    --color-link: hsl(227, 40%, 60%);
     --color-grey: #717274;
 
     --color-surface: #252629;

@@ -1,20 +1,41 @@
 "use client"
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuActiveStyle, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
+import { GraphicInfoList } from '@/lib/Graphics'
+import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-type LinkElementProps = {
-    href: string,
-    children: React.ReactNode
+type LinkElementWithDescriptionProps = LinkElementProps & {
+    title: string
+    description: string
 }
-// TODO: Make Trigger active if any child link is active
-function LinkElement({ href, children }: LinkElementProps) {
+
+function LinkElementWithDescription({ href, description, title }: LinkElementWithDescriptionProps) {
+    return (
+        <LinkElement href={href} className='!w-72 justify-start'>
+            <div className="flex flex-col justify-start">
+                <div>
+                    {title}
+                </div>
+                <div className='text-muted-foreground text-sm'>
+                    {description}
+                </div>
+            </div>
+        </LinkElement>
+    )
+}
+
+type LinkElementProps = {
+    href: string
+} & React.HTMLProps<HTMLElement>
+
+function LinkElement({ href, children, className }: LinkElementProps) {
     const pathname = usePathname()
     const isActive = href === pathname
-    console.log(isActive)
+    console.log(className)
     return (
         <Link href={href} legacyBehavior passHref>
-            <NavigationMenuLink active={isActive} className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink active={isActive} className={cn(navigationMenuTriggerStyle(), className)}>
                 {children}
             </NavigationMenuLink>
         </Link>
@@ -30,10 +51,9 @@ export default function NavBar() {
                     <LinkElement href='/'>HEMA Broadcast</LinkElement>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger className={pathname.includes('/config/') ? navigationMenuActiveStyle() : ''}>Graphics</NavigationMenuTrigger>
+                    <NavigationMenuTrigger {...(pathname.includes('/config/') ? { 'data-active': '' } : {})}>Graphics</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                        <LinkElement href='/config/fightercard'>Fighter Card</LinkElement>
-                        <LinkElement href='/config/lowerthird'>Lower Third</LinkElement>
+                        {GraphicInfoList.map((graphic) => <LinkElementWithDescription href={graphic.path} title={graphic.title} description={graphic.description} key={graphic.path} />)}
                     </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
