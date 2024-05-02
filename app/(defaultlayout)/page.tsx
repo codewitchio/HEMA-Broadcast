@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { GraphicInfoList } from '@/lib/Graphics'
+import { GraphicInfoList } from '@/components/graphics/Graphics'
 
 export default function Page() {
     return (
@@ -17,7 +17,7 @@ export default function Page() {
                 <h2 className='text-center text-3xl'>Graphic templates</h2>
                 <div className='horizontal-flex flex-wrap justify-center [&>*]:w-72'>
                     {GraphicInfoList.map((graphic) =>
-                        <Card>
+                        <Card key={graphic.path}>
                             <CardHeader>
                                 <CardTitle>{graphic.title}</CardTitle>
                                 <CardDescription>{graphic.description}</CardDescription>
