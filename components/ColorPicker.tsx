@@ -4,9 +4,9 @@
 "use client"
 import * as React from "react"
 import { UseFormReturn } from 'react-hook-form'
-import { FormControl, FormField, FormItem, FormLabel } from "../ui/form"
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
-import { Label } from "../ui/label"
+import { FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Label } from "@/components/ui/label"
 
 export enum Colors {
     NEUTRAL = "Neutral",

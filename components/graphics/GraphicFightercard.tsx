@@ -1,12 +1,13 @@
 import React from 'react'
 import { GetFlagEmoji } from '@/lib/GetFlagEmoji'
-import { FighterResult, RatingResult } from '@/lib/InternalAPI'
 import '@/styles/graphics.css'
-import { Colors } from '../forms/ColorPicker'
+import FighterSearchBox from '@/components/FighterSearchBox'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { ColorPicker } from '@/components/ColorPicker'
+import { Switch } from '@/components/ui/switch'
+import { FormElementProps, GraphicPropsWithFighter } from '@/components/graphics/Graphics'
 
-export type GraphicFightercardProps = { fighter: FighterResult, selectedRating: RatingResult | null, color: Colors, glow: boolean }
-
-function GraphicFightercard(props: GraphicFightercardProps) {
+export function GraphicFightercard(props: GraphicPropsWithFighter) {
     const { fighter, selectedRating, color, glow } = props
     return (
         <div className={`card-wrapper vertical-flex ${color} ${glow && 'box-glow'}`}>
@@ -40,4 +41,36 @@ function GraphicFightercard(props: GraphicFightercardProps) {
     )
 }
 
-export default GraphicFightercard
+export function GraphicFightercardForm(props: FormElementProps) {
+    const { form } = props
+    return (
+        <>
+            <h2 className='text-2xl text-center'>Search HEMA Ratings</h2>
+            <FighterSearchBox numberOfSelections={1} includeRating={true} />
+            <h2 className='text-2xl text-center'>Graphic settings</h2>
+            <form className="space-y-8 w-full">
+                <FormField
+                    control={form.control}
+                    name="glow"
+                    render={({ field }) => (
+                        <FormItem className='flex flex-col'>
+                            <FormLabel>
+                                Glow
+                            </FormLabel>
+                            <FormControl>
+                                <Switch
+                                    checked={field.value}
+                                    onCheckedChange={field.onChange}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <ColorPicker name={'color'} form={form} />
+                {/* TODO: Add manual input */}
+            </form>
+        </>
+
+    )
+}

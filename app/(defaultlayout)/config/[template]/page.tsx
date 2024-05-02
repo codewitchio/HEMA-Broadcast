@@ -1,19 +1,14 @@
 "use client"
 import React from "react"
 import copy from "copy-to-clipboard"
-import { FormProvider, UseFormReturn, useForm } from "react-hook-form"
+import { FormProvider, useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import GraphicFightercard from "@/components/graphics/GraphicFightercard"
-import GraphicLowerThird, { GraphicLowerThirdProps } from "@/components/graphics/GraphicLowerThird"
-import { GraphicFightercardProps } from '@/components/graphics/GraphicFightercard'
-import { LowerThirdForm } from "@/components/forms/LowerThirdForm"
-import { FormInterface } from "@/components/forms/FormInterface"
-import { FighterCardForm } from "@/components/forms/FighterCardForm"
 import { FighterContext } from "@/components/FighterProvider"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
+import { GetGraphicInfo, GraphicPropsWithFighter } from "@/components/graphics/Graphics"
 
 function ConfigurePage({ params }: { params: { template: string } }) {
     const { selectedFighters, selectedRating } = React.useContext(FighterContext)
@@ -23,46 +18,40 @@ function ConfigurePage({ params }: { params: { template: string } }) {
         setIsClient(true)
     }, [])
 
-    let ConfigForm!: FormInterface
-    let form!: UseFormReturn<any>
-    let graphicElement: React.ReactElement | undefined = undefined
-    let graphicProps: Object = {}
-    switch (params.template) {
-        case 'fightercard':
-            ConfigForm = React.useMemo(() => new FighterCardForm(), [params.template])
-            form = useForm<z.infer<typeof ConfigForm.FormSchema>>({
-                resolver: zodResolver(ConfigForm.FormSchema),
-                defaultValues: ConfigForm.DefaultValues,
-            })
-            graphicProps = { fighter: selectedFighters[0], selectedRating: selectedRating, color: form.watch('color'), glow: form.watch('glow') }
-            graphicElement = <GraphicFightercard  {...(graphicProps as GraphicFightercardProps)} />
-            break
-        case 'lowerthird':
-        default:
-            ConfigForm = React.useMemo(() => new LowerThirdForm(), [params.template])
-            form = useForm<z.infer<typeof ConfigForm.FormSchema>>({
-                resolver: zodResolver(ConfigForm.FormSchema),
-                defaultValues: ConfigForm.DefaultValues,
-            })
-            graphicProps = { name: form.watch('name'), subtitle: form.watch('subtitle'), color: form.watch('color'), glow: form.watch('glow') }
-            graphicElement = <GraphicLowerThird {...(graphicProps as GraphicLowerThirdProps)} />
+    const graphic = GetGraphicInfo(params.template)
+    if (!graphic) {
+        return (
+            <div className="page page-config">
+                Invalid url
+            </div>
+        )
     }
+    const form = useForm<z.infer<typeof graphic.formSchema>>({
+        resolver: zodResolver(graphic.formSchema),
+        defaultValues: graphic.defaultFormValues,
+    })
+
+    // Watch all names in the form schema
+    const graphicProps = Object.fromEntries(Object.keys(graphic.formSchema.shape).map((name: string) => [name, form.watch(name)]))
+    graphicProps.fighter = selectedFighters[0]
+    graphicProps.selectedRating = selectedRating
+    /* TODO: Clean up fighter/rating prop when moving to direct form values */
+
 
     const URIEncodedData = encodeURI(JSON.stringify(graphicProps))
     const link = isClient ? `${window.location.hostname}:${window.location.port}/graphic/${params.template}/${URIEncodedData}` : ""
-    const hasSelection: boolean = selectedFighters.length > 0
     // TODO: Add checks for all required inputs filled
 
     return (
         <div className="page page-config">
             <div className="config-input vertical-flex">
                 <FormProvider {...form}>
-                    <ConfigForm.FormElement form={form} />
+                    <graphic.formElement form={form} />
                 </FormProvider>
             </div>
             <div className="config-graphics vertical-flex">
                 <h2 className="text-2xl text-center">Preview</h2>
-                {graphicElement}
+                <graphic.graphicElement {...(graphicProps as GraphicPropsWithFighter)} />
                 <h2 className="text-2xl text-center">Export</h2>
                 <Input type="text" value={link} readOnly />
                 <Button variant={"outline"} onClick={() => {
