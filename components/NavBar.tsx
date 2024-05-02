@@ -1,6 +1,6 @@
 "use client"
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
-import { GraphicInfoList } from '@/lib/Graphics'
+import { GraphicInfoList } from '@/components/graphics/Graphics'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -32,7 +32,6 @@ type LinkElementProps = {
 function LinkElement({ href, children, className }: LinkElementProps) {
     const pathname = usePathname()
     const isActive = href === pathname
-    console.log(className)
     return (
         <Link href={href} legacyBehavior passHref>
             <NavigationMenuLink active={isActive} className={cn(navigationMenuTriggerStyle(), className)}>
