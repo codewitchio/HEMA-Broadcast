@@ -2,9 +2,9 @@ import React from 'react'
 import { GetFlagEmoji } from '@/lib/GetFlagEmoji'
 import '@/styles/graphics.css'
 import FighterSearchBox from '@/components/FighterSearchBox'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/shadcn-ui/form'
 import { ColorPicker } from '@/components/ColorPicker'
-import { Switch } from '@/components/ui/switch'
+import { Switch } from '@/components/shadcn-ui/switch'
 import { FormElementProps, GraphicPropsWithFighter } from '@/components/graphics/Graphics'
 
 export function GraphicFightercard(props: GraphicPropsWithFighter) {

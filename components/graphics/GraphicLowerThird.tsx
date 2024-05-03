@@ -2,9 +2,9 @@ import React from 'react'
 import '@/styles/graphics.css'
 import { ColorPicker } from '../ColorPicker'
 import { FormElementProps, GraphicProps } from '@/components/graphics/Graphics'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Switch } from '@/components/ui/switch'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/shadcn-ui/form'
+import { Input } from '@/components/shadcn-ui/input'
+import { Switch } from '@/components/shadcn-ui/switch'
 
 
 export function GraphicLowerThird(props: GraphicProps & { name: string, subtitle: string }) {

@@ -1,5 +1,5 @@
 "use client"
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from '@/components/shadcn-ui/navigation-menu'
 import { GraphicInfoList } from '@/components/graphics/Graphics'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'

@@ -3,9 +3,9 @@ import { FighterResult, FighterSearch, FighterSearchResultCombined } from "@/lib
 import { GetFlagEmoji } from "@/lib/GetFlagEmoji"
 import { InputLoadingIcon } from './InputLoadingIcon'
 import AnimateHeight from 'react-animate-height'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./shadcn-ui/select"
 import { FighterContext } from "./FighterProvider"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { ScrollArea } from "@/components/shadcn-ui/scroll-area"
 
 const typingTimeoutDuration = 350
 const animationDuration = 250

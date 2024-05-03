@@ -2,8 +2,8 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/shadcn-ui/card'
+import { Button } from '@/components/shadcn-ui/button'
 import { GraphicInfoList } from '@/components/graphics/Graphics'
 
 export default function Page() {

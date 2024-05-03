@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import { Analytics } from "@vercel/analytics/react"
 import "@/styles/global.css"
-import { Toaster } from '@/components/ui/sonner'
+import { Toaster } from '@/components/shadcn-ui/sonner'
 import NavBar from '@/components/NavBar'
 
 export const metadata: Metadata = {

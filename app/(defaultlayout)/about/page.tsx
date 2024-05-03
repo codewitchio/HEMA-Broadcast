@@ -2,8 +2,8 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Card, CardContent } from '@/components/ui/card'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/shadcn-ui/avatar'
+import { Card, CardContent } from '@/components/shadcn-ui/card'
 import { GetFlagEmoji } from '@/lib/GetFlagEmoji'
 import GitHubSponsorButton from '@/components/GitHubSponsorButton'
 
