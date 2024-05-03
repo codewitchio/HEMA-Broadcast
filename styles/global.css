@@ -101,6 +101,18 @@
     --color-surface: #252629;
     --color-surface-disabled: #111113;
     --color-surface-highlight: #2d2d31;
+
+    --conic-rainbow: conic-gradient(
+        from 90deg,
+        #ff00ff,
+        #a200ff,
+        #0099ff,
+        #00ff00,
+        #ffff00,
+        #ffa500,
+        #ff0055,
+        #ff00ff
+      );
 }
 
 body:has(.default-layout-root) {
@@ -427,4 +439,58 @@ input[type="text"].showHeader {
         color: #213547;
         background-color: #ffffff;
     }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+.rainbow-border {
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    z-index: 2;
+    display: inline-block;
+    overflow: hidden;
+    
+    border-radius: var(--border-radius);
+}
+
+.rainbow-border::before{
+    content: "";
+    z-index: 3;
+    position: absolute;
+    height: 1000%;
+    width: 1000%;
+    /* Half size minus 50% */
+    top: -450%;
+    left: -450%;
+
+    border-radius: var(--border-radius);
+    background: var(--conic-rainbow);
+    animation: rotate 6s linear infinite;
+}
+
+.rainbow-border > * {
+    position: relative;
+    z-index: 4;
+    margin: 1px;
+
+    border-radius: var(--border-radius);
+}
+
+.rainbow-border-glow {
+    position: relative;
+    z-index: 1;
+    box-sizing: content-box;
+    padding: 1px;
+
+    background: var(--conic-rainbow);
+    filter: blur(15px);
+    animation: rotate 6s linear infinite;
 }

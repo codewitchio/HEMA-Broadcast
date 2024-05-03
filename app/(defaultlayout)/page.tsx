@@ -5,12 +5,16 @@ import Image from 'next/image'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/shadcn-ui/card'
 import { Button } from '@/components/shadcn-ui/button'
 import { GraphicInfoList } from '@/components/graphics/Graphics'
+import { RainbowBadge } from '@/components/RainbowBadge'
 
 export default function Page() {
     return (
         <div className="page page-frontpage flex flex-col gap-8 [&>section]:flex [&>section]:flex-col [&>section]:gap-2">
-            <section className='vertical-flex justify-center h-80'>
-                <h1 className='hero text-center text-6xl'>HEMA Broadcast Tools</h1>
+            <section className='vertical-flex justify-center items-center h-80'>
+                <h1 className='hero text-center text-6xl w-max'>
+                    <RainbowBadge className='ms-auto bottom-8 right-6'>Beta</RainbowBadge>
+                    HEMA Broadcast Tools
+                </h1>
                 <span className='text-center text-xl text-muted-foreground'>An easier way of creating overlays for HEMA events</span>
             </section>
             <section>
