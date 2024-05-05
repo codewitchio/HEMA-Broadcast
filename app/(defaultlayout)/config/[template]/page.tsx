@@ -9,6 +9,9 @@ import { Input } from "@/components/shadcn-ui/input"
 import { Button } from "@/components/shadcn-ui/button"
 import { toast } from "sonner"
 import { GetGraphicInfo, GraphicPropsWithFighter } from "@/components/graphics/Graphics"
+import { ColorPicker } from "@/components/ColorPicker"
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/shadcn-ui/form"
+import { Switch } from "@/components/shadcn-ui/switch"
 
 function ConfigurePage({ params }: { params: { template: string } }) {
     const { selectedFighters, selectedRating } = React.useContext(FighterContext)
@@ -46,7 +49,29 @@ function ConfigurePage({ params }: { params: { template: string } }) {
         <div className="page page-config">
             <div className="config-input vertical-flex">
                 <FormProvider {...form}>
-                    <graphic.formElement form={form} />
+                    <form className="space-y-4">
+                        <graphic.formElement form={form} />
+                        <h2 className='text-2xl text-center'>Graphic settings</h2>
+                        <FormField
+                            control={form.control}
+                            name="glow"
+                            render={({ field }) => (
+                                <FormItem className='flex flex-col'>
+                                    <FormLabel>
+                                        Glow
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Switch
+                                            checked={field.value}
+                                            onCheckedChange={field.onChange}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <ColorPicker name={'color'} form={form} />
+                    </form>
                 </FormProvider>
             </div>
             <div className="config-graphics vertical-flex">

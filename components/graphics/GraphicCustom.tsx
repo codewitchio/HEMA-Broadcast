@@ -1,10 +1,8 @@
 import React from 'react'
 import '@/styles/graphics.css'
-import { ColorPicker } from '../ColorPicker'
 import { FormElementProps, GraphicProps } from '@/components/graphics/Graphics'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/shadcn-ui/form'
 import { Input } from '@/components/shadcn-ui/input'
-import { Switch } from '@/components/shadcn-ui/switch'
 
 
 export function GraphicCustom(props: GraphicProps & { markdown: string }) {
@@ -23,7 +21,7 @@ export function GraphicCustom(props: GraphicProps & { markdown: string }) {
 export function GraphicCustomForm(props: FormElementProps) {
     const { form } = props
     return (
-        <form className="space-y-4">
+        <>
             <h2 className='text-2xl text-center'>Manual input</h2>
             <FormField
                 control={form.control}
@@ -38,26 +36,6 @@ export function GraphicCustomForm(props: FormElementProps) {
                     </FormItem>
                 )}
             />
-            <h2 className='text-2xl text-center'>Graphic settings</h2>
-            <FormField
-                control={form.control}
-                name="glow"
-                render={({ field }) => (
-                    <FormItem className='flex flex-col'>
-                        <FormLabel>
-                            Glow
-                        </FormLabel>
-                        <FormControl>
-                            <Switch
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
-                            />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
-            <ColorPicker name={'color'} form={form} />
-        </form>
+        </>
     )
 }

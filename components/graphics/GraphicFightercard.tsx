@@ -2,9 +2,6 @@ import React from 'react'
 import { GetFlagEmoji } from '@/lib/GetFlagEmoji'
 import '@/styles/graphics.css'
 import FighterSearchBox from '@/components/FighterSearchBox'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/shadcn-ui/form'
-import { ColorPicker } from '@/components/ColorPicker'
-import { Switch } from '@/components/shadcn-ui/switch'
 import { FormElementProps, GraphicPropsWithFighter } from '@/components/graphics/Graphics'
 
 export function GraphicFightercard(props: GraphicPropsWithFighter) {
@@ -47,30 +44,7 @@ export function GraphicFightercardForm(props: FormElementProps) {
         <>
             <h2 className='text-2xl text-center'>Search HEMA Ratings</h2>
             <FighterSearchBox numberOfSelections={1} includeRating={true} />
-            <h2 className='text-2xl text-center'>Graphic settings</h2>
-            <form className="space-y-8 w-full">
-                <FormField
-                    control={form.control}
-                    name="glow"
-                    render={({ field }) => (
-                        <FormItem className='flex flex-col'>
-                            <FormLabel>
-                                Glow
-                            </FormLabel>
-                            <FormControl>
-                                <Switch
-                                    checked={field.value}
-                                    onCheckedChange={field.onChange}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <ColorPicker name={'color'} form={form} />
-                {/* TODO: Add manual input */}
-            </form>
+            {/* TODO: Add manual input */}
         </>
-
     )
 }
