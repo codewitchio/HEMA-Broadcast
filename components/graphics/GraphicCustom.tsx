@@ -4,16 +4,11 @@ import { FormElementProps, GraphicProps } from '@/components/graphics/Graphics'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/shadcn-ui/form'
 import { Input } from '@/components/shadcn-ui/input'
 
-
 export function GraphicCustom(props: GraphicProps & { markdown: string }) {
-    const { markdown, color, glow } = props
+    const { markdown } = props
     return (
-        <div className={`card-wrapper vertical-flex ${color} ${glow && 'box-glow'}`}>
-            <div className='card-border'>
-                <div className='graphic graphic-lowerthird noise backdrop'>
-                    <span>{markdown || ''}</span>
-                </div>
-            </div>
+        <div className='graphic graphic-lowerthird noise backdrop'>
+            <span>{markdown || ''}</span>
         </div>
     )
 }

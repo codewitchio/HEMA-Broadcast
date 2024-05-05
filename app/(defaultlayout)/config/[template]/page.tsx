@@ -76,7 +76,11 @@ function ConfigurePage({ params }: { params: { template: string } }) {
             </div>
             <div className="config-graphics vertical-flex">
                 <h2 className="text-2xl text-center">Preview</h2>
-                <graphic.graphicElement {...(graphicProps as GraphicPropsWithFighter)} />
+                <div className={`card-wrapper vertical-flex ${graphicProps.color} ${graphicProps.glow}`}>
+                    <div className='card-border'>
+                        <graphic.graphicElement {...(graphicProps as GraphicPropsWithFighter)} />
+                    </div>
+                </div>
                 <h2 className="text-2xl text-center">Export</h2>
                 <Input type="text" value={link} readOnly />
                 <Button variant={"outline"} onClick={() => {

@@ -4,17 +4,12 @@ import { FormElementProps, GraphicProps } from '@/components/graphics/Graphics'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/shadcn-ui/form'
 import { Input } from '@/components/shadcn-ui/input'
 
-
 export function GraphicLowerThird(props: GraphicProps & { name: string, subtitle: string }) {
-    const { name, subtitle, color, glow } = props
+    const { name, subtitle } = props
     return (
-        <div className={`card-wrapper vertical-flex ${color} ${glow && 'box-glow'}`}>
-            <div className='card-border'>
-                <div className='graphic graphic-lowerthird noise backdrop'>
-                    <span>{name || 'Name'}</span>
-                    <span className='card-secondary-text'>{subtitle || 'Subtitle'}</span>
-                </div>
-            </div>
+        <div className='graphic graphic-lowerthird noise backdrop'>
+            <span>{name || 'Name'}</span>
+            <span className='card-secondary-text'>{subtitle || 'Subtitle'}</span>
         </div>
     )
 }

@@ -1,16 +1,22 @@
 "use client"
 import React from 'react'
-import { GetGraphicInfo, GraphicProps, GraphicPropsWithFighter } from '@/components/graphics/Graphics'
+import '@/styles/graphics.css'
+import { GetGraphicInfo, GraphicPropsWithFighter } from '@/components/graphics/Graphics'
 
 const invalidElement = <div>Invalid data</div>
 function GraphicPage({ params }: { params: { template: string, data: string } }) {
-    let formattedData: Object = params.data ? JSON.parse(decodeURIComponent(params.data)) : undefined
-    let graphicElement: React.ReactElement = <div>Invalid data</div>
+    let formattedData: GraphicPropsWithFighter = params.data ? JSON.parse(decodeURIComponent(params.data)) : undefined
 
     const graphic = GetGraphicInfo(params.template)
     if (!graphic || !formattedData) { return invalidElement }
     else {
-        return <graphic.graphicElement {...(formattedData as GraphicPropsWithFighter)} />
+        return (
+            <div className={`card-wrapper vertical-flex ${formattedData.color} ${formattedData.glow}`}>
+                <div className='card-border'>
+                    <graphic.graphicElement {...formattedData} />
+                </div>
+            </div>
+        )
     }
 }
 

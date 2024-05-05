@@ -26,13 +26,13 @@
     background: linear-gradient(135deg, var(--card-blue-grd1), var(--card-blue-grd2));
 }
 
-.box-glow {
+.glow {
     box-shadow: 0px 5px 80px 10px var(--card-glow);
 }
-.Red.box-glow {
+.Red.glow {
     box-shadow: 0px 5px 80px 10px var(--card-red-glow);
 }
-.Blue.box-glow {
+.Blue.glow {
     box-shadow: 0px 5px 80px 10px var(--card-blue-glow);
 }
 
