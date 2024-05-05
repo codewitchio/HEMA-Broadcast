@@ -4,6 +4,7 @@ import { Colors } from "@/components/ColorPicker"
 import { GraphicFightercard, GraphicFightercardForm } from "@/components/graphics/GraphicFightercard"
 import { FighterResult, RatingResult } from "@/lib/InternalAPI"
 import { GraphicLowerThird, GraphicLowerThirdForm } from "@/components/graphics/GraphicLowerThird"
+import { GraphicCustom, GraphicCustomForm } from '@/components/graphics/GraphicCustom'
 
 export type GraphicInfo = {
     name: string,
@@ -70,6 +71,22 @@ export const GraphicInfoList: GraphicInfo[] = [
         },
         graphicElement: GraphicLowerThird
     },
+    {
+        name: 'custom',
+        title: 'Custom Element',
+        description: 'A blank canvas for you to fill with anything using markdown',
+        path: '/config/custom',
+        formElement: GraphicCustomForm,
+        formSchema: z.object({
+            ...generalFormItems,
+            markdown: z.string()
+        }),
+        defaultFormValues: {
+            ...generalFormItems,
+            markdown: ''
+        },
+        graphicElement: GraphicCustom
+    }
 ]
 
 export function GetGraphicInfo(name: string): GraphicInfo | undefined { return GraphicInfoList.find((graphic) => graphic.name === name) }
