@@ -65,7 +65,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-    height: 100%;
+    height: auto;
 
     --border-grd1: #cdb164;
     --border-grd2: #c28f00;
@@ -115,17 +115,8 @@
 }
 
 body:has(.default-layout-root) {
+    height: auto;
     background-color: hsl(var(--background));
-}
-body:has(.default-layout-root)::after {
-    content: "";
-    height: 100%;
-    width:100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  
     background: radial-gradient(circle at top, hsl(var(--background-gradient)), hsl(var(--background)) 50vw);
 }
 
