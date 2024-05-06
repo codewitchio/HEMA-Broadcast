@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import copy from "copy-to-clipboard"
-import { FormProvider, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FighterContext } from "@/components/FighterProvider"
@@ -10,7 +10,7 @@ import { Button } from "@/components/shadcn-ui/button"
 import { toast } from "sonner"
 import { GetGraphicInfo, GraphicPropsWithFighter } from "@/components/graphics/Graphics"
 import { ColorPicker } from "@/components/ColorPicker"
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/shadcn-ui/form"
+import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "@/components/shadcn-ui/form"
 import { Switch } from "@/components/shadcn-ui/switch"
 
 function ConfigurePage({ params }: { params: { template: string } }) {
@@ -48,8 +48,8 @@ function ConfigurePage({ params }: { params: { template: string } }) {
     return (
         <div className="page page-config">
             <div className="config-input vertical-flex">
-                <FormProvider {...form}>
-                    <form className="space-y-4">
+                <Form {...form}>
+                    <div className="space-y-4">
                         <graphic.formElement form={form} />
                         <h2 className='text-2xl text-center'>Graphic settings</h2>
                         <FormField
@@ -71,12 +71,12 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                             )}
                         />
                         <ColorPicker name={'color'} form={form} />
-                    </form>
-                </FormProvider>
+                    </div>
+                </Form>
             </div>
             <div className="config-graphics vertical-flex">
                 <h2 className="text-2xl text-center">Preview</h2>
-                <div className={`card-wrapper vertical-flex ${graphicProps.color} ${graphicProps.glow}`}>
+                <div className={`card-wrapper vertical-flex ${graphicProps.color} ${graphicProps.glow && 'glow'}`}>
                     <div className='card-border'>
                         <graphic.graphicElement {...(graphicProps as GraphicPropsWithFighter)} />
                     </div>
