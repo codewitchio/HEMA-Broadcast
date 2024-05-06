@@ -27,10 +27,10 @@ export function GraphicCustomForm(props: FormElementProps) {
                 name="markdown"
                 render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Supports <a href='https://commonmark.org/help/'>Markdown</a></FormLabel>
                         <FormControl>
                             <Textarea placeholder="Enter text here" {...field} className='h-60' />
                         </FormControl>
+                        <FormLabel>Supports <a href='https://commonmark.org/help/'>Markdown</a></FormLabel>
                         <FormMessage />
                     </FormItem>
                 )}

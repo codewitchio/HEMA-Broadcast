@@ -49,7 +49,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
         <div className="page page-config">
             <div className="config-input vertical-flex">
                 <Form {...form}>
-                    <div className="space-y-4">
+                    <div className="vertical-flex">
                         <graphic.formElement form={form} />
                         <h2 className='text-2xl text-center'>Graphic settings</h2>
                         <FormField
