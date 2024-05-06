@@ -66,6 +66,7 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
     height: auto;
+    min-height: 100%;
 
     --border-grd1: #cdb164;
     --border-grd2: #c28f00;
