@@ -71,6 +71,37 @@
     flex-direction: column;
 }
 
+.graphic-custom {
+    padding: 10px 20px;
+    flex-direction: column;
+}
+
+.graphic-custom h1 {
+    @apply text-4xl
+}
+
+.graphic-custom h2 {
+    @apply text-2xl
+}
+
+.graphic-custom h3 {
+    @apply text-xl
+}
+.graphic-custom h4 {
+    @apply text-lg
+}
+.graphic-custom {
+    @apply text-base
+}
+.graphic-custom ul {
+    list-style: initial;
+    padding-inline-start: 20px;
+}
+.graphic-custom ol {
+    list-style: decimal;
+    padding-inline-start: 20px;
+}
+
 .card-list div {
     display: flex;
 }

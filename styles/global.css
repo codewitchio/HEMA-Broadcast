@@ -151,7 +151,7 @@ body:has(.default-layout-root) {
     gap: 24px
 }
 
-.page-config h2 {
+.config-input h2 {
     text-align: center;
     /* Same as input boxes */
     width: 442px;
