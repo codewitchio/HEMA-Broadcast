@@ -82,7 +82,7 @@ export const GraphicInfoList: GraphicInfo[] = [
             markdown: z.string()
         }),
         defaultFormValues: {
-            ...generalFormItems,
+            ...generalFormItemDefaults,
             markdown: ''
         },
         graphicElement: GraphicCustom
