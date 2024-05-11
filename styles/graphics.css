@@ -64,6 +64,8 @@
 .graphic-fightercard {
     padding: 40px 20px;
     flex-direction: column;
+    height: 240px;
+    justify-content: center;
 }
 
 .graphic-lowerthird {
