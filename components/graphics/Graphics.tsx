@@ -26,9 +26,18 @@ export type GraphicProps = {
     glow: boolean
 }
 
-export type GraphicPropsWithFighter = GraphicProps & {
-    fighter: FighterResult,
-    selectedRating: RatingResult | null,
+export type GraphicPropsWithFighter = GraphicProps & FighterProps & RatingProps
+
+export type FighterProps = {
+    name: string,
+    clubName: string,
+    countryCode: string, // TODO: Replace with enum
+}
+
+export type RatingProps = {
+    ratingCategoryName: string,
+    rank: number,
+    weightedRating: number
 }
 
 const generalFormItems = {
@@ -48,9 +57,23 @@ export const GraphicInfoList: GraphicInfo[] = [
         path: '/config/fightercard',
         formElement: GraphicFightercardForm,
         formSchema: z.object({
-            ...generalFormItems
+            ...generalFormItems,
+            name: z.string(),
+            clubName: z.string(),
+            countryCode: z.string(), // TODO: Replace with enum
+            ratingCategoryName: z.string(),
+            rank: z.number(),
+            weightedRating: z.number()
         }),
-        defaultFormValues: generalFormItemDefaults,
+        defaultFormValues: {
+            ...generalFormItemDefaults,
+            name: '',
+            clubName: '',
+            countryCode: '', // TODO: Replace with enum
+            ratingCategoryName: '',
+            rank: '',
+            weightedRating: ''
+        },
         graphicElement: GraphicFightercard
     },
     {

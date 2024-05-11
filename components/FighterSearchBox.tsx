@@ -6,6 +6,8 @@ import AnimateHeight from 'react-animate-height'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./shadcn-ui/select"
 import { FighterContext } from "./FighterProvider"
 import { ScrollArea } from "@/components/shadcn-ui/scroll-area"
+import { UseFormReturn } from "react-hook-form"
+import { RatingResult } from '../lib/InternalAPI'
 
 const typingTimeoutDuration = 350
 const animationDuration = 250
@@ -55,7 +57,8 @@ function SearchResultRow(props: SearchResultRowProps) {
 
 type FighterSearchBoxProps = {
     numberOfSelections?: number,
-    includeRating?: boolean
+    includeRating?: boolean,
+    form: UseFormReturn<any>
 }
 
 // TODO: Add prop for allowed number of fighters to pick
@@ -68,9 +71,23 @@ function FighterSearchBox(props: FighterSearchBoxProps) {
     const [searchResultsHeight, setSearchResultsHeight]: [number, Function] = React.useState<number>(0)
     const searchResultsElement = React.useRef<HTMLDivElement | null>(null)
 
-    const { selectedFighters, setSelectedFighters, setSelectedRating } = React.useContext(FighterContext)
+    const { selectedFighters, setSelectedFighters, selectedRating, setSelectedRating } = React.useContext(FighterContext)
     const { numberOfSelections, includeRating } = props
 
+    function updateForm(fighter: FighterResult, rating?: RatingResult) {
+        props.form.setValue("name", fighter.name)
+        props.form.setValue("clubName", fighter.clubName)
+        props.form.setValue("countryCode", fighter.countryCode)
+        props.form.setValue("ratingCategoryName", rating?.ratingCategoryName ?? '')
+        props.form.setValue("rank", rating?.rank ?? '')
+        props.form.setValue("weightedRating", rating?.weightedRating ?? '')
+    }
+
+    function selectRating(value: string) {
+        const newRating = selectedFighters[0].ratings?.[Number(value)]
+        setSelectedRating(newRating)
+        updateForm(selectedFighters[0], newRating)
+    }
 
     function selectFighter(fighter: FighterResult): void {
         if (!numberOfSelections || selectedFighters.length < numberOfSelections) {
@@ -78,6 +95,7 @@ function FighterSearchBox(props: FighterSearchBoxProps) {
             setSearchResult()
             setInputValue('')
             inputRef.current && inputRef.current.focus()
+            updateForm(fighter)
         }
 
         if (selectedFighters.length === 0) {
@@ -87,6 +105,14 @@ function FighterSearchBox(props: FighterSearchBoxProps) {
 
     function unselectFighter(fighter: FighterResult): void {
         setSelectedFighters(selectedFighters.filter((f) => f.id !== fighter.id))
+        props.form.reset({
+            "name": '',
+            "clubName": '',
+            "countryCode": '',
+            "ratingCategoryName": '',
+            "rank": '',
+            "weightedRating": '',
+        })
     }
 
     // Typing timer and search
@@ -174,7 +200,7 @@ function FighterSearchBox(props: FighterSearchBoxProps) {
                 <div className="fighter-search-selected-count text-grey ms-auto">{`${selectedFighters.length}/${numberOfSelections} selected`}</div>
             </div>
             {selectedFighters[0] && selectedFighters[0].ratings?.length ? (
-                <Select onValueChange={(e) => setSelectedRating(selectedFighters[0].ratings?.[Number(e)])}>
+                <Select onValueChange={selectRating}>
                     <SelectTrigger>
                         <SelectValue placeholder="Select a rating" />
                     </SelectTrigger>

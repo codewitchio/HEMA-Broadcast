@@ -36,9 +36,6 @@ function ConfigurePage({ params }: { params: { template: string } }) {
 
     // Watch all names in the form schema
     const graphicProps = Object.fromEntries(Object.keys(graphic.formSchema.shape).map((name: string) => [name, form.watch(name)]))
-    graphicProps.fighter = selectedFighters[0]
-    graphicProps.selectedRating = selectedRating
-    /* TODO: Clean up fighter/rating prop when moving to direct form values */
 
 
     const URIEncodedData = encodeURI(JSON.stringify(graphicProps))
