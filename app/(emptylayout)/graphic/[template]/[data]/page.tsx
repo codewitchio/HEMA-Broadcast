@@ -11,7 +11,7 @@ function GraphicPage({ params }: { params: { template: string, data: string } })
     if (!graphic || !formattedData) { return invalidElement }
     else {
         return (
-            <div className={`card-wrapper vertical-flex ${formattedData.color} ${formattedData.glow && 'glow'}`}>
+            <div className={`card-wrapper vertical-flex noise ${formattedData.color} ${formattedData.glow && 'glow'}`}>
                 <div className='card-border'>
                     <graphic.graphicElement {...formattedData} />
                 </div>

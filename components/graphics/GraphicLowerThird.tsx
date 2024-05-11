@@ -7,7 +7,7 @@ import { Input } from '@/components/shadcn-ui/input'
 export function GraphicLowerThird(props: GraphicProps & { name: string, subtitle: string }) {
     const { name, subtitle } = props
     return (
-        <div className='graphic graphic-lowerthird noise backdrop'>
+        <div className='graphic graphic-lowerthird'>
             <span>{name || 'Name'}</span>
             <span className='card-secondary-text'>{subtitle || 'Subtitle'}</span>
         </div>

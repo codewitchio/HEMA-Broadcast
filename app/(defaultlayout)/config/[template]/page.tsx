@@ -67,13 +67,31 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name="noise"
+                            render={({ field }) => (
+                                <FormItem className='flex flex-col'>
+                                    <FormLabel>
+                                        Noise
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Switch
+                                            checked={field.value}
+                                            onCheckedChange={field.onChange}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                         <ColorPicker name={'color'} form={form} />
                     </div>
                 </Form>
             </div>
             <div className="config-graphics vertical-flex">
                 <h2 className="text-2xl text-center">Preview</h2>
-                <div className={`card-wrapper vertical-flex ${graphicProps.color} ${graphicProps.glow && 'glow'}`}>
+                <div className={`card-wrapper vertical-flex ${graphicProps.noise && 'noise'} ${graphicProps.color} ${graphicProps.glow && 'glow'}`}>
                     <div className='card-border'>
                         <graphic.graphicElement {...(graphicProps as GraphicPropsWithFighter)} />
                     </div>

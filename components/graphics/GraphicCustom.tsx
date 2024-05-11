@@ -13,7 +13,7 @@ export function GraphicCustom(props: GraphicProps & { markdown: string }) {
     const html = DOMPurify.sanitize(marked.parse(markdown || placeholderMarkdown) as string)
 
     return (
-        <div className='graphic graphic-custom noise backdrop' dangerouslySetInnerHTML={{ __html: html }} />
+        <div className='graphic graphic-custom' dangerouslySetInnerHTML={{ __html: html }} />
     )
 }
 

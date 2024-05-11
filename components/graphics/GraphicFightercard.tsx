@@ -10,7 +10,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 export function GraphicFightercard(props: GraphicPropsWithFighter) {
     const { name, clubName, countryCode, ratingCategoryName, rank, weightedRating } = props
     return (
-        <div className='graphic graphic-fightercard noise backdrop'>
+        <div className='graphic graphic-fightercard'>
             {/* Fencer name */}
             <h1 className='text-4xl text-center'>
                 {name || 'Fencer name'} {countryCode && GetFlagEmoji(countryCode)}

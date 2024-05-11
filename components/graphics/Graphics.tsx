@@ -2,7 +2,6 @@ import { z } from 'zod'
 import { UseFormReturn } from 'react-hook-form'
 import { Colors } from "@/components/ColorPicker"
 import { GraphicFightercard, GraphicFightercardForm } from "@/components/graphics/GraphicFightercard"
-import { FighterResult, RatingResult } from "@/lib/InternalAPI"
 import { GraphicLowerThird, GraphicLowerThirdForm } from "@/components/graphics/GraphicLowerThird"
 import { GraphicCustom, GraphicCustomForm } from '@/components/graphics/GraphicCustom'
 
@@ -23,7 +22,8 @@ export type FormElementProps = {
 
 export type GraphicProps = {
     color: Colors,
-    glow: boolean
+    glow: boolean,
+    noise: boolean
 }
 
 export type GraphicPropsWithFighter = GraphicProps & FighterProps & RatingProps
@@ -41,12 +41,14 @@ export type RatingProps = {
 }
 
 const generalFormItems = {
+    color: z.nativeEnum(Colors),
     glow: z.boolean(),
-    color: z.nativeEnum(Colors)
+    noise: z.boolean()
 }
 const generalFormItemDefaults = {
+    color: Colors.NEUTRAL,
     glow: true,
-    color: Colors.NEUTRAL
+    noise: true
 }
 
 export const GraphicInfoList: GraphicInfo[] = [

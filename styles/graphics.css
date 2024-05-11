@@ -108,7 +108,7 @@
     display: flex;
 }
 
-.noise::after {
+.noise .graphic::after {
     content: '';
     position: absolute;
     top: 0;
