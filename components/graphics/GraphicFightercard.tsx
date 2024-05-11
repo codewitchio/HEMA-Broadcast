@@ -5,6 +5,7 @@ import FighterSearchBox from '@/components/FighterSearchBox'
 import { FormElementProps, GraphicPropsWithFighter } from '@/components/graphics/Graphics'
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/shadcn-ui/form'
 import { Input } from '@/components/shadcn-ui/input'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 export function GraphicFightercard(props: GraphicPropsWithFighter) {
     const { name, clubName, countryCode, ratingCategoryName, rank, weightedRating } = props
@@ -43,85 +44,93 @@ export function GraphicFightercardForm(props: FormElementProps) {
             <h2 className='text-2xl text-center'>Search HEMA Ratings</h2>
             <FighterSearchBox numberOfSelections={1} includeRating={true} form={form} />
             {/* TODO: Make collapsible */}
-            <h2 className='text-2xl text-center'>Manual input</h2>
-            <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                            <Input placeholder="Name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
-            <FormField
-                control={form.control}
-                name="clubName"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Club</FormLabel>
-                        <FormControl>
-                            <Input placeholder="Club" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
-            <FormField
-                control={form.control}
-                name="countryCode"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Country</FormLabel>
-                        <FormControl>
-                            <Input placeholder="Country" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
-            <FormField
-                control={form.control}
-                name="ratingCategoryName"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Rating name</FormLabel>
-                        <FormControl>
-                            <Input placeholder="Rating name" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
-            <FormField
-                control={form.control}
-                name="rank"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Rank (number)</FormLabel>
-                        <FormControl>
-                            <Input placeholder="Rank" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
-            <FormField
-                control={form.control}
-                name="weightedRating"
-                render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Rating  (number)</FormLabel>
-                        <FormControl>
-                            <Input placeholder="Rating" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                    </FormItem>
-                )}
-            />
+            <Accordion type="single" collapsible>
+                <AccordionItem value="item-1" className='border-none'>
+                    <AccordionTrigger className='hover:text-accent-foreground hover:no-underline'>
+                        <h2 className='text-2xl text-center'>Manual input</h2>
+                    </AccordionTrigger>
+                    <AccordionContent className="vertical-flex">
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Name</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Name" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="clubName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Club</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Club" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="countryCode"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Country</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Country" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="ratingCategoryName"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Rating name</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Rating name" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="rank"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Rank (number)</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Rank" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="weightedRating"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Rating  (number)</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Rating" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </AccordionContent>
+                </AccordionItem>
+            </Accordion>
         </>
     )
 }
