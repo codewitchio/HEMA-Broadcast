@@ -2,6 +2,7 @@ import React from 'react'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import "@/styles/global.css"
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
     title: 'HEMA Broadcast',
@@ -15,6 +16,7 @@ export default function GraphicLayout({ children, }: { children: React.ReactNode
             <body>
                 <div className="graphic-layout-root">
                     {children}
+                    <SpeedInsights />
                 </div>
             </body>
         </html>

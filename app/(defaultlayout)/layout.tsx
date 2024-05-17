@@ -2,6 +2,7 @@ import React from 'react'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "@/styles/global.css"
 import { Toaster } from '@/components/shadcn-ui/sonner'
 import NavBar from '@/components/NavBar'
@@ -30,6 +31,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
                 </svg>
                 <Toaster />
                 <Analytics />
+                <SpeedInsights />
             </body>
         </html >
     )
