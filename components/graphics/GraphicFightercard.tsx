@@ -29,9 +29,9 @@ export function GraphicFightercard(props: GraphicPropsWithFighter) {
             {/* Rating and rank */}
             <div style={{ margin: '0 auto' }}>
                 <span className='card-secondary-text'>Rank: </span>
-                <span>{rank || '(rank)'}</span>
+                <span>{rank || '(unranked)'}</span>
                 <span className='card-secondary-text'> Rating: </span>
-                <span>{Number(weightedRating) ? weightedRating.toFixed(1) : '(rating)'}</span>
+                <span>{Number(weightedRating) ? Number(weightedRating).toFixed(1) : '(unrated)'}</span>
             </div>
         </div>
     )
