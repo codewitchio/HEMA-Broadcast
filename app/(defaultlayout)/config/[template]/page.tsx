@@ -39,7 +39,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
 
 
     const URIEncodedData = encodeURI(JSON.stringify(graphicProps))
-    const link = isClient ? `${window.location.hostname}:${window.location.port}/graphic/${params.template}/${URIEncodedData}` : ""
+    const link = isClient ? `${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}/graphic/${params.template}/${URIEncodedData}` : ""
     // TODO: Add checks for all required inputs filled
 
     return (
