@@ -8,6 +8,7 @@ import { FighterContext } from "./FighterProvider"
 import { ScrollArea } from "@/components/shadcn-ui/scroll-area"
 import { UseFormReturn } from "react-hook-form"
 import { RatingResult } from '../lib/InternalAPI'
+import { fighterCardFormItemDefaults } from "@/components/graphics/Graphics"
 
 const typingTimeoutDuration = 350
 const animationDuration = 250
@@ -105,14 +106,7 @@ function FighterSearchBox(props: FighterSearchBoxProps) {
 
     function unselectFighter(fighter: FighterResult): void {
         setSelectedFighters(selectedFighters.filter((f) => f.id !== fighter.id))
-        props.form.reset({
-            "name": '',
-            "clubName": '',
-            "countryCode": '',
-            "ratingCategoryName": '',
-            "rank": '',
-            "weightedRating": '',
-        })
+        props.form.reset(fighterCardFormItemDefaults)
     }
 
     // Typing timer and search

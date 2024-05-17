@@ -45,10 +45,21 @@ const generalFormItems = {
     glow: z.boolean(),
     noise: z.boolean()
 }
-const generalFormItemDefaults = {
+export const generalFormItemDefaults = {
     color: Colors.NEUTRAL,
     glow: true,
     noise: true
+}
+
+// TODO: These (and the schemas) should be moved to the individual files
+export const fighterCardFormItemDefaults = {
+    ...generalFormItemDefaults,
+    name: '',
+    clubName: '',
+    countryCode: '', // TODO: Replace with enum
+    ratingCategoryName: '',
+    rank: '',
+    weightedRating: ''
 }
 
 export const GraphicInfoList: GraphicInfo[] = [
@@ -67,15 +78,8 @@ export const GraphicInfoList: GraphicInfo[] = [
             rank: z.number(),
             weightedRating: z.number()
         }),
-        defaultFormValues: {
-            ...generalFormItemDefaults,
-            name: '',
-            clubName: '',
-            countryCode: '', // TODO: Replace with enum
-            ratingCategoryName: '',
-            rank: '',
-            weightedRating: ''
-        },
+        defaultFormValues: fighterCardFormItemDefaults
+        ,
         graphicElement: GraphicFightercard
     },
     {
