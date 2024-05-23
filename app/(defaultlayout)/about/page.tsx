@@ -18,7 +18,7 @@ export default function Page() {
                             <CardContent className='p-5 pt-5 flex flex-col'>
                                 <div className='flex flex-row gap-2  items-center'>
                                     <Avatar className='h-12 w-12'>
-                                        <AvatarImage src="https://github.com/aryuko.png" />
+                                        <AvatarImage src="https://github.com/aryuko.png?size=48" />
                                         <AvatarFallback>github.com/Aryuko</AvatarFallback>
                                     </Avatar>
                                     <div className='flex flex-col gap-1'>
