@@ -4,7 +4,6 @@ import copy from "copy-to-clipboard"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { FighterContext } from "@/components/FighterProvider"
 import { Input } from "@/components/shadcn-ui/input"
 import { Button } from "@/components/shadcn-ui/button"
 import { toast } from "sonner"
@@ -12,13 +11,15 @@ import { GetGraphicInfo, GraphicPropsWithFighter } from "@/components/graphics/G
 import { ColorPicker } from "@/components/ColorPicker"
 import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "@/components/shadcn-ui/form"
 import { Switch } from "@/components/shadcn-ui/switch"
+import { useLocalStorage } from "@/lib/useLocalStorage"
 
 function ConfigurePage({ params }: { params: { template: string } }) {
-    const { selectedFighters, selectedRating } = React.useContext(FighterContext)
+    const [savedForm, saveForm] = useLocalStorage('savedForm', {})
 
     const [isClient, setIsClient] = React.useState(false)
     React.useEffect(() => {
         setIsClient(true)
+        form.reset(savedForm)
     }, [])
 
     const graphic = GetGraphicInfo(params.template)
@@ -34,9 +35,15 @@ function ConfigurePage({ params }: { params: { template: string } }) {
         defaultValues: graphic.defaultFormValues,
     })
 
+    form.watch((data: any) => {
+        if (isClient) {
+            const { glow, noise } = data
+            saveForm({ glow, noise })
+        }
+    })
+
     // Watch all names in the form schema
     const graphicProps = Object.fromEntries(Object.keys(graphic.formSchema.shape).map((name: string) => [name, form.watch(name)]))
-
 
     const URIEncodedData = encodeURI(JSON.stringify(graphicProps))
     const link = isClient ? `${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}/graphic/${params.template}/${URIEncodedData}` : ""
