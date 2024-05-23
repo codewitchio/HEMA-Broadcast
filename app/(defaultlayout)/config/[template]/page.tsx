@@ -56,42 +56,44 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                     <div className="vertical-flex">
                         <graphic.formElement form={form} />
                         <h2 className='text-2xl text-center'>Graphic settings</h2>
-                        <FormField
-                            control={form.control}
-                            name="glow"
-                            render={({ field }) => (
-                                <FormItem className='flex flex-col'>
-                                    <FormLabel>
-                                        Glow
-                                    </FormLabel>
-                                    <FormControl>
-                                        <Switch
-                                            checked={field.value}
-                                            onCheckedChange={field.onChange}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="noise"
-                            render={({ field }) => (
-                                <FormItem className='flex flex-col'>
-                                    <FormLabel>
-                                        Noise
-                                    </FormLabel>
-                                    <FormControl>
-                                        <Switch
-                                            checked={field.value}
-                                            onCheckedChange={field.onChange}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                        <div className="flex flex-row gap-4">
+                            <FormField
+                                control={form.control}
+                                name="glow"
+                                render={({ field }) => (
+                                    <FormItem className='flex flex-col'>
+                                        <FormLabel>
+                                            Glow
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Switch
+                                                checked={field.value}
+                                                onCheckedChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="noise"
+                                render={({ field }) => (
+                                    <FormItem className='flex flex-col'>
+                                        <FormLabel>
+                                            Noise
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Switch
+                                                checked={field.value}
+                                                onCheckedChange={field.onChange}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
                         <ColorPicker name={'color'} form={form} />
                     </div>
                 </Form>
