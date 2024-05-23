@@ -1,5 +1,14 @@
 const APIUrl = "/api"
 
+export type Club = {
+    id: number,
+    name: string,
+    shortName: string,
+    country: string,
+    state: string,
+    city: string
+}
+
 export type FighterSearchResultCombined = {
     searchTerm: string,
     matches: Array<FighterResult>
@@ -27,6 +36,10 @@ export type RatingResult = {
     month: string,
     weightedRating: number,
     rank: number
+}
+
+export function GetClub(id: number): Promise<Club> {
+    return InternalAPIRequest(`${APIUrl}/club//${id}`)
 }
 
 export function FighterSearchMock(_name: string, includeRating: boolean = false): Promise<FighterSearchResult> {
@@ -59,13 +72,12 @@ export function FighterSearchMock(_name: string, includeRating: boolean = false)
     })
 }
 
-export function FighterSearch(name: string, includeRating: boolean = false): Promise<FighterSearchResultCombined> {
-    return InternalAPIRequest(`${APIUrl}/fighters/search/${name}/${includeRating}`).then((JSONResponse: FighterSearchResult) => {
-        return {
-            searchTerm: JSONResponse.searchTerm,
-            matches: JSONResponse.exactMatches.concat(JSONResponse.fuzzyMatches)
-        }
-    })
+export async function FighterSearch(name: string, includeRating: boolean = false): Promise<FighterSearchResultCombined> {
+    const JSONResponse = await InternalAPIRequest(`${APIUrl}/fighters/search/${name}/${includeRating}`)
+    return {
+        searchTerm: JSONResponse.searchTerm,
+        matches: JSONResponse.exactMatches.concat(JSONResponse.fuzzyMatches)
+    }
 }
 
 async function InternalAPIRequest(url: string): Promise<any> {

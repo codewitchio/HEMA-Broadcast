@@ -1,4 +1,5 @@
 import 'dotenv/config'
+// TODO: Move file to separate server lib folder
 
 const APIUrl = 'https://hemaratingspublicapi.azurewebsites.net/api'
 const DefaultOptions = {
@@ -6,6 +7,9 @@ const DefaultOptions = {
     "headers": {
         "x-functions-key": process.env.HEMARatingsAPIKey!
     }
+}
+export async function HEMARatingsGetClub(id: string): Promise<any> {
+    return HEMARatingsAPIRequest(`${APIUrl}/clubs/${id}`)
 }
 
 export async function HEMARatingsFighterSearch(name: string, includeRating: boolean = false): Promise<any> {

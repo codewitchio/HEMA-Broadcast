@@ -1,5 +1,5 @@
 import React from "react"
-import { FighterResult, FighterSearch, FighterSearchResultCombined } from "@/lib/InternalAPI"
+import { Club, FighterResult, FighterSearch, FighterSearchResultCombined, GetClub } from "@/lib/InternalAPI"
 import { GetFlagEmoji } from "@/lib/GetFlagEmoji"
 import { InputLoadingIcon } from './InputLoadingIcon'
 import AnimateHeight from 'react-animate-height'
@@ -90,12 +90,19 @@ function FighterSearchBox(props: FighterSearchBoxProps) {
         updateForm(selectedFighters[0], newRating)
     }
 
-    function selectFighter(fighter: FighterResult): void {
+    async function selectFighter(fighter: FighterResult) {
         if (!numberOfSelections || selectedFighters.length < numberOfSelections) {
-            setSelectedFighters(selectedFighters.concat([fighter]))
             setSearchResult()
             setInputValue('')
             inputRef.current && inputRef.current.focus()
+
+            if (fighter.clubName.length > 35) {
+                await GetClub(fighter.clubId).then((ClubResult: Club) => {
+                    fighter.clubName = ClubResult.shortName
+                })
+            }
+
+            setSelectedFighters(selectedFighters.concat([fighter]))
             updateForm(fighter)
         }
 
