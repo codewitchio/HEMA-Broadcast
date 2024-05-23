@@ -95,6 +95,7 @@ function ConfigurePage({ params }: { params: { template: string } }) {
                             />
                         </div>
                         <ColorPicker name={'color'} form={form} />
+                        <span className="text-sm text-muted-foreground">More colours and styles coming soon!</span>
                     </div>
                 </Form>
             </div>
