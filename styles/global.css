@@ -265,11 +265,10 @@ input[type="text"]:disabled {
     display: inline-flex !important;
     position: absolute;
     right: 0;
-    height: 100%;
     align-items: center;
     /* width: 30px; */
     /* (17+10+10) = (25 + 7*2) */
-    padding: 9px;
+    padding: 10px;
 }
 
 /* FighterSearchBox */
