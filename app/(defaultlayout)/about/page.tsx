@@ -41,9 +41,14 @@ export default function Page() {
             <div className='flex justify-center'>
                 <GitHubSponsorButton />
             </div>
-            <p>
-                This application was made possible by <Link href="https://hemaratings.com/">HEMA Ratings</Link>.
-            </p>
+            <div className='w-[824px] flex flex-col gap-4'>
+                <p>
+                    This application was made possible by <Link href="https://hemaratings.com/">HEMA Ratings</Link>.
+                </p>
+                <p>
+                    If you are an organizer of HEMA events or are interested in helping create tools for organizers (or just have some feedback about this tool), feel free to join <Link target='_blank' href='https://discord.com/invite/3JkPwCpSmg'>our Discord</Link>.
+                </p>
+            </div>
         </div>
     )
 }
