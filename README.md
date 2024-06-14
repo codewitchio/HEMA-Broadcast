@@ -1,4 +1,6 @@
 # HEMA-Broadcast
+Now live at [hema.codewitch.io](https://hema.codewitch.io/)
+
 Graphical overlay elements for HEMA Broadcasts powered by [HEMA Ratings](https://hemaratings.com/). 
 
 Tired of manually editing big photoshop files with your stream overlays for every single tournament participant? Tired of collecting information on every fencer manually? Then boy do we have a new product for you! Introducing HEMA-Broadcast (name subject to change)! 
@@ -7,7 +9,7 @@ This project is intended to be a user-friendly web app that does the tedious and
 
 This is very much a work in progress and there are plans to add multiple different templates and add options for changing the visual style etc.
 
-Here's an early alpha demo to show the intended usage flow:
+Here's an very early, very outdated alpha demo to show the intended usage flow:
 
 https://github.com/Aryuko/HEMA-Broadcast/assets/7040167/d0d6f3f7-1b7b-4f23-b935-0f973d465c2b
 
