@@ -13,17 +13,17 @@ export default function Page() {
             <section className='flex flex-row gap-6 [&>div]:flex [&>div]:flex-col [&>div]:gap-2 [&_h1]:text-2xl [&_h1]:text-center'>
                 <div>
                     <h1>Author</h1>
-                    <Link href="https://github.com/Aryuko" className='inline-block'>
+                    <Link href="https://github.com/codewitchio" className='inline-block'>
                         <Card className='w-[400px] h-30'>
                             <CardContent className='p-5 pt-5 flex flex-col'>
                                 <div className='flex flex-row gap-2  items-center'>
                                     <Avatar className='h-12 w-12'>
-                                        <AvatarImage src="https://github.com/aryuko.png?size=48" />
-                                        <AvatarFallback>github.com/Aryuko</AvatarFallback>
+                                        <AvatarImage src="https://github.com/codewitchio.png?size=48" />
+                                        <AvatarFallback>github.com/codewitchio</AvatarFallback>
                                     </Avatar>
                                     <div className='flex flex-col gap-1'>
                                         <p><span className='font-bold'>Hanna</span> <span className='text-muted-foreground text-sm'>(she/they)</span></p>
-                                        <p className='text-muted-foreground text-sm'>github.com/Aryuko</p>
+                                        <p className='text-muted-foreground text-sm'>github.com/codewitchio</p>
                                     </div>
                                 </div>
                                 <span className='pt-3 text-muted-foreground text-sm'>{GetFlagEmoji('SE')} Stockholm, Sweden</span>
@@ -33,8 +33,8 @@ export default function Page() {
                 </div>
                 <div>
                     <h1>Repository</h1>
-                    <Link href="https://github.com/Aryuko/HEMA-Broadcast" className='inline-block'>
-                        <Image unoptimized alt='Github Repository preview' width={400} height={120} src={"https://github-readme-stats.vercel.app/api/pin/?username=Aryuko&repo=HEMA-Broadcast&theme=dark&border_color=6a77a4&bg_color=020817&text_color=94a3b8&icon_color=94a3b8&border_radius=10"} />
+                    <Link href="https://github.com/codewitchio/HEMA-Broadcast" className='inline-block'>
+                        <Image unoptimized alt='Github Repository preview' width={400} height={120} src={"https://github-readme-stats.vercel.app/api/pin/?username=codewitchio&repo=HEMA-Broadcast&theme=dark&border_color=6a77a4&bg_color=020817&text_color=94a3b8&icon_color=94a3b8&border_radius=10"} />
                     </Link>
                 </div>
             </section>
